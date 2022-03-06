@@ -26,6 +26,7 @@ const dragSelect = (tool, model, p1, p2, e) => produce(model, (draft) => {
         case !!layer: {
             set(draft, "selection", new Set([uuid]))
             moveLayer(layer, delta)
+            //draft.entries = [...draft.entries]
             break;
         }
         default: {

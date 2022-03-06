@@ -11,6 +11,7 @@ import ModelContext from "../contexts/ModelContext";
 import {designCommit} from "../actions/design";
 import dragTool from "../methods/dragTool";
 import clickTool from "../methods/clickTool";
+import {original} from "immer";
 
 const mapStateToProps = (state) => {
     const currentModel = selectActiveModel(state)
@@ -44,10 +45,11 @@ const PointerProvider = (props) => {
         if (!!down && (!!drag || !isEqual(down, pos))) {
             setDrag(pos)
 
-
             const newModel = dragTool(tool, currentModel, down, pos, e)
+            if (!!newModel && newModel.entities !== currentModel.entities) {
+                // debugger
+            }
             if (!!newModel && newModel !== currentModel) {
-                console.log("only///onPointerMove/newModel", newModel)
                 renderModel(newModel)
             }
         }
@@ -61,6 +63,9 @@ const PointerProvider = (props) => {
         switch (true) {
             case !!down && !!drag: {
                 const newModel = dragTool(tool, currentModel, down, pos, e)
+                if (!!newModel && newModel.entities !== currentModel.entities) {
+                    debugger
+                }
                 if (!!newModel && newModel !== currentModel) {
                     dispatch(designCommit(newModel, {designId}))
                     renderModel(undefined)
@@ -68,11 +73,18 @@ const PointerProvider = (props) => {
                 break;
             }
             case !!down: {
-                const newModel = clickTool(tool, currentModel, down, e)
-                if (!!newModel && newModel !== currentModel) {
-                    dispatch(designCommit(newModel, {designId}))
-                    renderModel(undefined)
-                }
+                dispatch((dispatch, getState) => {
+                    const model = selectActiveModel(getState())
+                    const newModel = clickTool(tool, model, down, e)
+
+                    if (!!newModel && newModel.entities !== model.entities) {
+                        debugger
+                    }
+                    if (!!newModel && newModel !== model) {
+                        dispatch(designCommit(newModel, {designId}))
+                        renderModel(undefined)
+                    }
+                })
                 break;
             }
         }
