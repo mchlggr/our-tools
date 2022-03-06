@@ -15,9 +15,9 @@ const DesignEditDisplay = (props) => {
     return (
         <>
             <Layout.Container>
-                {/*<Layout.Header>*/}
-                {/*    <ToolbarContainer designId={designId}/>*/}
-                {/*</Layout.Header>*/}
+                <Layout.Header>
+                    <ToolbarContainer designId={designId}/>
+                </Layout.Header>
                 <Layout.Content>
                     <ModelProvider designId={designId}>
                         <PointerProvider designId={designId}>

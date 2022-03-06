@@ -11,8 +11,6 @@ const overlapRectangle = (layer, point) => {
 
     const t = SELECTION_TRESHOLD;
 
-    // debugger
-
     return (y1 - t <= y && y <= y2 + t &&
             ((x1 - t <= x && x <= x1 + t) ||
                 (x2 - t <= x && x <= x2 + t))) ||
@@ -33,14 +31,11 @@ const overlapEllipse = (layer, point) => {
         rx,
         ry
     } = layer
-    // debugger
 
     const t = SELECTION_TRESHOLD;
 
     const {x, y} = point
 
-
-    // debugger
     return insideEllipse(x, y, cx, cy, rx + t, ry + t) && (rx <= t || ry <= t || !insideEllipse(x, y, cx, cy, rx - t, ry - t));
 }
 
@@ -51,7 +46,6 @@ const overlapLine = (layer, point) => {
         x2,
         y2
     } = layer
-    // debugger
 
     const {x, y} = point
 
@@ -86,7 +80,6 @@ const overlapLayer = multi(
     method('layer:group', overlapGroup),
     method('layer:path', overlapPath),
     method(() => {
-        debugger
         return false
     }),
 )

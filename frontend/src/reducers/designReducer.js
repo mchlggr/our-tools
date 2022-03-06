@@ -2,7 +2,7 @@ import {selectActiveDesignId} from "../selectors/design";
 import {emptyObject} from "../utils/empty";
 import {drop, update} from "lodash";
 import produce, {original} from "immer";
-import {DESIGN_GO_TO} from "../actions/design";
+import {DESIGN_GO_TO, DESIGN_SET_TOOL} from "../actions/design";
 
 const {DESIGN_COMMIT, DESIGN_REDO, DESIGN_UNDO} = require("../actions/design");
 
@@ -21,6 +21,7 @@ const designReducer = (baseState = initialDesignState, action) => {
     const designPath = ["byId", designId]
 
     switch (type) {
+        // --- Core Actions ---
         case DESIGN_COMMIT: {
             const {payload: next} = action
 
@@ -28,7 +29,9 @@ const designReducer = (baseState = initialDesignState, action) => {
                 const {at, history} = draft
                 const current = history[at]
 
+
                 if (next.entities !== original(current.entities)) {
+                    debugger
                     draft.history = draft.history.slice(0, at + 1)
                     draft.history.push(next)
                     draft.at = at + 1
@@ -58,6 +61,8 @@ const designReducer = (baseState = initialDesignState, action) => {
                 if (at < history.length - 1) draft.at += 1
             }))
         }
+
+        // --- Extra Actions ---
         case DESIGN_GO_TO: {
             const {payload: jump} = action
 
@@ -65,6 +70,15 @@ const designReducer = (baseState = initialDesignState, action) => {
                 if(jump <= draft.history.length - 1) {
                     draft.at = jump
                 }
+            }))
+        }
+        case DESIGN_SET_TOOL: {
+            const {payload: tool} = action
+
+            return update(baseState, designPath, (design) => produce(design, (draft) => {
+                const {at, history} = draft
+                const current = history[at]
+                current.tool = tool
             }))
         }
         default: {

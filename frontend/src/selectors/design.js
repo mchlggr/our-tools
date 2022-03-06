@@ -12,6 +12,8 @@ export const getCurrentModel = ({at, history}) => get(history, at)
 export const getEntities = ({entities}) => entities
 export const getSelection = ({selection}) => selection
 
+export const getTool = ({tool}) => tool
+
 export const getView = ({view}) => view
 export const getViewTarget = ({view}) => get(view, 'target')
 
@@ -38,3 +40,4 @@ export const selectActiveSelection = createSelector(selectActiveModel, getSelect
 
 export const selectActiveView = createSelector(selectActiveModel, getView)
 export const selectActiveViewTarget = createSelector(selectActiveModel, getViewTarget)
+export const selectActiveTool = createSelector(selectActiveModel, getTool)

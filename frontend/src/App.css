@@ -11,7 +11,7 @@
     width: 100%;
 }
 
-.penumbra__design-stage {
+.design-stage {
     height: 100%;
 }
 
@@ -27,4 +27,28 @@
 
 .history-model--current {
     border: 4px solid greenyellow;
+}
+
+.design-toolbar {
+    position: absolute;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+}
+
+.design-tool-button {
+    width: 50px;
+    height: 50px;
+}
+
+.design-tool-button--active {
+    background: blue;
+    color: white;
+    font-weight: bold;
+}
+
+.design-layer--selected {
+    stroke: orange;
+    stroke-width: 8px;
 }

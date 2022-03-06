@@ -11,8 +11,6 @@ const ViewModelDisplay = (props) => {
     const entities = useContextSelector(ModelContext, getViewEntities)
     const selection = useContextSelector(ModelContext, getViewSelection)
 
-    console.log("v/entities",entities)
-
     return (
         <>
             <ModelDisplay entities={entities}

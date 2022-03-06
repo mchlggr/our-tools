@@ -12,32 +12,26 @@ const clickSelect = (tool, model, point, e) => produce(model, (draft) => {
 
     const layer = findSelected(layers, point)
     const {uuid} = layer || emptyObject
-    console.log("clickSelect/uuid",uuid)
 
     // Poor man's pattern matching
     switch (true) {
         case layer && multiSelect && selection.has(uuid) : {
-            //debugger
             selection.delete(uuid)
             break;
         }
         case layer && multiSelect && !selection.has(uuid) : {
-            //debugger
             selection.add(uuid)
             break;
         }
         case layer && !multiSelect : {
-            //debugger
             set(draft, "selection", new Set([uuid]))
             break;
         }
         case !layer && !multiSelect && selection.size > 0: {
-            //debugger
             set(draft, "selection", new Set([]))
             break;
         }
         case !layer && !multiSelect && selection.size === 0: {
-            ////debugger
             // This will avoid a use-less re-render
             return null
         }
@@ -45,14 +39,12 @@ const clickSelect = (tool, model, point, e) => produce(model, (draft) => {
 })
 
 const clickLayer = (tool, model, point, e) => produce(model, (draft) => {
-
+    // Avoids use-less re-rendering
+    return null
 })
 
 const clickTool = multi(
-    (tool) => {
-        console.log("!/tool", tool)
-        return tool
-    },
+    (tool) => tool,
     method('tool:select', clickSelect),
     method('tool:rectangle', clickLayer),
     method('tool:line', clickLayer),

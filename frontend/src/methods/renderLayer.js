@@ -4,11 +4,12 @@ import classNames from 'classnames'
 const typePattenSuffix = /(?<=\:).*/
 
 const layerClassNames = (layer, selected, className = undefined) => {
+    console.log("layers/selected",selected)
     const {type} = layer
     const [suffix] = type.match(typePattenSuffix)
-    return classNames('penumbra__layer', {
-        "penumbra__layer--selected": selected,
-        [`penumbra__layer-${suffix}`]: suffix
+    return classNames('design-layer', {
+        "design-layer--selected": selected,
+        [`design-layer-${suffix}`]: suffix
     }, className)
 }
 

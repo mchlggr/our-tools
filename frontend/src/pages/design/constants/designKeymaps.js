@@ -1,6 +1,15 @@
 export const DEFAULT_DESIGN_KEYMAP = {
-    // File keys
+    // FILE keys
     SAVE: "ctrl+s",
+
+    // TOOL keys
+    SELECT: "v",
+    RECTANGLE: "r",
+    ELLIPSE: "o",
+    LINE: "l",
+    TEXT: "t",
+    PATH: "p",
+    POLYGON: "s",
 
     // EDIT Keys
     UP: "up",

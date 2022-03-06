@@ -17,7 +17,7 @@ const StageContainer = (props) => {
     const onPointerMove = useContextSelector(PointerContext, ({onPointerMove}) => onPointerMove)
     const onPointerUp = useContextSelector(PointerContext, ({onPointerUp}) => onPointerUp)
 
-    return <svg className={"penumbra__design-stage"}
+    return <svg className={"design-stage"}
                 onPointerDown={onPointerDown}
                 onPointerMove={onPointerMove}
                 onPointerUp={onPointerUp}
