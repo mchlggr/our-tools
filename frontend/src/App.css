@@ -1,0 +1,30 @@
+
+#penumbra__root {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.penumbra__main-wrapper {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.penumbra__design-stage {
+    height: 100%;
+}
+
+.penumbra__design-history {
+
+}
+
+.history-model {
+    background: darkgray;
+    width: 100px;
+    height: 100px;
+}
+
+.history-model--current {
+    border: 4px solid greenyellow;
+}

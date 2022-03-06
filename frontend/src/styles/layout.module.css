@@ -1,0 +1,36 @@
+.module_container {
+ background: rgba(255,255,255,1);
+}
+.module_header {
+  background: rgba(255,255,255,1);
+}
+.module_content {
+  background: rgba(255,255,255,1);
+}
+.module_footer {
+  background: rgba(255,255,255,1);
+}
+
+.module_container {
+
+  display: flex;
+  flex-flow: column;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.module_container .module_row.module_header {
+  flex: 0 1 auto;
+}
+
+.module_container .module_row.module_content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: stretch;
+}
+
+.module_container .module_row.module_footer {
+  flex: 0 1 40px;
+}
+

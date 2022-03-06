@@ -1,0 +1,1 @@
+export const SELECTION_TRESHOLD = 8
