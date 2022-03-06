@@ -46,9 +46,7 @@ const PointerProvider = (props) => {
             setDrag(pos)
 
             const newModel = dragTool(tool, currentModel, down, pos, e)
-            if (!!newModel && newModel.entities !== currentModel.entities) {
-                // debugger
-            }
+
             if (!!newModel && newModel !== currentModel) {
                 renderModel(newModel)
             }
@@ -63,9 +61,7 @@ const PointerProvider = (props) => {
         switch (true) {
             case !!down && !!drag: {
                 const newModel = dragTool(tool, currentModel, down, pos, e)
-                if (!!newModel && newModel.entities !== currentModel.entities) {
-                    debugger
-                }
+
                 if (!!newModel && newModel !== currentModel) {
                     dispatch(designCommit(newModel, {designId}))
                     renderModel(undefined)
@@ -77,9 +73,6 @@ const PointerProvider = (props) => {
                     const model = selectActiveModel(getState())
                     const newModel = clickTool(tool, model, down, e)
 
-                    if (!!newModel && newModel.entities !== model.entities) {
-                        debugger
-                    }
                     if (!!newModel && newModel !== model) {
                         dispatch(designCommit(newModel, {designId}))
                         renderModel(undefined)

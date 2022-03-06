@@ -31,9 +31,6 @@ const designReducer = (baseState = initialDesignState, action) => {
             const {at, history} = design
             const current = history[at]
             const shouldCommit = next.entities !== original(current.entities)
-            if (shouldCommit) {
-                debugger
-            }
 
             return update(baseState, designPath, (design) => produce(design, (draft) => {
                 const {at, history} = draft
