@@ -1,6 +1,6 @@
 import {selectActiveDesignId} from "../selectors/design";
 import {emptyObject} from "../utils/empty";
-import {drop, update, get} from "lodash";
+import {chain, drop, update, get, compact} from "lodash";
 import produce, {original, current} from "immer";
 import {DESIGN_GO_TO, DESIGN_SET_TOOL} from "../actions/design";
 
@@ -14,8 +14,55 @@ const emptyDesign = {
 
 const initialDesignState = {}
 
-// window._original = original
-// window._current = current
+const boundaryPadding = 25
+
+const entityLatitudes = ({x, x1, x2, cx, width}) => {
+    let dims = compact([x, x1, x2, cx])
+    if (width) {
+        dims = [...dims, ...dims.map(d => d + width)]
+    }
+    return dims
+}
+
+const entityLongitibutes = ({y, y1, y2, cy, height}) => {
+    let dims = compact([y, y1, y2, cy])
+    if (height) {
+        dims = [...dims, ...dims.map(d => d + height)]
+    }
+    return dims
+}
+
+const updateMetadata = (model) => produce(model, (draft) => {
+    const {entities} = draft
+
+    // --- Handle Bounding Box ---
+    const longitudes = chain(entities)
+        .map(entityLongitibutes)
+        .flatten()
+        .compact()
+        .value()
+
+    const latitudes = chain(entities)
+        .map(entityLatitudes)
+        .flatten()
+        .compact()
+        .value()
+
+    debugger
+
+    const minX = Math.min(...latitudes)
+    const minY = Math.min(...longitudes)
+
+    const maxX = Math.max(...latitudes)
+    const maxY = Math.max(...longitudes)
+
+    draft.boundary = {
+        minX: minX - boundaryPadding,
+        minY: minY - boundaryPadding,
+        maxX: maxX + boundaryPadding,
+        maxY: maxY + boundaryPadding
+    }
+})
 
 const designReducer = (baseState = initialDesignState, action) => {
 
@@ -26,15 +73,18 @@ const designReducer = (baseState = initialDesignState, action) => {
     switch (type) {
         // --- Core Actions ---
         case DESIGN_COMMIT: {
-            const {payload: next} = action
+            const {payload: model} = action
             const design = get(baseState, designPath)
             const {at, history} = design
             const current = history[at]
-            const shouldCommit = next.entities !== original(current.entities)
+            const shouldCommit = model.entities !== original(current.entities)
 
             return update(baseState, designPath, (design) => produce(design, (draft) => {
-                const {at, history} = draft
+                const {at, history, entities} = draft
                 if (shouldCommit) {
+                    let next = updateMetadata(model)
+
+                    // --- Handle History ---
                     draft.history = draft.history.slice(0, at + 1)
                     draft.history.push(next)
                     draft.at = at + 1
@@ -46,7 +96,7 @@ const designReducer = (baseState = initialDesignState, action) => {
                     }
                 } else {
                     // Edit history at current position
-                    draft.history[at] = next
+                    draft.history[at] = model
                 }
             }))
         }

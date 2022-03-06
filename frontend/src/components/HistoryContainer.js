@@ -11,7 +11,7 @@ import {designGoTo} from "../actions/design";
 
 const HistoryModelDisplay = (props) => {
     const {model, index, at, designId} = props
-    const {entities, selection} = model
+    const {entities, selection, boundary} = model
 
     const isCurrent = index === at
 
@@ -21,7 +21,20 @@ const HistoryModelDisplay = (props) => {
     }, [index])
 
 
+    const {
+        minX,
+        minY,
+        maxX,
+        maxY
+    } = boundary
+
+    const width = maxX - minX
+    const height = maxY - minY
+
+    const viewBox = `${minX} ${minY} ${width} ${height}`
+
     return <svg key={index}
+                viewBox={viewBox}
                 onClick={goToModel}
                 className={classNames("history-model", {
                     "history-model--current": isCurrent

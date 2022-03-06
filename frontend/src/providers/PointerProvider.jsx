@@ -32,7 +32,7 @@ const PointerProvider = (props) => {
     const [up, setUp] = useImmer(undefined)
     const [drag, setDrag] = useImmer(undefined)
 
-    //TODO: const [trace, setTrace] = useImmer([])
+    const [trace, setTrace] = useImmer([])
 
     const onPointerDown = useCallback((e) => {
         const pos = getMousePos(e)
@@ -69,15 +69,12 @@ const PointerProvider = (props) => {
                 break;
             }
             case !!down: {
-                dispatch((dispatch, getState) => {
-                    const model = selectActiveModel(getState())
-                    const newModel = clickTool(tool, model, down, e)
+                const newModel = clickTool(tool, currentModel, down, e)
 
-                    if (!!newModel && newModel !== model) {
-                        dispatch(designCommit(newModel, {designId}))
-                        renderModel(undefined)
-                    }
-                })
+                if (!!newModel && newModel !== currentModel) {
+                    dispatch(designCommit(newModel, {designId}))
+                    renderModel(undefined)
+                }
                 break;
             }
         }

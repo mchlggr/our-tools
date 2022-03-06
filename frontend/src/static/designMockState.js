@@ -15,6 +15,12 @@ const modelMockState = {
     committedAt: 0,
     tool: "tool:select",
     selection: new Set([]),
+    boundary: {
+        minX: 50 - 25,
+        minY: 50 - 25,
+        maxX: 150 + 25,
+        maxY: 150 + 25
+    },
     entities: [
         {
             type: "layer:rectangle", // is a type of Layer
@@ -29,31 +35,31 @@ const modelMockState = {
             fill: "#f00",
             stroke: 'red'
         },
-        {
-            type: "layer:ellipse", // is a type of Layer
-            uuid: "le1",
-            name: "blue ellipse",
-            group_uuid: "lg1",
-            surface_uuid: "s1",
-            cx: 20,
-            cy: 20,
-            rx: 100,
-            ry: 100,
-            fill: "#00f",
-            stroke: "#000"
-        },
-        {
-            type: "layer:line", // is a type of Layer
-            uuid: "ll1",
-            name: "green line",
-            group_uuid: "lg1",
-            surface_uuid: "s1",
-            x1: 1280,
-            y1: 1070,
-            x2: 930,
-            y2: 1200,
-            stroke: 'red'
-        },
+        // {
+        //     type: "layer:ellipse", // is a type of Layer
+        //     uuid: "le1",
+        //     name: "blue ellipse",
+        //     group_uuid: "lg1",
+        //     surface_uuid: "s1",
+        //     cx: 20,
+        //     cy: 20,
+        //     rx: 100,
+        //     ry: 100,
+        //     fill: "#00f",
+        //     stroke: "#000"
+        // },
+        // {
+        //     type: "layer:line", // is a type of Layer
+        //     uuid: "ll1",
+        //     name: "green line",
+        //     group_uuid: "lg1",
+        //     surface_uuid: "s1",
+        //     x1: 128,
+        //     y1: 107,
+        //     x2: 100,
+        //     y2: 200,
+        //     stroke: 'red'
+        // },
         // {
         //     type: "layer:text", // is a type of Layer
         //     uuid: "lt1",
@@ -66,14 +72,14 @@ const modelMockState = {
         //     content: "scream!",
         //     alignment: "left"
         // },
-        {
-            type: "surface",
-            uuid: "s1",
-            x: 50,
-            y: 50,
-            width: 850,
-            height: 1100,
-        },
+        // {
+        //     type: "surface",
+        //     uuid: "s1",
+        //     x: 50,
+        //     y: 50,
+        //     width: 850,
+        //     height: 1100,
+        // },
         // {
         //     type: "layer:group",
         //     uuid: "lg1",
