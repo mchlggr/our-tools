@@ -33,11 +33,6 @@ export const selectActiveModel = createSelector(selectActiveDesign, getCurrentMo
 export const selectActiveEntities = createSelector(selectActiveModel, getEntities)
 export const selectActiveSelection = createSelector(selectActiveModel, getSelection)
 
-// export const selectActivePointer = createSelector(selectActiveModel, getPointer)
-// export const selectActivePointerDown = createSelector(selectActiveModel, getPointerDown)
-// export const selectActivePointerUp = createSelector(selectActiveModel, getPointerUp)
-// export const selectActivePointerDrag = createSelector(selectActiveModel, getPointerDrag)
-
 export const selectActiveView = createSelector(selectActiveModel, getView)
 export const selectActiveViewTarget = createSelector(selectActiveModel, getViewTarget)
 export const selectActiveTool = createSelector(selectActiveModel, getTool)

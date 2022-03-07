@@ -75,7 +75,6 @@ const renderSurface = (layer, selected, key) => {
                  height={height}
                  fill={"white"}
                  stroke={"black"}
-                 // className={layerClassNames(layer, selected)}
     />
 }
 

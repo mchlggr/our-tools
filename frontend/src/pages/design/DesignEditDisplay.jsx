@@ -21,7 +21,7 @@ const DesignEditDisplay = (props) => {
                     <ToolbarContainer designId={designId}/>
                 </Layout.Header>
                 <Layout.Content className={"design-stage-wrapper"}
-                                //contentEditable={"true"}
+                                // contentEditable={"true"}
                                 // suppressContentEditableWarning={true}
                 >
                     <ModelProvider designId={designId}>

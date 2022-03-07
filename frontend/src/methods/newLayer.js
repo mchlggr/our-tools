@@ -45,8 +45,7 @@ const newLine = produce((type, p1, p2) => {
         x1,
         y1,
         x2,
-        y2,
-        // stroke: 'green'
+        y2
     }
 })
 
@@ -81,7 +80,6 @@ const newPath = produce((type, p1, p2, path) => {
         uuid: nanoid(),
         path,
         d: roughPathD(path),
-        // stroke: 'red',
         fill: "none",
         boundary: calculatePathBoundary(path) // Use for better selection performance
     }

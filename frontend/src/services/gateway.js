@@ -1,14 +1,5 @@
 import qs from 'qs';
 import axios from 'axios';
-import {
-  castArray,
-  get,
-  groupBy,
-  keys,
-  set,
-  values,
-  zipObject,
-} from 'lodash';
 
 const gateway = axios.create({
   baseURL: '/',
@@ -31,12 +22,6 @@ gateway.interceptors.response.use(
 
 gateway.interceptors.request.use(
   (config) => {
-    // const user = JSON.parse(localStorage.getItem('user') || '{}');
-    // if (user['access-token']) {
-    //   config.headers.client = user.client;
-    //   config.headers['access-token'] = user['access-token'];
-    // }
-    // return config;
   },
   error => Promise.reject(error),
 );

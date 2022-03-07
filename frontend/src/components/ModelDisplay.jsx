@@ -46,9 +46,3 @@ const StageDisplayMemo = memo(ModelDisplay)
 StageDisplayMemo.displayName = "ModelDisplay"
 
 export default StageDisplayMemo;
-
-
-// const surfacesByUuid = useMemo(() => {
-//     const surfaces = filter(entities, {type: "surface"})
-//     return keyBy(surfaces, 'uuid')
-// }, [entities])

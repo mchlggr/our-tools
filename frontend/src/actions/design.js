@@ -14,6 +14,3 @@ export const designGoTo = createAction(DESIGN_GO_TO)
 
 export const DESIGN_SET_TOOL = "DESIGN_SET_TOOL"
 export const designSetTool = createAction(DESIGN_SET_TOOL)
-
-// export const DESIGN_DELETE_SELECTION = "DESIGN_DELETE_SELECTION"
-// export const designDeleteSelection = createAction(DESIGN_DELETE_SELECTION)
