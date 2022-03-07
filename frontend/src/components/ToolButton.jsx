@@ -16,7 +16,7 @@ const ToolButton = (props) => {
         dispatch(designSetTool(name, {designId}))
     }, [name, dispatch, designId])
 
-        const [suffix] = name.match(typePattenSuffix)
+    const [suffix] = name.match(typePattenSuffix)
 
     return (
         <button className={classNames("design-tool-button", {

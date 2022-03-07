@@ -12,6 +12,10 @@ import {
 } from "../selectors/pointer";
 import {isEmpty} from "lodash";
 import {roughPathD} from "../utils/pathUtils";
+import classNames from 'classnames';
+import {useSelector} from "react-redux";
+import {selectActiveTool} from "../selectors/design";
+import {typePattenSuffix} from "../methods/renderLayer";
 
 
 const PointerDisplay = (props) => {
@@ -40,6 +44,9 @@ const PointerDisplay = (props) => {
     }, [path])
 
 
+    const tool = useSelector(selectActiveTool)
+    const [toolSuffix] = tool.match(typePattenSuffix)
+
     return (
         <>
             {isDown && <circle className={'pointer-down-circle'} cx={downX} cy={downY} r={"2"} strokeWidth={1}/>}
@@ -47,9 +54,16 @@ const PointerDisplay = (props) => {
             {isUp && !isDown &&
             <text className={'pointer-up-text'} x={upX + 8} y={upY - 8}>{`{x: ${upX}, y: ${upY}}`}</text>}
             {isDragging &&
-            <line className={'pointer-drag-line'} x1={downX} y1={downY} x2={dragX} y2={dragY} strokeWidth={1}
-                  strokeDasharray="1 8"/>}}
-            {d && <path className={'pointer-drag-path'} d={d} strokeDasharray="1 8" strokeWidth={1}/>}
+            <line className={classNames('pointer-drag-line', {[`pointer-drag-line--${toolSuffix}`]: toolSuffix})}
+                  x1={downX}
+                  y1={downY}
+                  x2={dragX}
+                  y2={dragY}
+                  />}}
+            {d && <path className={classNames('pointer-drag-path', {[`pointer-drag-path--${toolSuffix}`]: toolSuffix})}
+                        d={d}
+                        strokeDasharray="1 8"
+                        strokeWidth={1}/>}
         </>
     );
 }

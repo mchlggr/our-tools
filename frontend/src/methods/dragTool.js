@@ -1,10 +1,10 @@
 import {multi, method} from '@arrows/multimethod'
 import produce from "immer";
 import {filterLayers, filterSelectionLayers} from "../selectors/layer";
-import {find, set, update, each, isEqual, map} from "lodash";
+import {find, set, update, each, isEqual, map, isEmpty, size, every} from "lodash";
 import moveLayer from "./moveLayer";
-import {findSelected} from "./overlapLayer";
-import {emptyObject} from "../utils/empty";
+import {filterSelected, findSelected} from "./overlapLayer";
+import {emptyArray, emptyObject} from "../utils/empty";
 import newLayer from "./newLayer";
 import {nanoid} from "@reduxjs/toolkit";
 
@@ -24,26 +24,41 @@ export const moveSelection = (model, delta, duplicate) => {
     }
 }
 
+const NOWHERE = Object.freeze({x: -9999, y: -9999})
 
-const dragSelect = (tool, model, p1, p2, e) => produce(model, (draft) => {
+
+const dragSelect = (tool, model, p1, p2, e, path = emptyArray) => produce(model, (draft) => {
     const {selection, entities} = draft
-    const delta = {x: p2.x - p1.x, y: p2.y - p1.y}
 
+    const delta = {x: p2.x - p1.x, y: p2.y - p1.y}
     const duplicate = e.altKey
+    const lasso = path.map(({x, y}) => [x, y]) // Converted to different format for 'point-in-polygon'
+    const multiSelect = size(lasso) > 1
 
     const allLayers = filterLayers(entities)
-    const layer = findSelected(allLayers, p1)
-    const {uuid} = layer || emptyObject
+    const selectedLayer = findSelected(allLayers, p1)
+
+    // TODO: passing NOWHERE here is a little weird, perhaps there is a better way?
+    const lassoedLayers = multiSelect ? filterSelected(allLayers, NOWHERE, lasso) : []
+
+    const alreadyLassoed = every(lassoedLayers, ({uuid}) => selection.has(uuid))
+    const alreadySelected = !!selectedLayer ? selection.has(selectedLayer.uuid) : false
 
     // Poor man's pattern matching
     switch (true) {
-        case selection.has(uuid): {
+        case !selectedLayer && !isEmpty(lassoedLayers) && !alreadyLassoed && multiSelect: {
+            each(lassoedLayers, ({uuid}) => selection.add(uuid))
+            break;
+        }
+        case !!selectedLayer && alreadySelected: { //|| selection.size > 0
             moveSelection(draft, delta, duplicate)
             break;
         }
-        case !!layer: {
-            set(draft, "selection", new Set([uuid]))
-            moveLayer(layer, delta)
+        case !!selectedLayer && !alreadySelected: {
+            // set(draft, "selection", new Set(map(selectedLayers, "uuid")))
+            // each(selectedLayers, layer => moveLayer(layer, delta))
+            set(draft, "selection", new Set([selectedLayer.uuid]))
+            moveLayer(selectedLayer, delta)
             break;
         }
         default: {

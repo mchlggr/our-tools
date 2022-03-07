@@ -15,7 +15,7 @@ const RootRoutes = (props) => {
                 <Route path={pageRoutes.design.index()} element={<DesignIndex/>}/>
                 <Route path={pageRoutes.design.edit()} element={<DesignEditContainer/>}/>
             </Routes>
-            <Navigate to={pageRoutes.design.edit(0)}/>
+            {/*<Navigate to={pageRoutes.design.edit(0)}/>*/}
         </>
     );
 }

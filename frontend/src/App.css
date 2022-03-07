@@ -44,10 +44,13 @@
     height: 40px;
     border: 1px solid #efefef;
     margin-right: 18px;
+    border-radius: 4px;
+    border-bottom-width: 4px;
+    /*filter: drop-shadow(0 4px 1px black);*/
 }
 
 .history-model--past {
-    border-color: #8e908c;
+    border-color: #d6d6d6;
     background: #efefef;
 }
 
@@ -57,7 +60,7 @@
 }
 
 .history-model--future {
-    border-color: #4d4d4c;
+    border-color: #d6d6d6;
     background: #efefef;
     opacity: 0.25;
 }
@@ -79,11 +82,14 @@
     margin: 0 8px;
     border: 1px solid #d6d6d6;
     font-weight: 700;
+    border-bottom-width: 4px;
+    border-radius: 4px;
 }
 
 .design-tool-button--active {
     color: #ffffff;
     font-weight: 700;
+    border: none !important;
 }
 
 .design-layer {
@@ -146,9 +152,27 @@
 .pointer-drag-line {
     fill: none;
     stroke: #8e908c;
+    stroke-width: 1;
+    stroke-dasharray: 1 8
 }
 
 .pointer-drag-path {
     fill: none;
     stroke: #8e908c;
 }
+
+.pointer-drag-path--select {
+    stroke: #4d4d4c;
+    fill: rgba(214,214,214, 0.5)
+}
+
+.pointer-drag-line--rectangle {
+    stroke: #4d4d4c;
+    stroke-dasharray: 4 4;
+}
+
+.pointer-drag-line--ellipse {
+    stroke: #4d4d4c;
+    stroke-dasharray: 4 4;
+}
+
