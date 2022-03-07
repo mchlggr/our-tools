@@ -93,23 +93,23 @@ const designReducer = (baseState = initialDesignState, action) => {
 
             return update(baseState, designPath, (design) => produce(design, (draft) => {
                 const {at, history, entities} = draft
-                // if (shouldCommit) {
-                //     let next = updateMetadata(model)
-                //
-                //     // --- Handle History ---
-                //     draft.history = draft.history.slice(0, at + 1)
-                //     draft.history.push(next)
-                //     draft.at = at + 1
-                //
-                //     const clip = history.length - 50
-                //     if (clip > 0) {
-                //         draft.history = drop(draft.history, clip)
-                //         draft.at = at - clip
-                //     }
-                // } else {
+                if (shouldCommit) {
+                    let next = updateMetadata(model)
+
+                    // --- Handle History ---
+                    draft.history = draft.history.slice(0, at + 1)
+                    draft.history.push(next)
+                    draft.at = at + 1
+
+                    const clip = history.length - 50
+                    if (clip > 0) {
+                        draft.history = drop(draft.history, clip)
+                        draft.at = at - clip
+                    }
+                } else {
                     // Edit history at current position
                     draft.history[at] = model
-                // }
+                }
             }))
         }
         case DESIGN_UNDO: {
