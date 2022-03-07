@@ -1,4 +1,4 @@
-import React, {memo, useCallback} from 'react';
+import React, {memo, useCallback, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import ToolbarContainer from "../../components/ToolbarContainer";
 import StageContainer from "../../components/StageContainer";
@@ -7,10 +7,19 @@ import Layout from "../../components/Layout";
 import PointerProvider from "../../providers/PointerProvider";
 import ModelProvider from "../../providers/ModelProvider";
 import StageHotkeys from "../../components/StageHotkeys";
+import useScrollBlock from "../../hooks/useScrollBlock";
+import useMount from "../../hooks/useMount";
 
 
 const DesignEditDisplay = (props) => {
     const {designId} = props
+    const [blockScroll, allowScroll] = useScrollBlock()
+    useEffect(() => {
+        blockScroll()
+        return () => {
+            allowScroll()
+        }
+    }, [])
 
     // TODO: put contentEditable into context
     return (
@@ -20,8 +29,8 @@ const DesignEditDisplay = (props) => {
                     <ToolbarContainer designId={designId}/>
                 </Layout.Header>
                 <Layout.Content className={"design-stage-wrapper"}
-                                // contentEditable={"true"}
-                                // suppressContentEditableWarning={true}
+                    // contentEditable={"true"}
+                    // suppressContentEditableWarning={true}
                 >
                     <ModelProvider designId={designId}>
                         <PointerProvider designId={designId}>

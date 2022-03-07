@@ -2,7 +2,8 @@ import {multi, method} from '@arrows/multimethod'
 import classNames from 'classnames'
 import TextDisplay from "../components/layers/TextDisplay";
 
-export const typePattenSuffix = /(?<=\:).*/
+// export const typePattenSuffix = /(?<=\:).*/
+export const typePattenSuffix = /([a-z]+$)/
 
 export const layerClassNames = (layer, selected, className = undefined) => {
     const {type} = layer
