@@ -12,10 +12,10 @@ export const DEFAULT_DESIGN_KEYMAP = {
     POLYGON: "s",
 
     // EDIT Keys
-    UP: "up",
-    RIGHT: "right",
-    LEFT: "left",
-    DOWN: "down",
+    UP: ["up", "shift+up", "alt+up", "shift+alt+up"],
+    RIGHT: ["right", "shift+right", "alt+right", "shift+alt+right"],
+    LEFT: ["left", "shift+left", "alt+left", "shift+alt+left"],
+    DOWN: ["down", "shift+down", "alt+down", "shift+alt+down"],
 
     DELETE: ["del", "backspace"],
 

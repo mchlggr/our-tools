@@ -1,4 +1,4 @@
-import React, {memo, useMemo} from 'react';
+import React, {memo, useCallback, useMemo} from 'react';
 import PropTypes from 'prop-types';
 import {designCommit, designRedo, designSetTool, designUndo} from "../actions/design";
 import {useDispatch, useSelector} from "react-redux";
@@ -7,6 +7,8 @@ import {GlobalHotKeys} from "react-hotkeys";
 import {DEFAULT_DESIGN_KEYMAP} from "../pages/design/constants/designKeymaps";
 import {selectActiveModel} from "../selectors/design";
 import deleteTool from "../methods/deleteTool";
+import nudgeTool from "../methods/nudgeTool";
+import {DIRECTION_EAST, DIRECTION_NORTH, DIRECTION_SOUTH, DIRECTION_WEST} from "../constants/direction";
 
 
 const StageHotkeys = (props) => {
@@ -15,6 +17,18 @@ const StageHotkeys = (props) => {
     const currentModel = useSelector(selectActiveModel)
 
     const dispatch = useDispatch()
+
+    const nudgeDirection = useCallback((e, direction) => {
+        console.log("dir/direction",direction)
+        debugger
+        const {tool} = currentModel
+        const newModel = nudgeTool(tool, currentModel, direction, e)
+        if (!!newModel && newModel !== currentModel) {
+            dispatch(designCommit(newModel, {designId}))
+        }
+    }, [dispatch, designId, currentModel])
+
+
     const handlers = useMemo(() => {
         return {
             // Tool keys
@@ -57,12 +71,16 @@ const StageHotkeys = (props) => {
             DELETE: (e) => {
                 const {tool} = currentModel
                 const newModel = deleteTool(tool, currentModel, e)
-                if (newModel) {
+                if (!!newModel && newModel !== currentModel) {
                     dispatch(designCommit(newModel, {designId}))
                 }
-            }
+            },
+            UP: (e) => nudgeDirection(e, DIRECTION_NORTH),
+            RIGHT: (e) => nudgeDirection(e, DIRECTION_EAST),
+            LEFT: (e) => nudgeDirection(e, DIRECTION_WEST),
+            DOWN: (e) => nudgeDirection(e, DIRECTION_SOUTH)
         }
-    }, [dispatch, designId, currentModel])
+    }, [dispatch, designId, currentModel, nudgeDirection])
 
     return (
         <>

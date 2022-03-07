@@ -8,6 +8,23 @@ import {emptyObject} from "../utils/empty";
 import newLayer from "./newLayer";
 import {nanoid} from "@reduxjs/toolkit";
 
+export const moveSelection = (model, delta, duplicate) => {
+    // Moves or duplicates and moves all selection layers
+    const {entities} = model
+    const selectionLayers = filterSelectionLayers(model)
+    if (duplicate) {
+        const newLayers = selectionLayers.map(produce((layer) => {
+            layer.uuid = nanoid()
+            moveLayer(layer, delta)
+        }))
+        set(model, "selection", new Set(map(newLayers, 'uuid')))
+        entities.push(...newLayers)
+    } else {
+        each(selectionLayers, (layer) => moveLayer(layer, delta))
+    }
+}
+
+
 const dragSelect = (tool, model, p1, p2, e) => produce(model, (draft) => {
     const {selection, entities} = draft
     const delta = {x: p2.x - p1.x, y: p2.y - p1.y}
@@ -21,19 +38,7 @@ const dragSelect = (tool, model, p1, p2, e) => produce(model, (draft) => {
     // Poor man's pattern matching
     switch (true) {
         case selection.has(uuid): {
-            // Moves all selection layers
-            const selectionLayers = filterSelectionLayers(draft)
-
-            if(duplicate) {
-                const newLayers = selectionLayers.map(produce((layer) => {
-                    layer.uuid = nanoid()
-                    moveLayer(layer, delta)
-                }))
-                set(draft, "selection", new Set(map(newLayers, 'uuid')))
-                entities.push(...newLayers)
-            } else {
-                each(selectionLayers, (layer) => moveLayer(layer, delta))
-            }
+            moveSelection(draft, delta, duplicate)
             break;
         }
         case !!layer: {
