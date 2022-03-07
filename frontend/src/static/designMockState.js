@@ -22,19 +22,36 @@ const modelMockState = {
         maxY: 150 + 25
     },
     entities: [
-        {
-            type: "layer:rectangle", // is a type of Layer
-            uuid: "lr1",
-            name: "red rect",
-            group_uuid: "lg1",
-            surface_uuid: "s1",
-            x: 50,
-            y: 50,
-            width: 100,
-            height: 100,
-            fill: "#f00",
-            stroke: 'red'
-        },
+        // {
+        //     type: "layer:rectangle", // is a type of Layer
+        //     uuid: "lr1",
+        //     name: "red rect",
+        //     group_uuid: "lg1",
+        //     surface_uuid: "s1",
+        //     x: 50,
+        //     y: 50,
+        //     width: 100,
+        //     height: 100,
+        //     fill: "#f00",
+        //     stroke: 'red'
+        // },
+        // {
+        //     type: "layer:path", // is a type of Layer
+        //     uuid: "llp1",
+        //     name: "green path",
+        //     group_uuid: "lg1",
+        //     surface_uuid: "s1",
+        //     path: [{x: 0, y: 0}, {x: 100, y: 100}, {x: 200, y: 100}, {x: 200, y: 500}],
+        //     d: "M 0 0 100 100 200 100 200 500",
+        //     boundary: {
+        //         minX: 0,
+        //         minY: 0,
+        //         maxX: 200,
+        //         maxY: 500
+        //     },
+        //     stroke: 'red',
+        //     fill: "none"
+        // },
         // {
         //     type: "layer:ellipse", // is a type of Layer
         //     uuid: "le1",

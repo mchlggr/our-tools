@@ -15,6 +15,7 @@ export const getPointerDrag = (pointer) => get(pointer, "drag")
 export const getPointerDragX = (pointer) => get(pointer, ["drag", "x"])
 export const getPointerDragY = (pointer) => get(pointer, ["drag", "y"])
 
+export const getPointerPath = (pointer) => get(pointer, "path")
 
 export const getMousePos = (e) => {
     e.preventDefault()

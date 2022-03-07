@@ -67,8 +67,8 @@ const renderGroup = (layer, selected, key) => {
 }
 
 const renderPath = (layer, selected, key) => {
-    const {} = layer
-    return <path key={key}/>
+    const {d, stroke, fill} = layer
+    return <path key={key} d={d} stroke={stroke} fill={fill} className={layerClassNames(layer, selected)}/>
 }
 
 const renderLayer = multi(

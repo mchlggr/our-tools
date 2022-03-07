@@ -35,10 +35,10 @@ const dragSelect = (tool, model, p1, p2, e) => produce(model, (draft) => {
     }
 })
 
-const dragNewLayer = (tool, model, p1, p2, e) => produce(model, (draft) => {
+const dragNewLayer = (tool, model, p1, p2, e, path) => produce(model, (draft) => {
     if (!isEqual(p1, p2)) {
         const {tool} = draft
-        const instance = newLayer(tool, p1, p2)
+        const instance = newLayer(tool, p1, p2, path)
         const {uuid} = instance
 
         set(draft, "selection", new Set([uuid]))

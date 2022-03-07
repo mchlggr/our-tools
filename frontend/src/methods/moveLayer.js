@@ -2,6 +2,8 @@
 
 import {multi, method} from "@arrows/multimethod";
 import produce from "immer";
+import {calculatePathBoundary, roughPathD} from "../utils/pathUtils";
+import {each, map} from "lodash";
 
 const moveRectangle = (layer, delta) => {
     const {x, y} = delta
@@ -32,7 +34,18 @@ const moveGroup = (layer, delta) => {
 }
 
 const movePath = (layer, delta) => {
+    const {path} = layer
     const {x, y} = delta
+
+    const newPath = map(path, (p) => {
+        p.x += x
+        p.y += y
+        return p
+    })
+
+    layer.path = newPath
+    layer.d = roughPathD(newPath)
+    layer.boundary = calculatePathBoundary(newPath)
 }
 
 const moveLayer = multi(

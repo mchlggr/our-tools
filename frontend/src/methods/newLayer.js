@@ -3,6 +3,7 @@
 import {multi, method} from "@arrows/multimethod";
 import produce from "immer";
 import {nanoid} from "@reduxjs/toolkit";
+import {calculatePathBoundary, roughPathD} from "../utils/pathUtils";
 
 const newRectangle = produce((type, p1, p2) => {
     const {x: x1, y: y1} = p1
@@ -55,8 +56,17 @@ const newGroup = produce((type, p1, p2) => {
 
 })
 
-const newPath = produce((type, p1, p2) => {
+const newPath = produce((type, p1, p2, path) => {
 
+    return {
+        type: "layer:path", // is a type of Layer
+        uuid: nanoid(),
+        path,
+        d: roughPathD(path),
+        stroke: 'red',
+        fill: "none",
+        boundary: calculatePathBoundary(path) // Use for better selection performance
+    }
 })
 
 const newLayer = multi(

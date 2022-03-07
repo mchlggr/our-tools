@@ -1,6 +1,7 @@
 import {multi, method} from "@arrows/multimethod";
-import {find} from "lodash";
+import {chain, find, some} from "lodash";
 import {SELECTION_TRESHOLD} from "../constants/design";
+import {emptyObject} from "../utils/empty";
 
 const overlapRectangle = (layer, point) => {
     const {x: x1, y: y1, width, height} = layer
@@ -39,6 +40,9 @@ const overlapEllipse = (layer, point) => {
     return insideEllipse(x, y, cx, cy, rx + t, ry + t) && (rx <= t || ry <= t || !insideEllipse(x, y, cx, cy, rx - t, ry - t));
 }
 
+const insideLine = ({x1, y1, x2, y2}, {x, y}) =>
+    Math.abs((y2 - y1) * x - (x2 - x1) * y + x2 * y1 - y2 * x1) / Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1)) <= SELECTION_TRESHOLD;
+
 const overlapLine = (layer, point) => {
     const {
         x1,
@@ -54,8 +58,7 @@ const overlapLine = (layer, point) => {
         Math.min(y1, y2) <= y &&
         Math.max(y1, y2) >= y) {
 
-        return Math.abs((y2 - y1) * x - (x2 - x1) * y + x2 * y1 - y2 * x1) /
-            Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1)) <= SELECTION_TRESHOLD;
+        return insideLine(layer, point)
     }
 }
 
@@ -68,7 +71,28 @@ const overlapGroup = (layer, point) => {
 }
 
 const overlapPath = (layer, point) => {
+    const {x, y} = point
+    const {path, boundary} = layer
+    const {minX, minY, maxX, maxY} = boundary || emptyObject
 
+    // debugger
+
+    if (minX <= x &&
+        maxX >= x &&
+        minY <= y &&
+        maxY >= y) {
+
+        const inside = chain(path)
+            .chunk(2)
+            .some(([{x: x1, y: y1},{x: x2, y: y2}]) => insideLine({x1, y1, x2, y2}, point))
+            .value()
+
+        // if(inside) {
+        //     debugger
+        // }
+
+        return inside
+    }
 }
 
 const overlapLayer = multi(

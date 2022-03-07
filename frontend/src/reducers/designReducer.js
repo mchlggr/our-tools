@@ -1,6 +1,6 @@
 import {selectActiveDesignId} from "../selectors/design";
 import {emptyObject} from "../utils/empty";
-import {chain, drop, update, get, compact} from "lodash";
+import {chain, drop, update, get, compact, flatten} from "lodash";
 import produce, {original, current} from "immer";
 import {DESIGN_GO_TO, DESIGN_SET_TOOL} from "../actions/design";
 
@@ -16,18 +16,24 @@ const initialDesignState = {}
 
 const boundaryPadding = 25
 
-const entityLatitudes = ({x, x1, x2, cx, width}) => {
+const entityLatitudes = ({x, x1, x2, cx, width, path}) => {
     let dims = compact([x, x1, x2, cx])
     if (width) {
         dims = [...dims, ...dims.map(d => d + width)]
     }
+    if (path) {
+        dims.push(...path.map(({x}) => x))
+    }
     return dims
 }
 
-const entityLongitibutes = ({y, y1, y2, cy, height}) => {
-    let dims = compact([y, y1, y2, cy])
+const entityLongitibutes = ({y, y1, y2, cy, height, path}) => {
+    const dims = compact([y, y1, y2, cy])
     if (height) {
-        dims = [...dims, ...dims.map(d => d + height)]
+        dims.push(...dims.map(d => d + height))
+    }
+    if (path) {
+        dims.push(...path.map(({y}) => y))
     }
     return dims
 }
@@ -47,8 +53,6 @@ const updateMetadata = (model) => produce(model, (draft) => {
         .flatten()
         .compact()
         .value()
-
-    debugger
 
     const minX = Math.min(...latitudes)
     const minY = Math.min(...longitudes)

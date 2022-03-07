@@ -32,12 +32,15 @@ const PointerProvider = (props) => {
     const [up, setUp] = useImmer(undefined)
     const [drag, setDrag] = useImmer(undefined)
 
-    const [trace, setTrace] = useImmer([])
+    const [path, updatePath] = useImmer([])
+
+    //console.log("!!!/path",path)
 
     const onPointerDown = useCallback((e) => {
         const pos = getMousePos(e)
         setDown(pos)
-    }, [setDown])
+        updatePath([])
+    }, [setDown, updatePath])
 
     const onPointerMove = useCallback((e) => {
         const pos = getMousePos(e)
@@ -45,13 +48,16 @@ const PointerProvider = (props) => {
         if (!!down && (!!drag || !isEqual(down, pos))) {
             setDrag(pos)
 
-            const newModel = dragTool(tool, currentModel, down, pos, e)
+            //TODO: Check for drag distance threshold before updating path
+            updatePath((draft) => void draft.push(pos))
+
+            const newModel = dragTool(tool, currentModel, down, pos, e, path)
 
             if (!!newModel && newModel !== currentModel) {
                 renderModel(newModel)
             }
         }
-    }, [down, drag, setDrag, currentModel, renderModel, tool])
+    }, [down, drag, setDrag, currentModel, renderModel, tool, path])
 
     const onPointerUp = useCallback((e) => {
         const pos = getMousePos(e)
@@ -60,7 +66,7 @@ const PointerProvider = (props) => {
         // Poor man's pattern matching
         switch (true) {
             case !!down && !!drag: {
-                const newModel = dragTool(tool, currentModel, down, pos, e)
+                const newModel = dragTool(tool, currentModel, down, pos, e, path)
 
                 if (!!newModel && newModel !== currentModel) {
                     dispatch(designCommit(newModel, {designId}))
@@ -69,7 +75,7 @@ const PointerProvider = (props) => {
                 break;
             }
             case !!down: {
-                const newModel = clickTool(tool, currentModel, down, e)
+                const newModel = clickTool(tool, currentModel, down, e, path)
 
                 if (!!newModel && newModel !== currentModel) {
                     dispatch(designCommit(newModel, {designId}))
@@ -82,21 +88,24 @@ const PointerProvider = (props) => {
         // Reset other pointer coordinates
         setDown(undefined)
         setDrag(undefined)
-    }, [setUp, setDown, setDrag, tool, down, drag, dispatch, designId, currentModel, renderModel])
+        updatePath([])
+    }, [setUp, setDown, setDrag, tool, down, drag, dispatch, designId, currentModel, renderModel, path])
 
     const contextValue = useMemo(() => {
         return {
             down,
             up,
             drag,
-            onPointerDown: throttle(onPointerDown, 10),
-            onPointerMove: throttle(onPointerMove, 10),
-            onPointerUp: throttle(onPointerUp, 10)
+            path,
+            onPointerDown: throttle(onPointerDown, 100),
+            onPointerMove: throttle(onPointerMove, 100),
+            onPointerUp: throttle(onPointerUp, 100)
         }
     }, [
         down,
         up,
         drag,
+        path,
         onPointerDown,
         onPointerMove,
         onPointerUp
