@@ -13,7 +13,6 @@ const DesignEditDisplay = (props) => {
     const {designId} = props
 
     // TODO: put contentEditable into context
-
     return (
         <>
             <Layout.Container>

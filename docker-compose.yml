@@ -1,0 +1,35 @@
+version: '3'
+services:
+
+  backend:
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile
+    command: /bin/sh -c "rm -f /app/tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
+    volumes:
+      - ./backend:/app
+      - ./backend/vendor/bundle:/app/vendor/bundle
+      - ./public:/public
+      - tmp-data:/app/tmp
+      - log-data:/app/log
+    environment:
+      RAILS_ENV: production
+    ports:
+      - 3000:3000
+
+  proxy:
+    build:
+      context: ./proxy/
+      dockerfile: Dockerfile
+    volumes:
+      - ./proxy/nginx.conf:/etc/nginx/conf.d/webapp.conf
+      - ./public:/public
+      - tmp-data:/app/tmp
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+
+volumes:
+  tmp-data:
+  log-data:
