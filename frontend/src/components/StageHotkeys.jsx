@@ -19,8 +19,6 @@ const StageHotkeys = (props) => {
     const dispatch = useDispatch()
 
     const nudgeDirection = useCallback((e, direction) => {
-        console.log("dir/direction",direction)
-        debugger
         const {tool} = currentModel
         const newModel = nudgeTool(tool, currentModel, direction, e)
         if (!!newModel && newModel !== currentModel) {

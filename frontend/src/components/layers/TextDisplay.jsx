@@ -37,7 +37,6 @@ const TextDisplay = (props) => {
 
     useEffect(() => {
         const {current} = textRef
-        console.log("text/current", current)
         if (current) {
             // noinspection JSUnresolvedFunction
             current.addEventListener("blur", onBlur);

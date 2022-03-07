@@ -98,7 +98,7 @@
 }
 
 .history-model .design-layer {
-    stroke-width: 12px;
+    vector-effect: non-scaling-stroke;
 }
 
 .design-layer--selected {

@@ -141,11 +141,11 @@ const designMockState = {
             requestedAt: {"1": 123},
             receivedAt: {"1": 123},
             alias: {
-                [RESOURCE_ALIAS.ACTIVE_DESIGN]: 1
+                [RESOURCE_ALIAS.ACTIVE_DESIGN]: 0
             },
             byId: {
-                "1": {
-                    id: "1",
+                "0": {
+                    id: "0",
                     build_version: "0.1",
                     at: 0,
                     units: 'px',

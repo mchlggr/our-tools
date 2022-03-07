@@ -4,7 +4,6 @@ import {moveSelection} from "./dragTool";
 
 
 const nudgeSelection = (tool, model, direction, e) => produce(model, (draft) => {
-    debugger
     const {selection, entities} = draft
 
     if (selection.size > 0) {

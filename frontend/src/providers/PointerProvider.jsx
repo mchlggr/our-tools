@@ -34,8 +34,6 @@ const PointerProvider = (props) => {
 
     const [path, updatePath] = useImmer([])
 
-    //console.log("!!!/path",path)
-
     const onPointerDown = useCallback((e) => {
         const pos = getMousePos(e)
         setDown(pos)

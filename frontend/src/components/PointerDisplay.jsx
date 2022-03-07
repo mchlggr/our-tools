@@ -39,7 +39,6 @@ const PointerDisplay = (props) => {
         }
     }, [path])
 
-    // console.log("!!!/d", d)
 
     return (
         <>

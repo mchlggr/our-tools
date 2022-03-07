@@ -71,7 +71,7 @@ const overlapText = (layer, point) => {
         maxX >= x &&
         minY <= y &&
         maxY >= y) {
-        debugger
+
         return true
     }
 }
@@ -85,7 +85,6 @@ const overlapPath = (layer, point) => {
     const {path, boundary} = layer
     const {minX, minY, maxX, maxY} = boundary || emptyObject
 
-    // debugger
 
     if (minX <= x &&
         maxX >= x &&
@@ -97,9 +96,6 @@ const overlapPath = (layer, point) => {
             .some(([{x: x1, y: y1}, {x: x2, y: y2}]) => insideLine({x1, y1, x2, y2}, point))
             .value()
 
-        // if(inside) {
-        //     debugger
-        // }
 
         return inside
     }
