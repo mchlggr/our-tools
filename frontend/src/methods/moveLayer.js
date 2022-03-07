@@ -4,6 +4,7 @@ import {multi, method} from "@arrows/multimethod";
 import produce from "immer";
 import {calculatePathBoundary, roughPathD} from "../utils/pathUtils";
 import {each, map} from "lodash";
+import {calculateTextBoundary} from "../utils/textUtils";
 
 const moveRectangle = (layer, delta) => {
     const {x, y} = delta
@@ -27,6 +28,10 @@ const moveLine = (layer, delta) => {
 
 const moveText = (layer, delta) => {
     const {x, y} = delta
+
+    layer.x += x
+    layer.y += y
+    layer.boundary = calculateTextBoundary(layer)
 }
 
 const moveGroup = (layer, delta) => {

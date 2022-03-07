@@ -63,7 +63,17 @@ const overlapLine = (layer, point) => {
 }
 
 const overlapText = (layer, point) => {
+    const {x, y} = point
+    const {boundary} = layer
+    const {minX, minY, maxX, maxY} = boundary || emptyObject
 
+    if (minX <= x &&
+        maxX >= x &&
+        minY <= y &&
+        maxY >= y) {
+        debugger
+        return true
+    }
 }
 
 const overlapGroup = (layer, point) => {
@@ -84,7 +94,7 @@ const overlapPath = (layer, point) => {
 
         const inside = chain(path)
             .chunk(2)
-            .some(([{x: x1, y: y1},{x: x2, y: y2}]) => insideLine({x1, y1, x2, y2}, point))
+            .some(([{x: x1, y: y1}, {x: x2, y: y2}]) => insideLine({x1, y1, x2, y2}, point))
             .value()
 
         // if(inside) {

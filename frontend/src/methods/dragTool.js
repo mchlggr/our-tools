@@ -52,7 +52,6 @@ const dragTool = multi(
     method('tool:rectangle', dragNewLayer),
     method('tool:ellipse', dragNewLayer),
     method('tool:line', dragNewLayer),
-    method('tool:text', dragNewLayer),
     method('tool:path', dragNewLayer),
     method((tool, model, p1, p2, e) => null)
 )

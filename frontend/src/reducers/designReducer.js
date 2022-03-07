@@ -16,7 +16,7 @@ const initialDesignState = {}
 
 const boundaryPadding = 25
 
-const entityLatitudes = ({x, x1, x2, cx, width, path}) => {
+const entityLatitudes = ({x, x1, x2, cx, width, path, boundary}) => {
     let dims = compact([x, x1, x2, cx])
     if (width) {
         dims = [...dims, ...dims.map(d => d + width)]
@@ -24,16 +24,24 @@ const entityLatitudes = ({x, x1, x2, cx, width, path}) => {
     if (path) {
         dims.push(...path.map(({x}) => x))
     }
+    if (boundary) {
+        const {minX, maxX} = boundary
+        dims.push(...[minX, maxX])
+    }
     return dims
 }
 
-const entityLongitibutes = ({y, y1, y2, cy, height, path}) => {
+const entityLongitibutes = ({y, y1, y2, cy, height, path, boundary}) => {
     const dims = compact([y, y1, y2, cy])
     if (height) {
         dims.push(...dims.map(d => d + height))
     }
     if (path) {
         dims.push(...path.map(({y}) => y))
+    }
+    if (boundary) {
+        const {minY, maxY} = boundary
+        dims.push(...[minY, maxY])
     }
     return dims
 }

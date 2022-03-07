@@ -13,8 +13,6 @@ const HistoryModelDisplay = (props) => {
     const {model, index, at, designId} = props
     const {entities, selection, boundary} = model
 
-    const isCurrent = index === at
-
     const dispatch = useDispatch()
     const goToModel = useCallback(() => {
         dispatch(designGoTo(index, {designId}))
@@ -37,7 +35,9 @@ const HistoryModelDisplay = (props) => {
                 viewBox={viewBox}
                 onClick={goToModel}
                 className={classNames("history-model", {
-                    "history-model--current": isCurrent
+                    "history-model--past":   index < at,
+                    "history-model--present": index === at,
+                    "history-model--future":   index > at
                 })}
     >
         <ModelDisplay entities={entities} selection={selection}/>
@@ -52,7 +52,7 @@ const HistoryContainer = (props) => {
     const at = useSelector(selectActiveAt)
 
     return (
-        <div className={"penumbra__design-history"}>
+        <div className={"design-history"}>
             {history.map((model, index) => {
                 return <HistoryModelDisplay key={index} model={model} index={index} at={at} designId={designId}/>
             })}

@@ -4,6 +4,8 @@ import {multi, method} from "@arrows/multimethod";
 import produce from "immer";
 import {nanoid} from "@reduxjs/toolkit";
 import {calculatePathBoundary, roughPathD} from "../utils/pathUtils";
+import {calculateTextBoundary} from "../utils/textUtils";
+import {getHello} from "../utils/helloUtils";
 
 const newRectangle = produce((type, p1, p2) => {
     const {x: x1, y: y1} = p1
@@ -44,12 +46,28 @@ const newLine = produce((type, p1, p2) => {
         y1,
         x2,
         y2,
-        stroke: 'green'
+        // stroke: 'green'
     }
 })
 
+
+
+
 const newText = produce((type, p1, p2) => {
 
+    const fontSize = 100
+    const {x, y} = p1
+    const content = getHello()
+
+    return {
+        type: "layer:text",
+        uuid: nanoid(),
+        x,
+        y,
+        fontSize,
+        content,
+        boundary: calculateTextBoundary({x, y, fontSize, content})
+    }
 })
 
 const newGroup = produce((type, p1, p2) => {
@@ -63,7 +81,7 @@ const newPath = produce((type, p1, p2, path) => {
         uuid: nanoid(),
         path,
         d: roughPathD(path),
-        stroke: 'red',
+        // stroke: 'red',
         fill: "none",
         boundary: calculatePathBoundary(path) // Use for better selection performance
     }

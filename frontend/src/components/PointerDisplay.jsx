@@ -43,10 +43,14 @@ const PointerDisplay = (props) => {
 
     return (
         <>
-            {isDown && <circle cx={downX} cy={downY} r={"8"} fill={"red"}/>}
-            {isUp && <circle cx={upX} cy={upY} r={"8"} stroke={"red"} fill={'rgba(0,0,0,0)'}/>}
-            {isDragging && <line x1={downX} y1={downY} x2={dragX} y2={dragY} stroke={'blue'} strokeWidth={'4px'}/>}}
-            {d && <path d={d} fill={"none"} stroke={'#000'} strokeDasharray="1 8"/>}
+            {isDown && <circle className={'pointer-down-circle'} cx={downX} cy={downY} r={"2"} strokeWidth={1}/>}
+            {isUp && !isDown && <circle className={'pointer-up-circle'} cx={upX} cy={upY} r={"2"} strokeWidth={1}/>}
+            {isUp && !isDown &&
+            <text className={'pointer-up-text'} x={upX + 8} y={upY - 8}>{`{x: ${upX}, y: ${upY}}`}</text>}
+            {isDragging &&
+            <line className={'pointer-drag-line'} x1={downX} y1={downY} x2={dragX} y2={dragY} strokeWidth={1}
+                  strokeDasharray="1 8"/>}}
+            {d && <path className={'pointer-drag-path'} d={d} strokeDasharray="1 8" strokeWidth={1}/>}
         </>
     );
 }

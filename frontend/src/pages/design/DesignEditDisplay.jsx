@@ -12,13 +12,18 @@ import StageHotkeys from "../../components/StageHotkeys";
 const DesignEditDisplay = (props) => {
     const {designId} = props
 
+    // TODO: put contentEditable into context
+
     return (
         <>
             <Layout.Container>
                 <Layout.Header>
                     <ToolbarContainer designId={designId}/>
                 </Layout.Header>
-                <Layout.Content>
+                <Layout.Content className={"design-stage-wrapper"}
+                                //contentEditable={"true"}
+                                // suppressContentEditableWarning={true}
+                >
                     <ModelProvider designId={designId}>
                         <PointerProvider designId={designId}>
                             <StageHotkeys designId={designId}>
@@ -26,10 +31,11 @@ const DesignEditDisplay = (props) => {
                             </StageHotkeys>
                         </PointerProvider>
                     </ModelProvider>
-                </Layout.Content>
-                <Layout.Footer>
                     <HistoryContainer designId={designId}/>
-                </Layout.Footer>
+                </Layout.Content>
+                {/*<Layout.Footer>*/}
+                {/*    Go Back to All Designs | Save Design*/}
+                {/*</Layout.Footer>*/}
             </Layout.Container>
         </>
     );

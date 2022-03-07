@@ -1,9 +1,10 @@
 import {multi, method} from '@arrows/multimethod'
 import classNames from 'classnames'
+import TextDisplay from "../components/layers/TextDisplay";
 
-const typePattenSuffix = /(?<=\:).*/
+export const typePattenSuffix = /(?<=\:).*/
 
-const layerClassNames = (layer, selected, className = undefined) => {
+export const layerClassNames = (layer, selected, className = undefined) => {
     const {type} = layer
     const [suffix] = type.match(typePattenSuffix)
     return classNames('design-layer', {
@@ -24,6 +25,7 @@ const renderRectangle = (layer, selected, key) => {
                  className={layerClassNames(layer, selected)}
     />
 }
+
 const renderEllipse = (layer, selected, key) => {
     const {cx, cy, rx, ry} = layer
 
@@ -50,15 +52,8 @@ const renderLine = (layer, selected, key) => {
 }
 
 const renderText = (layer, selected, key) => {
-    const {x, y, dy, fontSize} = layer
 
-    return <text key={key}
-                 x={x}
-                 y={y}
-                 dy={dy}
-                 fontSize={fontSize}
-                 className={layerClassNames(layer, selected)}
-    />
+    return <TextDisplay key={key} layer={layer} selected={selected} />
 }
 
 const renderGroup = (layer, selected, key) => {
@@ -71,6 +66,19 @@ const renderPath = (layer, selected, key) => {
     return <path key={key} d={d} stroke={stroke} fill={fill} className={layerClassNames(layer, selected)}/>
 }
 
+const renderSurface = (layer, selected, key) => {
+    const {x, y, width, height} = layer
+    return <rect key={key}
+                 x={x}
+                 y={y}
+                 width={width}
+                 height={height}
+                 fill={"white"}
+                 stroke={"black"}
+                 // className={layerClassNames(layer, selected)}
+    />
+}
+
 const renderLayer = multi(
     ({type}) => type,
     method('layer:rectangle', renderRectangle),
@@ -79,6 +87,7 @@ const renderLayer = multi(
     method('layer:text', renderText),
     method('layer:group', renderGroup),
     method('layer:path', renderPath),
+    method('surface', renderSurface),
 )
 
 export default renderLayer

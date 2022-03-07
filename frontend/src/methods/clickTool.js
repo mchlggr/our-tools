@@ -2,8 +2,9 @@ import {multi, method} from '@arrows/multimethod'
 import produce from "immer";
 import {findSelected} from "./overlapLayer";
 import {filterLayers} from "../selectors/layer";
-import {set} from 'lodash'
+import {set, update} from 'lodash'
 import {emptyObject} from "../utils/empty";
+import newLayer from "./newLayer";
 
 const clickSelect = (tool, model, point, e) => produce(model, (draft) => {
     const {entities, selection} = draft
@@ -38,6 +39,15 @@ const clickSelect = (tool, model, point, e) => produce(model, (draft) => {
     }
 })
 
+const clickNewLayer = (tool, model, point, e) => produce(model, (draft) => {
+    const {tool} = draft
+    const instance = newLayer(tool, point, point)
+    const {uuid} = instance
+
+    set(draft, "selection", new Set([uuid]))
+    update(draft, "entities", (entities) => ([instance, ...entities]))
+})
+
 const clickLayer = (tool, model, point, e) => produce(model, (draft) => {
     // Avoids use-less re-rendering
     return null
@@ -48,7 +58,7 @@ const clickTool = multi(
     method('tool:select', clickSelect),
     method('tool:rectangle', clickLayer),
     method('tool:line', clickLayer),
-    method('tool:text', clickLayer),
+    method('tool:text', clickNewLayer),
     method('tool:path', clickLayer),
     method((tool, model, point, e) => null)
 )

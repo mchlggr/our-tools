@@ -82,21 +82,47 @@ const modelMockState = {
         //     uuid: "lt1",
         //     group_uuid: undefined,
         //     surface_uuid: "s1",
-        //     x: 0,
-        //     y: 0,
-        //     width: 66,
-        //     height: 98,
+        //     x: 200,
+        //     y: 200,
+        //     // width: 66,
+        //     // height: 98,
+        //     fontSize: 100,
         //     content: "scream!",
-        //     alignment: "left"
+        //     alignment: "left",
+        //     boundary: {
+        //         minX: 200,
+        //         minY: 200 - 100,
+        //         maxX: 200 + ("scream!".length * 50),
+        //         maxY: 200
+        //     }
         // },
         // {
-        //     type: "surface",
-        //     uuid: "s1",
-        //     x: 50,
-        //     y: 50,
-        //     width: 850,
-        //     height: 1100,
+        //     type: "layer:text", // is a type of Layer
+        //     uuid: "lt1",
+        //     group_uuid: undefined,
+        //     surface_uuid: "s1",
+        //     x: 400,
+        //     y: 400,
+        //     // width: 66,
+        //     // height: 98,
+        //     fontSize: "100px",
+        //     content: "hello!",
+        //     alignment: "left",
+        //     boundary: {
+        //         minX: 200,
+        //         minY: 200,
+        //         maxX: 200 + 100,
+        //         maxY: 200 + 100
+        //     }
         // },
+        {
+            type: "surface",
+            uuid: "s1",
+            x: 50,
+            y: 50,
+            width: 850,
+            height: 1100,
+        }
         // {
         //     type: "layer:group",
         //     uuid: "lg1",

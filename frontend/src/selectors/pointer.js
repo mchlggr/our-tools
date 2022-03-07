@@ -17,13 +17,14 @@ export const getPointerDragY = (pointer) => get(pointer, ["drag", "y"])
 
 export const getPointerPath = (pointer) => get(pointer, "path")
 
+
 export const getMousePos = (e) => {
-    e.preventDefault()
+    e.preventDefault() // Skip if selection exempt "design-layer"
     // const offset = e.target.getBoundingClientRect()
     const x = e.clientX //- offset.left
     const y = e.clientY //- offset.top
     return {
-        x: 10 * Math.round(x / 10),
-        y: 10 * Math.round(y / 10)
+        x: 8 * Math.round(x / 8),
+        y: 8 * Math.round(y / 8)
     }
 }
