@@ -1,15 +1,18 @@
 import {multi, method} from '@arrows/multimethod'
 import produce from "immer";
 import {filterLayers, filterSelectionLayers} from "../selectors/layer";
-import {find, set, update, each, isEqual} from "lodash";
+import {find, set, update, each, isEqual, map} from "lodash";
 import moveLayer from "./moveLayer";
 import {findSelected} from "./overlapLayer";
 import {emptyObject} from "../utils/empty";
 import newLayer from "./newLayer";
+import {nanoid} from "@reduxjs/toolkit";
 
 const dragSelect = (tool, model, p1, p2, e) => produce(model, (draft) => {
     const {selection, entities} = draft
     const delta = {x: p2.x - p1.x, y: p2.y - p1.y}
+
+    const duplicate = e.altKey
 
     const allLayers = filterLayers(entities)
     const layer = findSelected(allLayers, p1)
@@ -20,7 +23,17 @@ const dragSelect = (tool, model, p1, p2, e) => produce(model, (draft) => {
         case selection.has(uuid): {
             // Moves all selection layers
             const selectionLayers = filterSelectionLayers(draft)
-            each(selectionLayers, (layer) => moveLayer(layer, delta))
+
+            if(duplicate) {
+                const newLayers = selectionLayers.map(produce((layer) => {
+                    layer.uuid = nanoid()
+                    moveLayer(layer, delta)
+                }))
+                set(draft, "selection", new Set(map(newLayers, 'uuid')))
+                entities.push(...newLayers)
+            } else {
+                each(selectionLayers, (layer) => moveLayer(layer, delta))
+            }
             break;
         }
         case !!layer: {
