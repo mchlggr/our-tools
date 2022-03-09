@@ -26,8 +26,8 @@ const useResource = (resourceType, resourceMeta = emptyObject) => {
     const selectId =  useCallback(()=>id, [id])
 
     const loading = false // useSelector()
-    const error = useSelector(selectError(resourceType, selectId))
-    const resource = useSelector(selectOne(resourceType, selectId))
+    const error = useSelector(useCallback(selectError(resourceType, selectId), [resourceType, selectId]))
+    const resource = useSelector(useCallback(selectOne(resourceType, selectId), [resourceType, selectId]))
 
     const fetchResource = useCallback((payload, meta) => {
         return dispatch(fetchOne(resourceType, payload, {...resourceMeta, ...meta}))
