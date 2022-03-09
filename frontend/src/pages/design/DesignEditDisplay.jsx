@@ -1,19 +1,20 @@
 import React, {memo, useCallback, useEffect} from 'react';
-import PropTypes from 'prop-types';
+
+// Components
 import ToolbarContainer from "../../components/ToolbarContainer";
 import StageContainer from "../../components/StageContainer";
 import HistoryContainer from "../../components/HistoryContainer";
 import Layout from "../../components/Layout";
-import PointerProvider from "../../providers/PointerProvider";
-import ModelProvider from "../../providers/ModelProvider";
-import StageHotkeys from "../../components/StageHotkeys";
 import useScrollBlock from "../../hooks/useScrollBlock";
-import useMount from "../../hooks/useMount";
+import ModelProvider from "../../providers/ModelProvider";
+import PointerProvider from "../../providers/PointerProvider";
 
 
 const DesignEditDisplay = (props) => {
     const {designId} = props
+
     const [blockScroll, allowScroll] = useScrollBlock()
+
     useEffect(() => {
         blockScroll()
         return () => {
@@ -28,18 +29,16 @@ const DesignEditDisplay = (props) => {
                 <Layout.Header>
                     <ToolbarContainer designId={designId}/>
                 </Layout.Header>
-                <Layout.Content className={"design-stage-wrapper"}
+                <Layout.Content // className={"design-stage-wrapper"}
                     // contentEditable={"true"}
                     // suppressContentEditableWarning={true}
                 >
                     <ModelProvider designId={designId}>
                         <PointerProvider designId={designId}>
-                            <StageHotkeys designId={designId}>
-                                <StageContainer designId={designId}/>
-                            </StageHotkeys>
+                            <StageContainer designId={designId}/>
+                            <HistoryContainer designId={designId}/>
                         </PointerProvider>
                     </ModelProvider>
-                    <HistoryContainer designId={designId}/>
                 </Layout.Content>
                 {/*<Layout.Footer>*/}
                 {/*    Go Back to All Designs | Save Design*/}

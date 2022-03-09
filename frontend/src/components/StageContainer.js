@@ -7,8 +7,9 @@ import PointerDisplay from "./PointerDisplay";
 import PointerContext from "../contexts/PointerContext";
 import PointerProvider from "../providers/PointerProvider";
 import {useContextSelector} from "use-context-selector";
-import ActiveModelDisplay from "./ActiveModelDisplay";
-import ViewModelDisplay from "./ViewModelDisplay";
+import StageDisplay from "./StageDisplay";
+import StageHotkeys from "./StageHotkeys";
+
 
 const StageContainer = (props) => {
     const {designId} = props
@@ -18,14 +19,14 @@ const StageContainer = (props) => {
     const onPointerUp = useContextSelector(PointerContext, ({onPointerUp}) => onPointerUp)
 
     return <>
-        <svg className={"design-stage"}
-             onPointerDown={onPointerDown}
-             onPointerMove={onPointerMove}
-             onPointerUp={onPointerUp}
-        >
-            <ViewModelDisplay/>
-            <PointerDisplay/>
-        </svg>
+                <StageHotkeys designId={designId}>
+                    <StageDisplay
+                        onPointerDown={onPointerDown}
+                        onPointerMove={onPointerMove}
+                        onPointerUp={onPointerUp}
+                        designId={designId}
+                    />
+                </StageHotkeys>
     </>
 }
 

@@ -50,13 +50,11 @@ const dragSelect = (tool, model, p1, p2, e, path = emptyArray) => produce(model,
             each(lassoedLayers, ({uuid}) => selection.add(uuid))
             break;
         }
-        case !!selectedLayer && alreadySelected: { //|| selection.size > 0
+        case !!selectedLayer && alreadySelected: {
             moveSelection(draft, delta, duplicate)
             break;
         }
         case !!selectedLayer && !alreadySelected: {
-            // set(draft, "selection", new Set(map(selectedLayers, "uuid")))
-            // each(selectedLayers, layer => moveLayer(layer, delta))
             set(draft, "selection", new Set([selectedLayer.uuid]))
             moveLayer(selectedLayer, delta)
             break;

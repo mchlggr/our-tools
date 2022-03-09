@@ -1,0 +1,55 @@
+.design-toolbar {
+    padding-top: 14px;
+    position: absolute;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+}
+
+.design-tool-button {
+    width: 50px;
+    height: 50px;
+    background: #efefef;
+    color: #4d4d4c;
+    margin: 0 8px;
+    border: 1px solid #d6d6d6;
+    font-weight: 700;
+    border-bottom-width: 4px;
+    border-radius: 4px;
+}
+
+.design-tool-button--active {
+    color: #ffffff;
+    font-weight: 700;
+    border: none !important;
+}
+
+.design-tool-button--active.design-tool-button--select {
+    background: #c82829;
+}
+
+.design-tool-button--active.design-tool-button--rectangle {
+    background: #f5871f;
+}
+
+.design-tool-button--active.design-tool-button--ellipse {
+    background: #eab700;
+}
+
+.design-tool-button--active.design-tool-button--line {
+    background: #718c00;
+}
+
+.design-tool-button--active.design-tool-button--text {
+    background: #3e999f;
+}
+
+.design-tool-button--active.design-tool-button--path {
+    background: #4271ae;
+}
+
+.design-tool-button--active.design-tool-button--polygon {
+    background: #8959a8;
+}
+

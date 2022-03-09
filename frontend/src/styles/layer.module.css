@@ -1,0 +1,10 @@
+:global .design-layer {
+    fill: none;
+    stroke: #4d4d4c;
+    stroke-width: 2px;
+}
+
+
+:global .design-layer--selected {
+    stroke: #f5871f;
+}

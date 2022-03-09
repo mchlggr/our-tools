@@ -1,0 +1,41 @@
+.pointer-down-circle {
+    fill: #8e908c;
+    stroke: none;
+}
+
+.pointer-up-circle {
+    fill: none;
+    stroke: #8e908c;
+}
+
+.pointer-up-text {
+    fill: #8e908c
+}
+
+.pointer-drag-line {
+    fill: none;
+    stroke: #8e908c;
+    stroke-width: 1;
+    stroke-dasharray: 1 8
+}
+
+.pointer-drag-path {
+    fill: none;
+    stroke: #8e908c;
+}
+
+.pointer-drag-path--select {
+    stroke: #4d4d4c;
+    fill: rgba(214,214,214, 0.5)
+}
+
+.pointer-drag-line--rectangle {
+    stroke: #4d4d4c;
+    stroke-dasharray: 4 4;
+}
+
+.pointer-drag-line--ellipse {
+    stroke: #4d4d4c;
+    stroke-dasharray: 4 4;
+}
+

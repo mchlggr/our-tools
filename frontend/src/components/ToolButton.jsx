@@ -1,27 +1,34 @@
+// Deps
 import React, {memo, useCallback} from 'react';
-import PropTypes from 'prop-types';
-import {useDispatch, useSelector} from "react-redux";
-import {selectActiveModel} from "../selectors/design";
-import {designSetTool} from "../actions/design";
+import {useDispatch} from "react-redux";
 import classNames from "classnames";
-import {typePattenSuffix} from "../methods/renderLayer";
 
+// Actions
+import {designSetTool} from "../actions/design";
+
+// Utils
+import {typePattenSuffix} from "../utils/stringUtils";
+
+// Styles
+import s from "../styles/toolbar.module.css"
+
+// ---
 
 const ToolButton = (props) => {
     const {tool, designId, isActive} = props
     const [name, label] = tool
 
     const dispatch = useDispatch()
-    const setTool = useCallback((e) => {
+    const setTool = useCallback(() => {
         dispatch(designSetTool(name, {designId}))
     }, [name, dispatch, designId])
 
     const [suffix] = name.match(typePattenSuffix)
 
     return (
-        <button className={classNames("design-tool-button", {
-            "design-tool-button--active": isActive,
-            [`design-tool-button--${suffix}`]: !!suffix
+        <button className={classNames(s["design-tool-button"], {
+            [s["design-tool-button--active"]]: isActive,
+            [s[`design-tool-button--${suffix}`]]: !!suffix
         })} type={'button'} onClick={setTool}>
             {label}
         </button>

@@ -1,5 +1,5 @@
-#root {
-    display: block;
+.main-wrapper {
+    display: flex;
     height: 100%;
     width: 100%;
 }

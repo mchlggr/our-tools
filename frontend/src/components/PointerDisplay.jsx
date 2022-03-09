@@ -1,7 +1,13 @@
 import React, {memo, useMemo} from 'react';
-import PropTypes from 'prop-types';
-import PointerContext from "../contexts/PointerContext";
+import {isEmpty} from "lodash";
+import classNames from 'classnames';
+import {useSelector} from "react-redux";
 import {useContextSelector} from "use-context-selector";
+
+// Contexts
+import PointerContext from "../contexts/PointerContext";
+
+// Selectors
 import {
     getPointerDownX,
     getPointerDownY,
@@ -10,13 +16,15 @@ import {
     getPointerUpX,
     getPointerUpY
 } from "../selectors/pointer";
-import {isEmpty} from "lodash";
-import {roughPathD} from "../utils/pathUtils";
-import classNames from 'classnames';
-import {useSelector} from "react-redux";
-import {selectActiveTool} from "../selectors/design";
-import {typePattenSuffix} from "../methods/renderLayer";
 
+import {selectActiveTool} from "../selectors/design";
+
+// Utils
+import {typePattenSuffix} from "../utils/stringUtils";
+import {roughPathD} from "../utils/pathUtils";
+
+// Styles
+import s from '../styles/pointer.module.css'
 
 const PointerDisplay = (props) => {
 
@@ -49,18 +57,18 @@ const PointerDisplay = (props) => {
 
     return (
         <>
-            {isDown && <circle className={'pointer-down-circle'} cx={downX} cy={downY} r={"2"} strokeWidth={1}/>}
-            {isUp && !isDown && <circle className={'pointer-up-circle'} cx={upX} cy={upY} r={"2"} strokeWidth={1}/>}
+            {isDown && <circle className={s['pointer-down-circle']} cx={downX} cy={downY} r={"2"} strokeWidth={1}/>}
+            {isUp && !isDown && <circle className={s['pointer-up-circle']} cx={upX} cy={upY} r={"2"} strokeWidth={1}/>}
             {isUp && !isDown &&
-            <text className={'pointer-up-text'} x={upX + 8} y={upY - 8}>{`{x: ${upX}, y: ${upY}}`}</text>}
+            <text className={s['pointer-up-text']} x={upX + 8} y={upY - 8}>{`{x: ${upX}, y: ${upY}}`}</text>}
             {isDragging &&
-            <line className={classNames('pointer-drag-line', {[`pointer-drag-line--${toolSuffix}`]: toolSuffix})}
+            <line className={classNames(s['pointer-drag-line'], {[s[`pointer-drag-line--${toolSuffix}`]]: toolSuffix})}
                   x1={downX}
                   y1={downY}
                   x2={dragX}
                   y2={dragY}
                   />}}
-            {d && <path className={classNames('pointer-drag-path', {[`pointer-drag-path--${toolSuffix}`]: toolSuffix})}
+            {d && <path className={classNames(s['pointer-drag-path'], {[s[`pointer-drag-path--${toolSuffix}`]]: toolSuffix})}
                         d={d}
                         strokeDasharray="1 8"
                         strokeWidth={1}/>}

@@ -7,7 +7,7 @@ import s from "../styles/layout.module.css"
 function Layout({children, className, ...rest}) {
     return (
         <div
-            className={classNames(s.module_container, className)}
+            className={classNames(s["module_container"], className)}
             {...rest}
         >
             {children}
@@ -21,8 +21,8 @@ function LayoutHeader({children, className, ...rest}) {
     return (
         <div
             className={classNames(
-                s.module_row,
-                s.module_header,
+                s["module_row"],
+                s["module_header"],
                 className
             )}
             {...rest}
@@ -36,8 +36,8 @@ function LayoutContent({children, className, ...rest}) {
     return (
         <div
             className={classNames(
-                s.module_row,
-                s.module_content,
+                s["module_row"],
+                s["module_content"],
                 className
             )}
             {...rest}
@@ -51,8 +51,8 @@ function LayoutFooter({children, className, ...rest}) {
     return (
         <div
             className={classNames(
-                s.module_row,
-                s.module_footer,
+                s["module_row"],
+                s["module_footer"],
                 className
             )}
             {...rest}

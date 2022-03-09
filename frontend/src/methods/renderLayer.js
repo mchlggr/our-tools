@@ -1,15 +1,21 @@
+// Deps
 import {multi, method} from '@arrows/multimethod'
 import classNames from 'classnames'
+
+// Components
 import TextDisplay from "../components/layers/TextDisplay";
 
-// export const typePattenSuffix = /(?<=\:).*/
-export const typePattenSuffix = /([a-z]+$)/
+// Utils
+import {typePattenSuffix} from "../utils/stringUtils";
+
+// Styles
+import s from '../styles/layer.module.css'
 
 export const layerClassNames = (layer, selected, className = undefined) => {
     const {type} = layer
     const [suffix] = type.match(typePattenSuffix)
     return classNames('design-layer', {
-        "design-layer--selected": selected,
+        ["design-layer--selected"]: selected,
         [`design-layer-${suffix}`]: suffix
     }, className)
 }

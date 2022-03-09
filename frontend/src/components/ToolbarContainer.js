@@ -1,11 +1,17 @@
-import React, {memo} from 'react';
-import PropTypes from 'prop-types';
-import ToolButton from "./ToolButton";
-import {useSelector} from "react-redux";
+// Deps
+import React from 'react';
+import {connect} from "react-redux";
+
+// Selectors
 import {selectActiveTool} from "../selectors/design";
 
+// Containers
+import ToolbarDisplay from "./ToolbarDisplay";
 
-export const TOOLS = [
+
+// For now this is a constant at a later iteration
+// it will be dynamic and user-defined
+export const TOOLS = Object.freeze([
     ["tool:select", "V"],
     ["tool:rectangle", "R"],
     ["tool:ellipse", "O"],
@@ -13,27 +19,12 @@ export const TOOLS = [
     ["tool:text", "T"],
     ["tool:path", "P"],
     ["tool:polygon", "S"]
-]
+])
 
-const ToolbarContainer = (props) => {
-    const {designId} = props
+const mapStateToProps = (state) => {
+    const activeTool =  selectActiveTool(state)
 
-    const activeTool =  useSelector(selectActiveTool)
-
-    return (
-        <div className={"design-toolbar"}>
-            {TOOLS.map((tool, index) => {
-                const [name] = tool
-                const isActive = name === activeTool
-                return <ToolButton key={index} tool={tool} designId={designId} isActive={isActive}/>
-            })}
-        </div>
-    );
+    return {activeTool, tools: TOOLS}
 }
 
-ToolbarContainer.propTypes = {};
-
-const ToolbarContainerMemo = memo(ToolbarContainer)
-ToolbarContainerMemo.displayName = "ToolbarContainer"
-
-export default ToolbarContainerMemo;
+export default connect(mapStateToProps)(ToolbarDisplay);
