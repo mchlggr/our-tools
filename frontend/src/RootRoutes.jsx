@@ -10,11 +10,11 @@ import DesignEditContainer from "./pages/design/DesignEditContainer";
 const RootRoutes = (props) => {
     return (<>
             <Routes>
-                <Route
-                    exact
-                    path={"/"}
-                    element={<Navigate to={pageRoutes.design.edit(0)}/>}
-                />
+                {/*<Route*/}
+                {/*    exact*/}
+                {/*    path={"/"}*/}
+                {/*    element={<Navigate to={pageRoutes.design.edit(0)}/>}*/}
+                {/*/>*/}
                 <Route path={pageRoutes.auth.login()} element={<LoginPage/>}/>
                 <Route path={pageRoutes.auth.signup()} element={<SignupPage/>}/>
                 <Route path={pageRoutes.design.index()} element={<DesignIndex/>}/>

@@ -19,7 +19,7 @@ const useResource = (resourceType, resourceMeta = emptyObject) => {
 
     useMount(() => {
         if (alias) {
-            //dispatch(setAlias(resourceType, alias, id)))
+            //TODO: dispatch(setAlias(resourceType, alias, id)))
         }
     })
 
