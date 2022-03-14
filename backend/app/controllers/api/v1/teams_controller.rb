@@ -1,0 +1,3 @@
+class TeamsController < AuthorizedController
+
+end

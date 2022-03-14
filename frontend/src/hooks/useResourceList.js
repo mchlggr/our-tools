@@ -1,12 +1,13 @@
 import {emptyObject} from "../utils/empty";
 import {useParams} from "react-router";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import useMount from "./useMount";
 import {useCallback, useMemo} from "react";
 import {createOne, deleteOne, fetchList, oneAction, updateOne} from "../actions/resource";
+import {selectList} from "../selectors/resource";
 
 const useResourceList = (resourceType, resourceMeta = emptyObject) => {
-    const {alias} = resourceMeta
+    const {alias, list="list"} = resourceMeta
 
     //TODO: const {list} = useParams()
 
@@ -17,6 +18,10 @@ const useResourceList = (resourceType, resourceMeta = emptyObject) => {
             //TODO: dispatch(setAlias(resourceType, alias, list)))
         }
     })
+
+    //const selectList =  useCallback(()=>list, [list])
+
+    const resourceList = useSelector(useCallback(selectList(resourceType, list), [resourceType, list]))
 
     const fetchResourceList = useCallback((payload, meta) => {
         return dispatch(fetchList(resourceType, payload, {...resourceMeta, ...meta}))
@@ -41,6 +46,7 @@ const useResourceList = (resourceType, resourceMeta = emptyObject) => {
 
     const resourceListProps = useMemo(() => {
         return {
+            resourceList,
             fetchResourceList,
             createResource,
             updateResource,
@@ -48,10 +54,15 @@ const useResourceList = (resourceType, resourceMeta = emptyObject) => {
             resourceAction
         }
     }, [
+        resourceList,
         fetchResourceList,
         createResource,
         updateResource,
         deleteResource,
         resourceAction
     ])
+
+    return resourceListProps
 }
+
+export default useResourceList

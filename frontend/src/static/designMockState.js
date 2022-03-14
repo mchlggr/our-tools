@@ -32506,7 +32506,7 @@ const designMockState = {
     resource: {
         designs: {
             errors: {},
-            lists: {ids: []},
+            list: {ids: []},
             requestedAt: {"1": 123},
             receivedAt: {"1": 123},
             alias: {

@@ -1,0 +1,3 @@
+class RolesController < AuthorizedController
+
+end

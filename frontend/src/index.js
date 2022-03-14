@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {enableMapSet} from "immer";
+import {enableMapSet, current, original} from "immer";
+
+window._current = current
+window._original = original
 
 enableMapSet()
 

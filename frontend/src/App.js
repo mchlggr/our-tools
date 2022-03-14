@@ -1,6 +1,7 @@
 // Deps
 import RootRoutes from "./RootRoutes";
 import {BrowserRouter} from "react-router-dom";
+import classNames from 'classnames';
 
 // Providers
 import StoreProvider from "./providers/StoreProvider";
@@ -11,7 +12,7 @@ import s from './styles/app.module.css'
 
 function App() {
     return (
-        <div className={s["main-wrapper"]}>
+        <div className={classNames(s["main-wrapper"], "bg-grey-100")}>
             <StoreProvider>
                 <BrowserRouter>
                     <RootRoutes/>

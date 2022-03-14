@@ -1,17 +1,20 @@
 import React, {memo, useCallback} from 'react';
-import {Navigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
 import pageRoutes from "../pageRoutes";
 import Layout from "../../components/Layout";
 import {useDispatch} from "react-redux";
+import LoginForm from "./LoginForm";
+import {login} from "../../actions/auth";
 
 
 const LoginPage = (props) => {
 
-    const displatch = useDispatch()
-    //TODO: const onSubmit = useCallback((values)=>{
-    //     const payload = values
-    //     displatch(login('auth', payload))
-    // },[displatch])
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const onSubmit = useCallback((values) => {
+        dispatch(login('auth', values)).then(() => navigate(pageRoutes.design.index()))
+    }, [dispatch, navigate])
 
     return (
         <>
@@ -21,7 +24,8 @@ const LoginPage = (props) => {
                 </Layout.Header>
                 <Layout.Content>
                     LoginPage
-                </Layout.Content>e
+                    <LoginForm handleSubmit={onSubmit}/>
+                </Layout.Content>
             </Layout.Container>
 
         </>

@@ -2,14 +2,22 @@ require_relative "boot"
 
 require "rails/all"
 
+# require "lib/jwt/devise/password_strategy"
+# require "lib/jwt/devise/refresh_token_strategy"
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+Dotenv::Railtie.load
+
 module Backend
   class Application < Rails::Application
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
+
+    # config.autoloader = :zeitwerke
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -23,5 +31,24 @@ module Backend
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # config.eager_load_paths << Rails.root.join('lib')
+    # config.eager_load_paths << Rails.root.join('lib/**/*.rb')
+
+    config.to_prepare do
+      require_dependency("#{Rails.root}/lib/jwt.rb")
+    end
+
+    # config.eager_load_paths << "#{Rails.root}/lib"
+    # config.autoload_paths << "#{Rails.root}/lib"
+
+    # config.autoload_paths << Rails.root.join('/lib/**/*.rb')
+
+    Rails.application.eager_load!
+
+    # puts 'fewjio'
+
+    # ::Warden::Strategies.add(:jwt_refresh_token, ::Jwt::Devise::PasswordStrategy)
+    # ::Warden::Strategies.add(:jwt_password, ::Jwt::Devise::RefreshTokenStrategy)
   end
 end

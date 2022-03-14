@@ -34,4 +34,6 @@ const serializers = {
     }
 };
 
+window._serializers = serializers
+
 export default serializers

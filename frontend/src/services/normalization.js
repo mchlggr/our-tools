@@ -11,6 +11,7 @@ import {
 import serializers from "./serializers";
 import {emptyArray} from "../utils/empty";
 
+
 export const normalize = (resourceType, data) => {
     if (!serializers[resourceType]) {
         console.error(`No serializer/deserializer for ${resourceType}`);
@@ -20,6 +21,7 @@ export const normalize = (resourceType, data) => {
 };
 
 export const denormalize = (resourceType, data) => {
+    // debugger
     const result = serializers[resourceType].serializer.serialize(data);
     if(data.id) {
         return result
@@ -29,6 +31,7 @@ export const denormalize = (resourceType, data) => {
 };
 
 export const normalizeResponse = (response) => {
+    // debugger
     const {data = [], included = []} = response.data;
     const dataByType = groupBy(castArray(data).concat(included), 'type');
 
@@ -44,6 +47,7 @@ export const normalizeResponse = (response) => {
 };
 
 export const normalizeEndpointError = (err) => {
+    // debugger
     const error = get(err, ['response', 'data', 'errors', 0]);
 
     // noinspection JSUnresolvedVariable
@@ -51,6 +55,7 @@ export const normalizeEndpointError = (err) => {
 };
 
 export const normalizeErrors = (err) => {
+    // debugger
     // noinspection JSUnresolvedFunction
     throw get(err, 'response.data.errors', emptyArray)
         .reduce((errors, error) => {

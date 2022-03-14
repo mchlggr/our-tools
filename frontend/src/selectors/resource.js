@@ -32,16 +32,20 @@ export const getManyByIds = (resources, ids = emptyArray) => {
     }
 }
 
-export const getById = (resources) => get(resources, 'byIds')
+export const getById = (resources) => get(resources, 'byId')
 export const getAlias = (aliasName) => (resources) => {
     return get(resources, ['alias', aliasName])
 }
 
 export const getList = (listName) => (resources) => {
+    debugger
     const byId = getById(resources)
-    const list = getAlias(listName) // A list is kind of 'alias'
+    // const list = getAlias(listName)(resources) // A list is kind of 'alias'
+    const list = get(resources, listName)
 
     const {ids = emptyArray} = list || emptyObject
+
+    debugger
 
     if (isEmpty(ids)) {
         return {...emptyList, empty: true}
