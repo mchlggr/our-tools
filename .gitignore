@@ -1,3 +1,7 @@
 .idea/
 scratch/
 public/
+node_modules/
+.turbo/
+# Turborepo
+.turbo

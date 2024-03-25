@@ -23,7 +23,6 @@ const HistoryModelDisplay = (props) => {
         dispatch(designGoTo(index, {designId}))
     }, [index])
 
-
     const {
         minX,
         minY,

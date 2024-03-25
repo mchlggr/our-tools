@@ -1,0 +1,17 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "build": {
+      "outputs": [
+        "frontend/build/**"
+      ]
+    },
+    "build-public": {
+      "outputs": [
+        "public/**",
+        "frontend/build/**"
+      ]
+    },
+    "type-check": {}
+  }
+}

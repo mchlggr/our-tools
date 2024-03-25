@@ -23,7 +23,7 @@ const HistoryDisplay = (props) => {
 }
 
 HistoryDisplay.propTypes = {
-
+    
 };
 
 const HistoryDisplayMemo = memo(HistoryDisplay)

@@ -1,2 +1,1 @@
-# Programmable Design Tool
-Emacs for Graphics
+# Simple Design Tool
