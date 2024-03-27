@@ -1,5 +1,7 @@
+// Dependencies
 import {get} from 'lodash'
-import produce from "immer";
+
+// ---
 
 export const getPointer = (pointer) => pointer
 
@@ -17,14 +19,20 @@ export const getPointerDragY = (pointer) => get(pointer, ["drag", "y"])
 
 export const getPointerPath = (pointer) => get(pointer, "path")
 
-
-export const getMousePos = (e) => {
+export const getMousePos = (e, {offset, center}) => {
     e.preventDefault() // Skip if selection exempt "design-layer"
     // const offset = e.target.getBoundingClientRect()
-    const x = e.clientX //- offset.left
-    const y = e.clientY //- offset.top
+    const x = e.clientX - offset.x //- offset.left
+    const y = e.clientY - offset.y //- offset.top
     return {
         x: 8 * Math.round(x / 8),
         y: 8 * Math.round(y / 8)
     }
 }
+
+
+export const getOnPointerDown = (pointer) => get(pointer, "onPointerDown")
+export const getOnPointerMove = (pointer) => get(pointer, "onPointerMove")
+export const getOnPointerWheel = (pointer) => get(pointer, "onPointerWheel")
+export const getOnPointerPinch = (pointer) => get(pointer, "onPointerPinch")
+export const getOnPointerUp = (pointer) => get(pointer, "onPointerUp")

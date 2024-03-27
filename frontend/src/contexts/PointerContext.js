@@ -1,5 +1,4 @@
-import React from "react"
-import { createContext } from "use-context-selector"
+import React, {createContext } from "react"
 
 const PointerContext = createContext({})
 

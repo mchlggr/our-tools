@@ -1,4 +1,8 @@
+// Dependencies
+import memoize from 'proxy-memoize';
 import {filter, groupBy, keyBy} from "lodash";
+
+// ---
 
 export const typePatternLayer = /layer:/
 

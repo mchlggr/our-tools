@@ -1,8 +1,8 @@
-import React, {memo, useEffect, useMemo} from 'react';
+import React, {memo, useCallback, useEffect, useMemo} from 'react';
 import {connect} from "react-redux";
 import {selectActiveModel} from "../selectors/design";
-import {useImmer} from "use-immer";
-import ModelContext from "../contexts/ModelContext";
+import {createModelStore, useRenderModel, ModelStoreProvider} from "../contexts/modelStore";
+
 
 const mapStateToProps = (state) => {
     const currentModel = selectActiveModel(state)
@@ -11,29 +11,29 @@ const mapStateToProps = (state) => {
     }
 }
 
+const SetCurrentModel = connect(mapStateToProps)((props) => {
+    const {currentModel} = props
 
-const ModelProvider = (props) => {
-    const {currentModel, children} = props
-
-    const [nextModel, renderModel] = useImmer(undefined)
+    const renderModel = useRenderModel()
 
     useEffect(() => {
-        if (nextModel !== undefined) {
-            renderModel(currentModel)
-        }
+        // Resets speculative model to current model
+        renderModel(currentModel)
     }, [currentModel])
 
-    const viewModel = nextModel || currentModel
+    return null
+})
 
-    // TODO: maybe try splitting this up into 2 different contexts (viewModelContext, renderModelContext)
-    const contextValue = useMemo(() => {
-        return {viewModel, renderModel}
-    }, [viewModel, renderModel])
 
-    return (
-        <ModelContext.Provider value={contextValue}>
-            {children}
-        </ModelContext.Provider>
+const ModelProvider = (props) => {
+    const {children} = props
+
+    return (<>
+            <ModelStoreProvider createStore={createModelStore}>
+                <SetCurrentModel/>
+                {children}
+            </ModelStoreProvider>
+        </>
     );
 }
 
@@ -42,4 +42,4 @@ ModelProvider.propTypes = {};
 const NextModelProviderMemo = memo(ModelProvider)
 NextModelProviderMemo.displayName = "ModelProvider"
 
-export default connect(mapStateToProps)(NextModelProviderMemo);
+export default NextModelProviderMemo;

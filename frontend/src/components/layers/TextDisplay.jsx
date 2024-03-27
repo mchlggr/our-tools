@@ -1,17 +1,27 @@
 import React, {memo, useCallback, useEffect, useRef} from 'react';
+
+// Dependencies
 import {isString} from 'lodash'
 import PropTypes from 'prop-types';
-import {layerClassNames} from "../../methods/renderLayer";
 import {useDispatch, useSelector} from "react-redux";
+
+// Selectors
 import {selectActiveDesignId, selectActiveModel} from "../../selectors/design";
+
+// Actions
 import {designCommit} from "../../actions/design";
+
+// Methods
 import inputTool from "../../methods/inputTool";
+
+// Utils
 import {emptyObject} from "../../utils/empty";
 
 
+// ---
+
 const TextDisplay = (props) => {
-    const {layer, selected} = props
-    const {x, y, dy, fontSize, uuid, content, boundary} = layer
+    const {x, y, dy, fontSize, uuid, content, boundary, selected, className} = props
 
     const currentModel = useSelector(selectActiveModel)
     const designId = useSelector(selectActiveDesignId)
@@ -71,7 +81,7 @@ const TextDisplay = (props) => {
                   dy={dy}
                   //contentEditable={"false"}
                   fontSize={fontSize}
-                  className={layerClassNames(layer, selected)}
+                  className={className}
                   fontFamily="Helvetica"
                   stroke="#000"
                   textAnchor="left"
@@ -80,7 +90,7 @@ const TextDisplay = (props) => {
             </text>
             <rect
                 ref={rectRef}
-                className={layerClassNames(layer, selected)}
+                className={className}
                 x={minX}
                 y={minY}
                 width={maxX - minX}

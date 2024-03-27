@@ -23,6 +23,7 @@ const HistoryModelDisplay = (props) => {
         dispatch(designGoTo(index, {designId}))
     }, [index])
 
+
     const {
         minX,
         minY,
@@ -34,6 +35,8 @@ const HistoryModelDisplay = (props) => {
     const height = maxY - minY
 
     const viewBox = `${minX} ${minY} ${width} ${height}`
+
+    console.log("inf/viewBox",viewBox)
 
     return <svg key={index}
                 viewBox={viewBox}

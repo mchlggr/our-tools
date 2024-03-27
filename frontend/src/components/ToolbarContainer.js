@@ -5,13 +5,15 @@ import {connect} from "react-redux";
 // Selectors
 import {selectActiveTool} from "../selectors/design";
 
-// Containers
+// Components
 import ToolbarDisplay from "./ToolbarDisplay";
 
+// ---
 
 // For now this is a constant at a later iteration
 // it will be dynamic and user-defined
 export const TOOLS = Object.freeze([
+    ["tool:hand", "H"],
     ["tool:select", "V"],
     ["tool:rectangle", "R"],
     ["tool:ellipse", "O"],

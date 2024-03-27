@@ -1,72 +1,125 @@
 import React, {memo, useCallback, useMemo} from 'react';
+
+// Dependencies
 import PropTypes from 'prop-types';
-import {designCommit, designRedo, designSetTool, designUndo} from "../actions/design";
-import {useDispatch, useSelector} from "react-redux";
-import {emptyObject} from "../utils/empty";
 import {GlobalHotKeys} from "react-hotkeys";
+
+// Actions
+import {
+    designCommit,
+    designDeselectAll,
+    designRedo,
+    designSelectAll,
+    designSetTool,
+    designUndo
+} from "../actions/design";
+
+// Selectors
+import {useDispatch, useSelector} from "react-redux";
+
+// Utils
+import {emptyObject} from "../utils/empty";
+
+// Constants
 import {DEFAULT_DESIGN_KEYMAP} from "../pages/design/constants/designKeymaps";
-import {selectActiveModel} from "../selectors/design";
-import deleteTool from "../methods/deleteTool";
-import nudgeTool from "../methods/nudgeTool";
 import {DIRECTION_EAST, DIRECTION_NORTH, DIRECTION_SOUTH, DIRECTION_WEST} from "../constants/direction";
 
+// Selectors
+import {selectActiveModel} from "../selectors/design";
+
+// Methods
+import deleteTool from "../methods/deleteTool";
+import nudgeTool from "../methods/nudgeTool";
+
+// Hooks
+import {usePointer, usePointerDown} from "../contexts/pointerStore";
+import {useDispatchModel} from "./StageContainer";
+
+
+// ---
 
 const StageHotkeys = (props) => {
     const {designId, children} = props
 
     const currentModel = useSelector(selectActiveModel)
+    console.log("inf/currentModel",currentModel)
 
     const dispatch = useDispatch()
+    const dispatchModel = useDispatchModel(designId)
+
+    const onDirection = usePointer(({onDirection})=> (onDirection))
 
     const nudgeDirection = useCallback((e, direction) => {
         const {tool} = currentModel
-        const newModel = nudgeTool(tool, currentModel, direction, e)
-        if (!!newModel && newModel !== currentModel) {
-            dispatch(designCommit(newModel, {designId}))
-        }
-    }, [dispatch, designId, currentModel])
+            onDirection(e, tool, currentModel, dispatchModel, direction)
+    }, [dispatchModel, currentModel, onDirection])
 
+    const pointerDown = usePointerDown()
+
+    const setTool = useCallback((tool) => {
+        // Don't allow user to change tools while mouse is down
+        if (!pointerDown) {
+            dispatch(designSetTool(tool, {designId}))
+        }
+    }, [dispatch, designId, pointerDown])
 
     const handlers = useMemo(() => {
         return {
             // Tool keys
+            HAND: (e) => {
+                setTool("tool:hand")
+            },
             SELECT: (e) => {
-                dispatch(designSetTool("tool:select", {designId}))
+                setTool("tool:select")
             },
             RECTANGLE: (e) => {
-                dispatch(designSetTool("tool:rectangle", {designId}))
+                setTool("tool:rectangle")
             },
             ELLIPSE: (e) => {
-                dispatch(designSetTool("tool:ellipse", {designId}))
+                setTool("tool:ellipse")
 
             },
             LINE: (e) => {
-                dispatch(designSetTool("tool:line", {designId}))
+                setTool("tool:line")
 
             },
             TEXT: (e) => {
-                dispatch(designSetTool("tool:text", {designId}))
+                setTool("tool:text")
 
             },
             PATH: (e) => {
-                dispatch(designSetTool("tool:path", {designId}))
+                setTool("tool:path")
             },
             POLYGON: (e) => {
-                dispatch(designSetTool("tool:polygon", {designId}))
+                setTool("tool:polygon")
             },
 
             // History keys
             UNDO: (e) => {
+                e.preventDefault()
                 // default key stroke is ctrl+z
                 dispatch(designUndo(emptyObject, {designId}))
             },
             REDO: (e) => {
+                e.preventDefault()
                 // default key stroke is ctrl+shift+z
                 dispatch(designRedo(emptyObject, {designId}))
+            },
+            DESELECT_ALL: (e) => {
+                e.preventDefault()
+                // default key stroke is ctrl+shift+z
+                dispatch(designDeselectAll(emptyObject, {designId}))
+            },
+
+            SELECT_ALL: (e) => {
+                e.preventDefault()
+                // default key stroke is ctrl+shift+z
+                dispatch(designSelectAll(emptyObject, {designId}))
             },
 
             // Edit
             DELETE: (e) => {
+                e.preventDefault()
                 const {tool} = currentModel
                 const newModel = deleteTool(tool, currentModel, e)
                 if (!!newModel && newModel !== currentModel) {
@@ -78,7 +131,7 @@ const StageHotkeys = (props) => {
             LEFT: (e) => nudgeDirection(e, DIRECTION_WEST),
             DOWN: (e) => nudgeDirection(e, DIRECTION_SOUTH)
         }
-    }, [dispatch, designId, currentModel, nudgeDirection])
+    }, [dispatch, designId, currentModel, nudgeDirection, pointerDown, setTool])
 
     return (
         <>

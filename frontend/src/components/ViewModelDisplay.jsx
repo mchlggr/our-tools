@@ -1,15 +1,13 @@
-import React, {memo} from 'react';
+import React, {memo, useCallback} from 'react';
 import PropTypes from 'prop-types';
-import {useContextSelector} from "use-context-selector";
-import ModelContext from "../contexts/ModelContext";
 import {getViewEntities, getViewSelection} from "../selectors/model";
 import ModelDisplay from "./ModelDisplay";
+import { useModel } from "../contexts/modelStore";
 
 
 const ViewModelDisplay = (props) => {
-
-    const entities = useContextSelector(ModelContext, getViewEntities)
-    const selection = useContextSelector(ModelContext, getViewSelection)
+    const entities = useModel(getViewEntities)
+    const selection = useModel(getViewSelection)
 
     return (
         <>

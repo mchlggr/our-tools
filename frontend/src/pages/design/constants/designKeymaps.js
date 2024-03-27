@@ -3,6 +3,7 @@ export const DEFAULT_DESIGN_KEYMAP = {
     SAVE: "ctrl+s",
 
     // TOOL keys
+    HAND: "h",
     SELECT: "v",
     RECTANGLE: "r",
     ELLIPSE: "o",
@@ -18,6 +19,9 @@ export const DEFAULT_DESIGN_KEYMAP = {
     DOWN: ["down", "shift+down", "alt+down", "shift+alt+down"],
 
     DELETE: ["del", "backspace"],
+
+    DESELECT_ALL: ["ctrl+d", "command+d"],
+    SELECT_ALL: ["ctrl+a", "command+a"],
 
     // History Keys
     UNDO: ["ctrl+z", "command+z"],

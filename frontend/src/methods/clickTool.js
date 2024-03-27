@@ -6,7 +6,8 @@ import {set, update} from 'lodash'
 import {emptyObject} from "../utils/empty";
 import newLayer from "./newLayer";
 
-const clickSelect = (tool, model, point, e) => produce(model, (draft) => {
+const clickSelect = (tool, model, e, draftStage) => produce(model, (draft) => {
+    const {down: point} = draftStage
     const {entities, selection} = draft
     const multiSelect = e.shiftKey
     const layers = filterLayers(entities)
@@ -39,7 +40,8 @@ const clickSelect = (tool, model, point, e) => produce(model, (draft) => {
     }
 })
 
-const clickNewLayer = (tool, model, point, e) => produce(model, (draft) => {
+const clickNewLayer = (tool, model, e, draftStage) => produce(model, (draft) => {
+    const {down: point} = draftStage
     const {tool} = draft
     const instance = newLayer(tool, point, point)
     const {uuid} = instance
@@ -48,13 +50,19 @@ const clickNewLayer = (tool, model, point, e) => produce(model, (draft) => {
     update(draft, "entities", (entities) => ([instance, ...entities]))
 })
 
-const clickLayer = (tool, model, point, e) => produce(model, (draft) => {
+const clickLayer = (tool, model, point, e, draftStage) => produce(model, (draft) => {
+    // Avoids use-less re-rendering
+    return null
+})
+
+const clickHand =  (tool, model, point, e, draftStage) => produce(model, (draft) => {
     // Avoids use-less re-rendering
     return null
 })
 
 const clickTool = multi(
     (tool) => tool,
+    method('tool:hand', clickHand),
     method('tool:select', clickSelect),
     method('tool:rectangle', clickLayer),
     method('tool:line', clickLayer),

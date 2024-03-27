@@ -145,36 +145,40 @@ const lassoGroup = (layer, point, lasso) => {
 
 // -- PATH ------------
 const overlapPath = (layer, point) => {
-    const {x, y} = point
-    const {path, boundary} = layer
-    const {minX, minY, maxX, maxY} = boundary || emptyObject
-
-
-    if (minX <= x &&
-        maxX >= x &&
-        minY <= y &&
-        maxY >= y) {
-
-        const inside = chain(path)
-            .chunk(2)
-            .some(([{x: x1, y: y1}, {x: x2, y: y2}]) => insideLine({x1, y1, x2, y2}, point))
-            .value()
-
-
-        return inside
-    }
+    // const {x, y} = point
+    // console.log("json/layer", JSON.parse(JSON.stringify(layer)))
+    // const {path, boundary} = layer
+    // const {minX, minY, maxX, maxY} = boundary || emptyObject
+    //
+    //
+    // if (minX <= x &&
+    //     maxX >= x &&
+    //     minY <= y &&
+    //     maxY >= y) {
+    //
+    //     console.log("odd/path", JSON.parse(JSON.stringify(size(path))))
+    //
+    //     // const inside = chain(path)
+    //     //     .chunk(2)
+    //     //     .some(([{x: x1, y: y1}, {x: x2, y: y2}]) => insideLine({x1, y1, x2, y2}, point))
+    //     //     .value()
+    //     //
+    //     //
+    //     // return inside
+    // }
 }
 
 const lassoPath = (layer, point, lasso) => {
+    //debugger
     // if (overlapPath(layer, point)) {
     //     return true
     // }
-
-
-    const {path, boundary} = layer
-    const {minX, minY, maxX, maxY} = boundary || emptyObject
-    const points = path.map(({x, y}) => [x, y])
-    return some(points, (p) => pointInPolygon(p, lasso))
+    //
+    //
+    // const {path, boundary} = layer
+    // const {minX, minY, maxX, maxY} = boundary || emptyObject
+    // const points = path.map(({x, y}) => [x, y])
+    // return some(points, (p) => pointInPolygon(p, lasso))
 }
 
 

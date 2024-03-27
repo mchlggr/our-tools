@@ -3,7 +3,6 @@ import React, {memo, useCallback, useEffect} from 'react';
 // Components
 import ToolbarContainer from "../../components/ToolbarContainer";
 import StageContainer from "../../components/StageContainer";
-import HistoryContainer from "../../components/HistoryContainer";
 import Layout from "../../components/Layout";
 import useScrollBlock from "../../hooks/useScrollBlock";
 import ModelProvider from "../../providers/ModelProvider";
@@ -36,7 +35,7 @@ const DesignEditDisplay = (props) => {
                     <ModelProvider designId={designId}>
                         <PointerProvider designId={designId}>
                             <StageContainer designId={designId}/>
-                            <HistoryContainer designId={designId}/>
+                            {/*<HistoryContainer designId={designId}/>*/}
                         </PointerProvider>
                     </ModelProvider>
                 </Layout.Content>

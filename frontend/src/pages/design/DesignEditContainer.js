@@ -1,17 +1,22 @@
 import React, {memo, useCallback, useMemo} from 'react';
-import useResource from "../../hooks/useResource";
-import {RESOURCE_ALIAS} from "../../constants/resource";
-import useMount from "../../hooks/useMount";
-import StageContainer from "../../components/StageContainer";
+
+// Dependencies
 import * as PropTypes from "prop-types";
+
+// Constants
+import {RESOURCE_ALIAS} from "../../constants/resource";
+
+// Hooks
+import useResource from "../../hooks/useResource";
+import useMount from "../../hooks/useMount";
+
+// Components
+import StageContainer from "../../components/StageContainer";
 import HistoryContainer from "../../components/HistoryContainer";
 import ToolbarContainer from "../../components/ToolbarContainer";
 import DesignEditDisplay from "./DesignEditDisplay";
 
-
-
-HistoryContainer.propTypes = {};
-
+// ---
 
 const DesignEditContainer = (props) => {
 

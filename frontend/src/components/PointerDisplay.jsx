@@ -2,7 +2,6 @@ import React, {memo, useMemo} from 'react';
 import {isEmpty} from "lodash";
 import classNames from 'classnames';
 import {useSelector} from "react-redux";
-import {useContextSelector} from "use-context-selector";
 
 // Contexts
 import PointerContext from "../contexts/PointerContext";
@@ -25,23 +24,33 @@ import {roughPathD} from "../utils/pathUtils";
 
 // Styles
 import s from '../styles/pointer.module.css'
+import {
+    usePointerDownX,
+    usePointerDownY,
+    // --
+    usePointerDragX,
+    usePointerDragY, usePointerPath,
+    // --
+    usePointerUpX,
+    usePointerUpY
+} from "../contexts/pointerStore";
 
 const PointerDisplay = (props) => {
 
-    const downX = useContextSelector(PointerContext, getPointerDownX)
-    const downY = useContextSelector(PointerContext, getPointerDownY)
+    const downX = usePointerDownX()
+    const downY = usePointerDownY()
 
-    const dragX = useContextSelector(PointerContext, getPointerDragX)
-    const dragY = useContextSelector(PointerContext, getPointerDragY)
+    const dragX = usePointerDragX()
+    const dragY = usePointerDragY()
 
-    const upX = useContextSelector(PointerContext, getPointerUpX)
-    const upY = useContextSelector(PointerContext, getPointerUpY)
+    const upX = usePointerUpX()
+    const upY = usePointerUpY()
 
     const isDown = downX && downY
     const isUp = upX && upY
     const isDragging = isDown && dragX && dragY
 
-    const path = useContextSelector(PointerContext, getPointerPath)
+    const path = usePointerPath()
 
     const d = useMemo(() => {
         if (!isEmpty(path)) {
@@ -60,18 +69,20 @@ const PointerDisplay = (props) => {
             {isDown && <circle className={s['pointer-down-circle']} cx={downX} cy={downY} r={"2"} strokeWidth={1}/>}
             {isUp && !isDown && <circle className={s['pointer-up-circle']} cx={upX} cy={upY} r={"2"} strokeWidth={1}/>}
             {isUp && !isDown &&
-            <text className={s['pointer-up-text']} x={upX + 8} y={upY - 8}>{`{x: ${upX}, y: ${upY}}`}</text>}
+                <text className={s['pointer-up-text']} x={upX + 8} y={upY - 8}>{`{x: ${upX}, y: ${upY}}`}</text>}
             {isDragging &&
-            <line className={classNames(s['pointer-drag-line'], {[s[`pointer-drag-line--${toolSuffix}`]]: toolSuffix})}
-                  x1={downX}
-                  y1={downY}
-                  x2={dragX}
-                  y2={dragY}
-                  />}}
-            {d && <path className={classNames(s['pointer-drag-path'], {[s[`pointer-drag-path--${toolSuffix}`]]: toolSuffix})}
-                        d={d}
-                        strokeDasharray="1 8"
-                        strokeWidth={1}/>}
+                <line
+                    className={classNames(s['pointer-drag-line'], {[s[`pointer-drag-line--${toolSuffix}`]]: toolSuffix})}
+                    x1={downX}
+                    y1={downY}
+                    x2={dragX}
+                    y2={dragY}
+                />}
+            {d && <path
+                className={classNames(s['pointer-drag-path'], {[s[`pointer-drag-path--${toolSuffix}`]]: toolSuffix})}
+                d={d}
+                strokeDasharray="1 8"
+                strokeWidth={1}/>}
         </>
     );
 }

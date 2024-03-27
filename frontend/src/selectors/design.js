@@ -21,14 +21,18 @@ export const getSelf = (i) => i
 
 export const selectAllDesigns = createSelector(getAllResources("designs"), getSelf)
 
-export const selectActiveDesignId = createSelector(selectAllDesigns, getAlias(RESOURCE_ALIAS.ACTIVE_DESIGN))
+export const selectActiveDesignId = createSelector(selectAllDesigns, (scope) => {
+    return getAlias(RESOURCE_ALIAS.ACTIVE_DESIGN)(scope)
+})
 export const selectActiveDesign = createSelector(selectOne('designs', selectActiveDesignId), getSelf)
 
 export const selectActiveHistory = createSelector(selectActiveDesign, getHistory)
 export const selectActiveHistorySize = createSelector(selectActiveDesign, getHistorySize)
 export const selectActiveAt = createSelector(selectActiveDesign, getAt)
 
-export const selectActiveModel = createSelector(selectActiveDesign, getCurrentModel)
+export const selectActiveModel = createSelector(selectActiveDesign, (scope) => {
+    return getCurrentModel(scope)
+})
 
 export const selectActiveEntities = createSelector(selectActiveModel, getEntities)
 export const selectActiveSelection = createSelector(selectActiveModel, getSelection)

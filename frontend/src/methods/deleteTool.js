@@ -6,6 +6,7 @@ const deleteSelection = (tool, model, e) => produce(model, (draft) => {
     const {selection} = draft
     if (selection.size > 0) {
         update(draft, "entities", (entities) => reject(entities, ({uuid}) => selection.has(uuid)))
+        draft.selection = new Set([])
     } else {
         // Avoid use-less re-rendering
         return null

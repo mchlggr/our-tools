@@ -14,3 +14,9 @@ export const designGoTo = createAction(DESIGN_GO_TO)
 
 export const DESIGN_SET_TOOL = "DESIGN_SET_TOOL"
 export const designSetTool = createAction(DESIGN_SET_TOOL)
+
+export const DESIGN_SELECT_ALL = "DESIGN_SELECT_ALL"
+export const designSelectAll = createAction(DESIGN_SELECT_ALL)
+
+export const DESIGN_DESELECT_ALL = "DESIGN_DESELECT_ALL"
+export const designDeselectAll = createAction(DESIGN_DESELECT_ALL)

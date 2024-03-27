@@ -2,7 +2,7 @@ import {selectActiveDesignId} from "../selectors/design";
 import {emptyObject} from "../utils/empty";
 import {chain, drop, update, get, compact, flatten} from "lodash";
 import produce, {original, current} from "immer";
-import {DESIGN_GO_TO, DESIGN_SET_TOOL} from "../actions/design";
+import {DESIGN_DESELECT_ALL, DESIGN_GO_TO, DESIGN_SELECT_ALL, DESIGN_SET_TOOL} from "../actions/design";
 
 const {DESIGN_COMMIT, DESIGN_REDO, DESIGN_UNDO} = require("../actions/design");
 
@@ -144,6 +144,22 @@ const designReducer = (baseState = initialDesignState, action) => {
                 const {at, history} = draft
                 const current = history[at]
                 current.tool = tool
+            }))
+        }
+        case DESIGN_SELECT_ALL: {
+            return update(baseState, designPath, (design) => produce(design, (draft) => {
+                const {at, history} = draft
+                const current = history[at]
+                const {entities} = current
+                const uuids = entities.map(({uuid})=>uuid)
+                current.selection = new Set(uuids)
+            }))
+        }
+        case DESIGN_DESELECT_ALL: {
+            return update(baseState, designPath, (design) => produce(design, (draft) => {
+                const {at, history} = draft
+                const current = history[at]
+                current.selection = new Set([])
             }))
         }
         default: {

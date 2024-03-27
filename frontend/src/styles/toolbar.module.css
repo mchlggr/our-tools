@@ -25,6 +25,9 @@
     border: none !important;
 }
 
+.design-tool-button--active.design-tool-button--hand {
+    background: #8959a8;
+}
 .design-tool-button--active.design-tool-button--select {
     background: #c82829;
 }
