@@ -1,1 +1,0 @@
-// Helper hook to maintain array identity when cached/previous contents are all reference equal

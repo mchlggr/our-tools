@@ -1,1 +1,0 @@
-// Used for creating layers (rects, ellipse, line, paths, etc)
