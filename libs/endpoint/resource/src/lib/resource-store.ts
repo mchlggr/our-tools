@@ -18,7 +18,6 @@ import {mergeParams} from "./queryUtils";
 
 //---
 
-
 const {Provider: PrivateProvider, useStore: usePrivateStore} =
     createContext();
 

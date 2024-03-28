@@ -1,4 +1,7 @@
+// Deps
 import { isArray, isNull } from 'lodash';
+
+// ---
 
 const typeOf = (value: any) : string => {
   switch (typeof value) {
@@ -23,5 +26,7 @@ const typeOf = (value: any) : string => {
       return typeof value;
   }
 };
+
+// ---
 
 export { typeOf };
