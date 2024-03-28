@@ -66,5 +66,12 @@
       }
     }
   },
-  "nxCloudAccessToken": "OTExYzdjYTUtNjQwZi00ZmJlLThkNDItM2Y0YmUwMmVmYmEyfHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "OTExYzdjYTUtNjQwZi00ZmJlLThkNDItM2Y0YmUwMmVmYmEyfHJlYWQtd3JpdGU=",
+  "targetDefaults": {
+    "@nx/vite:build": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    }
+  }
 }

@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@penumbra/endpoint-jsonapi": ["libs/endpoint/jsonapi/src/index.ts"],
       "@penumbra/tool-ui": ["libs/tool/ui/src/index.ts"]
     }
   },
