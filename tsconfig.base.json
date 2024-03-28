@@ -18,6 +18,7 @@
       "@penumbra/endpoint-jsonapi": ["libs/endpoint/jsonapi/src/index.ts"],
       "@penumbra/endpoint-resource": ["libs/endpoint/resource/src/index.ts"],
       "@penumbra/endpoint-shared": ["libs/endpoint/shared/src/index.ts"],
+      "@penumbra/endpoint-transform": ["libs/endpoint/transform/src/index.ts"],
       "@penumbra/tool-ui": ["libs/tool/ui/src/index.ts"]
     }
   },
