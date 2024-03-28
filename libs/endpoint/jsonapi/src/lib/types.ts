@@ -1,3 +1,5 @@
+import { EndpointReference } from "@penumbra/endpoint-shared";
+
 interface JsonApiDocument {
   id: string;
   type: string;
@@ -37,11 +39,7 @@ interface JsonApiQuery {
   sort?: number;
 }
 
-interface JsonApiReference {
-  // TODO: extract to different utility file
-  id: string;
-  type: string;
-}
+type JsonApiReference = EndpointReference
 
 // ---
 

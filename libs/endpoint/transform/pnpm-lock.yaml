@@ -9,7 +9,16 @@ dependencies:
     specifier: ^3.6.9
     version: 3.6.9
 
+devDependencies:
+  '@types/jsonapi-serializer':
+    specifier: ^3.6.8
+    version: 3.6.8
+
 packages:
+
+  /@types/jsonapi-serializer@3.6.8:
+    resolution: {integrity: sha512-wPx2UBoW+R2KW0Z2U7FkzIM+iDLFqjHXxr8WGE9F8ww02m+qt886+8a2lGFSiODXe9JVnPscB8d+5+eL/d9nOw==}
+    dev: true
 
   /inflected@1.1.7:
     resolution: {integrity: sha512-3lz7idKIPmKvz0wqlu1PUPSg5strJnCh2v2NldPQy13Fmd6WsWQ5yExDoiIX48lQ9mo8N7ztdDlkZxOauZ/E5g==}

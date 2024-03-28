@@ -32,6 +32,11 @@ interface HttpRequest {
   method: HttpMethod;
 }
 
+interface EndpointReference {
+  id: string;
+  type: string;
+}
+
 // ---
 
 export {
@@ -44,6 +49,8 @@ export {
   HTTP_METHOD,
   // ---
   HttpHeaders,
+  // ---
+  EndpointReference
 };
 
 export function types(): string {

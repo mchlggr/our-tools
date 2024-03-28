@@ -1,5 +1,5 @@
 import { Deserializer } from 'jsonapi-serializer';
-import { JsonApiReference } from '@penumbra/endpoint-jsonapi';
+import { EndpointReference } from '@penumbra/endpoint-shared';
 
 
 // ---
@@ -16,8 +16,7 @@ const typeForAttribute = (type: string) : string => {
 
 // ---
 
-const valueForRelationship = (relationship: JsonApiReference) => {
-    debugger
+const valueForRelationship = (relationship: EndpointReference) => {
   return {
     id: relationship.id,
     type: relationship.type,

@@ -1,11 +1,14 @@
 {
-  "name": "@penumbra/endpoint-transform",
-  "version": "0.0.1",
-  "dependencies": {
-      "jsonapi-serializer": "^3.6.9"
-  },
-  "main": "./index.js",
-  "module": "./index.mjs",
-  "typings": "./index.d.ts",
-  "private": true
+    "name": "@penumbra/endpoint-transform",
+    "version": "0.0.1",
+    "dependencies": {
+        "jsonapi-serializer": "^3.6.9"
+    },
+    "main": "./index.js",
+    "module": "./index.mjs",
+    "typings": "./index.d.ts",
+    "private": true,
+    "devDependencies": {
+        "@types/jsonapi-serializer": "^3.6.8"
+    }
 }
