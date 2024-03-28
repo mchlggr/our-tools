@@ -1,4 +1,6 @@
-# extension
+# Extension
+
+This library is for psuedo language level extensions
 
 This library was generated with [Nx](https://nx.dev).
 
