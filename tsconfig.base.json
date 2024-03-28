@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@penumbra-monrepo/tool-ui": ["libs/tool/ui/src/index.ts"]
+      "@penumbra/tool-ui": ["libs/tool/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
