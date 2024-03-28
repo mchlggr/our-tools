@@ -1,7 +1,7 @@
-import { endpointTransform } from './endpoint-transform';
+import { types } from './types';
 
 describe('endpointTransform', () => {
   it('should work', () => {
-    expect(endpointTransform()).toEqual('endpoint-transform');
+    expect(types()).toEqual('endpoint-transform');
   });
 });

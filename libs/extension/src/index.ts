@@ -1,1 +1,1 @@
-export * from './lib/extension';
+export * from './lib/types';

@@ -1,7 +1,7 @@
-import { extension } from './extension';
+import { types } from './types';
 
 describe('extension', () => {
   it('should work', () => {
-    expect(extension()).toEqual('extension');
+    expect(types()).toEqual('extension');
   });
 });

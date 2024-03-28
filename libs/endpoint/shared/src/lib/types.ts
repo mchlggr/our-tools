@@ -46,6 +46,6 @@ export {
   HttpHeaders,
 };
 
-export function endpointShared(): string {
+export function types(): string {
   return 'endpoint-shared';
 }

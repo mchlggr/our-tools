@@ -1,1 +1,1 @@
-export * from './lib/tool-ui';
+export * from './lib/types';

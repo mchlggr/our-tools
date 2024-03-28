@@ -1,1 +1,1 @@
-export * from './lib/endpoint-jsonapi';
+export * from './lib/types';

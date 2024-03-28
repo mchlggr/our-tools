@@ -1,2 +1,2 @@
-export * from './lib/endpoint-shared';
+export * from './lib/types';
 export * from './lib/endpoint-error';

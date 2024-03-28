@@ -1,9 +1,9 @@
 // import { Token } from '../endpoint/endpointTypes';
-import {JsonApiQuery} from "../endpoints/jsonapiTypes";
+import { JsonApiQuery } from '@penumbra/endpoint-jsonapi';
 
-type Token = {}
+type Token = {} //TODO: use Token from endpoint-shared
 
-import {ResourceEndpoint} from "../endpoints/ResourceEndpoint";
+import { ResourceEndpoint } from './resource-endpoint';
 
 interface ResourceRecord {
   id: string;

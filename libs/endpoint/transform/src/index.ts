@@ -1,1 +1,1 @@
-export * from './lib/endpoint-transform';
+export * from './lib/types';
