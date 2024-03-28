@@ -10,9 +10,8 @@ import qs from 'qs';
 
 // Types
 import { AxiosInstance } from 'axios';
-import { Client, HTTP_METHOD } from './endpointTypes';
+import {Client, HTTP_METHOD } from '@penumbra/endpoint-shared';
 import * as process from 'node:process';
-
 //---
 
 const objectToQuerystring = (params) =>
@@ -53,10 +52,10 @@ const createAxiosClient = (baseURL= ""): Client => {
       const { url, params, method, headers } = options;
       let payload;
       switch (method) {
-        case HTTP_METHOD.put:
-        case HTTP_METHOD.post:
-        case HTTP_METHOD.delete:
-        case HTTP_METHOD.patch:
+        case HTTP_METHOD['put']:
+        case HTTP_METHOD['post']:
+        case HTTP_METHOD['delete']:
+        case HTTP_METHOD['patch']:
           payload = { data: params };
           break;
         default:
@@ -64,8 +63,7 @@ const createAxiosClient = (baseURL= ""): Client => {
       }
 
       const config = { url, method, headers, ...payload };
-      const response = await client(config);
-      return response;
+      return await client(config);
     },
   };
 };
@@ -74,7 +72,7 @@ const client = createAxiosClient();
 
 // ---
 
-if(process.env.NODE_ENV !== "production") {
+if(process.env['NODE_ENV'] !== "production") {
   window.__axios__ = axios;
   window.__client__ = client;
 }

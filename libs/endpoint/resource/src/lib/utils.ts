@@ -14,7 +14,7 @@ import {
   isNumber,
   isBoolean,
 } from 'lodash';
-import { ResourceReference } from './resourceTypes';
+import { ResourceReference } from './types';
 
 const upsertResource = (payload: any, upserter: any) => {
   keys(payload.normalized).forEach((key) => {

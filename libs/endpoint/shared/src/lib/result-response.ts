@@ -1,87 +1,41 @@
 // Types
-import {
-  Client,
-  EndpointOptions,
-  HttpHeaders,
-  HttpMethod,
-  HttpRequest,
-  Token,
-} from './endpointTypes';
+interface ResultResponse<FailureType extends Error, SuccessType> {
+  isSuccess(): boolean;
 
-// Helpers
-import { makeSuccess, makeFail, ResultResponse } from './resultResponse';
-import { normalizePayload, NormalizedResponse } from './normalization';
-import { JsonApiResponse } from './jsonapiTypes';
-import { EndpointError } from './EndpointError';
+  isFail(): boolean;
 
-// ---
+  success(): SuccessType;
 
-interface ResponseError extends Error {
-    response: any
+  fail(): FailureType;
 }
 
 // ---
 
-// Refactor as JsonApiEndpoint
-class JsonApiEndpoint {
-  public client: Client;
+// Functional Constructors
 
-  constructor({ client }: EndpointOptions) {
-    this.client = client;
-  }
+const makeSuccess = <F extends Error, S>(value: S): ResultResponse<F, S> => {
+  return {
+    isSuccess: ():boolean => true,
+    isFail: ():boolean => false,
+    success: (): S => value,
+    fail: (): F => {
+      throw new Error('Cannot call fail() on success.');
+    },
+  };
+};
 
-  // ---
-
-  protected async response(
-    method: HttpMethod,
-    url: string,
-    tokens: Token = {},
-    params: any = {}
-  ): Promise<ResultResponse<Error, NormalizedResponse>> {
-      // debugger
-    try {
-      const headers = this.makeHeaders(tokens);
-      const request: HttpRequest = { url, method, headers, params };
-      const response = await this.client.fetch(request);
-      const value : NormalizedResponse = await this.normalizeData(response.data);
-
-      return makeSuccess({url,  params, ...value });
-    } catch (e) {
-      // debugger;
-      return makeFail(this.processError(e));
-    }
-  }
-
-  private async normalizeData(
-    resp: JsonApiResponse
-  ): Promise<NormalizedResponse> {
-
-    const normalPayload = await normalizePayload(resp); //, included);
-
-    // Normalize response
-    return {
-      ...normalPayload,
-    };
-  }
-
-  private processError(error: ResponseError): EndpointError {
-    if (error?.response && error?.response?.status === 401) {
-      console.warn('error.response.status', error.response.status);
-    }
-    return new EndpointError(error.message);
-  }
-
-  private makeHeaders(tokens: Token) {
-    const headers: HttpHeaders = {};
-    // if (tokens.bearerToken) {
-    //   headers['Authorization'] = `Bearer ${tokens.bearerToken}`;
-    // } else {
-    //   console.warn('No bearer token found');
-    // }
-    return headers;
-  }
-}
+const makeFail = <F extends Error, S>(value: F): ResultResponse<F, S> => {
+  return {
+    isSuccess: ():boolean => false,
+    isFail: ():boolean => true,
+    success: () : S => {
+      throw new Error('Cannot call success() on fail.');
+    },
+    fail: (): F => value,
+  };
+};
 
 // ---
 
-export { JsonApiEndpoint };
+// Exports
+export { makeSuccess, makeFail, ResultResponse };

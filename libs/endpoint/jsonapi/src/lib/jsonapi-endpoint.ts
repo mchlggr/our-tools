@@ -6,13 +6,12 @@ import {
   HttpMethod,
   HttpRequest,
   Token,
-} from './endpointTypes';
+} from '@penumbra/endpoint-shared';
 
 // Helpers
-import { makeSuccess, makeFail, ResultResponse } from './resultResponse';
-import { normalizePayload, NormalizedResponse } from './normalization';
-import { JsonApiResponse } from './jsonapiTypes';
-import { EndpointError } from './EndpointError';
+import { makeSuccess, makeFail, ResultResponse, EndpointError } from '@penumbra/endpoint-shared';
+import { normalizePayload, NormalizedResponse } from '@penumbra/endpoint-transform';
+import { JsonApiResponse } from '@penumbra/endpoint-jsonapi';
 
 // ---
 

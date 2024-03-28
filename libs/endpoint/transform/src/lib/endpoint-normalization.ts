@@ -1,8 +1,8 @@
 import { chain, keys, values, zipObject } from 'lodash';
-import { anyDeserializer } from './deserialization';
-import {JsonApiResponse, JsonApiDocument} from "./jsonapiTypes";
-import {typeOf} from "../extensions/typeOf";
-import {ResourceRecord} from "../resources/resourceTypes";
+import { anyDeserializer } from '@penumbra/endpoint-transform';
+import {JsonApiResponse, JsonApiDocument} from "@penumbra/endpoint-jsonapi";
+import {typeOf} from "@penumbra/extension";
+import {ResourceRecord} from "@penumbra/endpoint-resource";
 
 interface Normalization {
   (recordType: string, data: object): object;

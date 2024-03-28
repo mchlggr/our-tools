@@ -6,15 +6,15 @@ import {immer} from 'zustand/middleware/immer';
 import createContext from 'zustand/context';
 
 // Types
-import {ResourceStoreMethod, ResourceStoreState, ResourceAction, RecordPayload} from "./resourceTypes";
+import {ResourceStoreMethod, ResourceStoreState, ResourceAction, RecordPayload} from "./types";
 
 // State Utils
 
 import {flow, omit, pick} from 'lodash';
 import * as _ from 'lodash'
-import {JsonApiQuery} from "../endpoints/jsonapiTypes";
-import {addLinks, addNormalized, makeAlias, makeAliasList} from "./resourceState";
-import {mergeParams} from "./queryUtils";
+import {JsonApiQuery} from "@penumbra/endpoint-jsonapi";
+import {addLinks, addNormalized, makeAlias, makeAliasList} from "./utils";
+import {mergeParams} from "@penumbra/endpoint-jsonapi";
 
 //---
 
@@ -23,7 +23,7 @@ const {Provider: PrivateProvider, useStore: usePrivateStore} =
 
 // ---
 
-const getOne =  (set, get: () => ResourceStoreState) : ResourceStoreMethod =>async (endpoint, payload: RecordPayload, config, token) => {
+const getOne =  (set, get: () => ResourceStoreState) : ResourceStoreMethod => async (endpoint, payload: RecordPayload, config, token) => {
     const {alias} = config;
     const type = endpoint.recordType();
     const id = payload.id;

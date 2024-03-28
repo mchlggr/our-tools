@@ -1,6 +1,6 @@
-import {JsonApiQuery, JsonApiResponse} from './jsonapiTypes';
-import { HTTP_METHOD, Token } from './endpointTypes';
-import { JsonApiEndpoint } from './JsonApiEndpoint';
+import {JsonApiQuery, JsonApiResponse, JsonApiEndpoint} from '@penumbra/endpoint-jsonapi';
+import { HTTP_METHOD, Token } from '@penumbra/endpoint-shared';
+// import {  } from '';
 // import { ResultResponse } from './resultResponse'
 
 // ----

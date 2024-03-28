@@ -1,7 +1,7 @@
 import {get} from "lodash";
-import {useMemo} from "react";
-import {Resource} from "./resourceTypes";
-import {useResourceStore} from "./ResourceStore";
+// import {useMemo} from "react"; TODO: remove?
+import {Resource} from "./types";
+import {useResourceStore} from "./resource-store";
 
 // ---
 

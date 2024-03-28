@@ -1,8 +1,8 @@
 import {useMemo} from "react";
-import {ResourceConfig, ResourceList, ResourceListHook} from "./resourceTypes";
-import {useResourceStore} from "./ResourceStore";
+import {ResourceConfig, ResourceList, ResourceListHook} from "./types";
+import {useResourceStore} from "./resource-store";
 import {get} from "lodash";
-import {ResourceEndpoint} from "../endpoints/ResourceEndpoint";
+import {ResourceEndpoint} from "./resource-endpoint";
 
 //---
 

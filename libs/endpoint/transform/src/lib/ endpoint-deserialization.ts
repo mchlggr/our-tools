@@ -1,10 +1,11 @@
 import { Deserializer } from 'jsonapi-serializer';
-import { JsonApiReference } from './jsonapiTypes';
+import { JsonApiReference } from '@penumbra/endpoint-jsonapi';
 
 
 // ---
 
-const typeForAttribute = (type) => {
+// TODO: remove if this is unused
+const typeForAttribute = (type: string) : string => {
   switch (type) {
     case 'many_polymorphic_references':
       return 'aos';

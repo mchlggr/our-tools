@@ -3,8 +3,8 @@ This file is selector and transformations of JsonApi Request (Query, Params, Etc
 */
 
 import { isArray, isString, merge, mergeWith } from 'lodash';
-import {JsonApiQuery} from "../endpoints/jsonapiTypes";
-// import { typeOf } from '../extensions/typeOf';
+import {JsonApiQuery} from "./types";
+// import { typeOf } from '@penumbra/extensions';
 
 // ---
 

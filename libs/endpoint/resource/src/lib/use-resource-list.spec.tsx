@@ -1,7 +1,7 @@
 import { act, renderHook } from '@testing-library/react';
 import * as React from 'react';
 
-import useResourceList from './resource-list';
+import { useResourceList } from './use-resource-list';
 
 describe('useResourceList', () => {
   it('should render successfully', () => {
