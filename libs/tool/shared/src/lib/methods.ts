@@ -52,7 +52,8 @@ export {
   dragTool,
   inputTool,
   wheelTool,
-  placeTool
+  placeTool,
+  nudgeTool
   // panTool
   // pinchTool
   // shakeTool
