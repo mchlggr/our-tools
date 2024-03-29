@@ -23,6 +23,11 @@ type AnyFacet = FillFacet | StrokeFacet | PositionFacet | PathFacet | FontSizeFa
 
 // ---
 
+type FacetTransform = (facet: Facet) => Facet
+type FacetTransaction = (facet: Facet) => void
+
+// ---
+
 export {
   Facet,
   FillType,
@@ -37,5 +42,7 @@ export {
   FontUnit,
   FontSizeFacet,
   AnyFacetType,
-  AnyFacet
+  AnyFacet,
+  FacetTransform,
+  FacetTransaction
 }

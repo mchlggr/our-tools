@@ -1,1 +1,1 @@
-export * from './lib/tool-shared';
+export * from './lib/methods';
