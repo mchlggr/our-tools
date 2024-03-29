@@ -20,6 +20,7 @@
       "@penumbra/endpoint-shared": ["libs/endpoint/shared/src/index.ts"],
       "@penumbra/endpoint-transform": ["libs/endpoint/transform/src/index.ts"],
       "@penumbra/extension": ["libs/extension/src/index.ts"],
+      "@penumbra/tool-shared": ["libs/tool/shared/src/index.ts"],
       "@penumbra/tool-ui": ["libs/tool/ui/src/index.ts"],
       "@penumbra/world-shared": ["libs/world/shared/src/index.ts"]
     }

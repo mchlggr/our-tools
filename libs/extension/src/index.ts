@@ -1,3 +1,4 @@
 export * from './lib/types';
-export * from './lib/typeOf';
-export * from './lib/emptyType';
+export * from './lib/type-of';
+export * from './lib/empty';
+export * from './lib/multimethod';

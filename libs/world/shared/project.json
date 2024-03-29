@@ -1,0 +1,19 @@
+{
+  "name": "world-shared",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/world/shared/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/world/shared",
+        "main": "libs/world/shared/src/index.ts",
+        "tsConfig": "libs/world/shared/tsconfig.lib.json",
+        "assets": ["libs/world/shared/*.md"]
+      }
+    }
+  },
+  "tags": []
+}
