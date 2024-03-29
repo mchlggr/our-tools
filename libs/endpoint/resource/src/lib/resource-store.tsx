@@ -135,15 +135,15 @@ const deleteResource = (set, get: () => ResourceStoreState) : ResourceStoreMetho
 // ---
 const createResourceStore = () => {
     return flow([
-        // (s) => persist(s, {name: 'resource-storage'}),
+        (s) => persist(s, {name: 'resource-storage'}),
         (s) => devtools(s),
         (s) => immer(s),
         (s) => create(s),
     ])((set, get: () => ResourceStoreState) => {
         return {
-            sync_transfers: { byId: {} },
-            sync_plans: { byId: {} },
-            integrations: { byId: {} },
+            // sync_transfers: { byId: {} },
+            // sync_plans: { byId: {} },
+            // integrations: { byId: {} },
             // ---
             getOne: getOne(set, get),
             getList: getList(set, get),

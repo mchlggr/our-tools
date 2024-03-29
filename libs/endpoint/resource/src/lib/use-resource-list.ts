@@ -1,12 +1,12 @@
-import {useMemo} from "react";
-import {ResourceConfig, ResourceList, ResourceListHook} from "./types";
-import {useResourceStore} from "./resource-store";
 import {get} from "lodash";
-import {ResourceEndpoint} from "./resource-endpoint";
+import {useMemo} from "react";
+import { ResourceListHook } from "./types";
+import {useResourceStore} from "./resource-store";
+import { emptyArray, emptyObject } from '@penumbra/extension';
 
 //---
 
-const useRecords = (recordType, ids = []) => {
+const useRecords = (recordType: string, ids: readonly string[] = emptyArray) => {
     const store = useResourceStore();
     const { byId } = store[recordType]
     return useMemo(() => {
@@ -14,15 +14,19 @@ const useRecords = (recordType, ids = []) => {
     }, [byId, ids]);
 };
 
-const useAliasIds = (recordType, alias) => {
+const useAliasIds = (recordType: string, alias: string) => {
     const store = useResourceStore();
+    if(alias === "") return emptyArray
+
     const list = get(store, [recordType, alias], {});
     const {ids = []} = list;
     return ids
 }
 
-const useAliasParams = (recordType, alias) => {
+const useAliasParams = (recordType: string, alias: string) => {
     const store = useResourceStore();
+    if(alias === "") return emptyObject;
+
     const list = get(store, [recordType, alias], {});
     const {params = {}} = list;
     return params
@@ -30,9 +34,10 @@ const useAliasParams = (recordType, alias) => {
 
 //---
 
-// const defaultListOptions = { alias: "LIST"}
+const defaultListOptions = { alias: "LIST"}
 
-const useResourceList = (endpoint: ResourceEndpoint, options: ResourceConfig = defaultListOptions) : ResourceList  => {
+
+const useResourceList : ResourceListHook = (endpoint, options  = defaultListOptions)  => {
     if (!endpoint) throw new Error(`Missing endpoint got: ${endpoint} instead`);
 
     const { alias } = options

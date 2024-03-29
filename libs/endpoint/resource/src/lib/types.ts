@@ -15,8 +15,8 @@ interface ResourceAction {
 }
 
 interface ResourceConfig extends JsonApiQuery {
+  alias: string;
   url?: string,
-  alias?: string;
   params?: object;
   id?: string;
 }
@@ -67,7 +67,7 @@ interface ResourceList<RecordType = ResourceRecord> extends ResourceActions {
 
   isNew: Set<string>;
   isLoading: Set<string>;
-  error: { [key: string]: object } | {};
+  error: { [key: string]: object };
 
   // ---
 
@@ -79,11 +79,12 @@ interface ResourceList<RecordType = ResourceRecord> extends ResourceActions {
   // onDelete: (state: ResourceState) => (record: ResourceRecord) => (e: any) => void;
 }
 
-type ResourceState = Resource | ResourceList;
+// TODO: type ResourceState = Resource | ResourceList;
 
 // ---
 
-interface ResourceProps {
+
+interface ResourceHook {
   (endpoint: ResourceEndpoint, config: ResourceConfig): Resource;
 }
 
@@ -101,7 +102,12 @@ interface ResourceStoreMethod {
     token: Token
   ): Promise<any>;
 }
-interface ResourceStoreState {
+
+interface ResourceStoreData<RecordData=ResourceRecord> {
+  [recordType: string]: { byId: {[id:string]: RecordData} };
+}
+
+type ResourceStoreState<T> = ResourceStoreData<T> & {
   // auth: { token: Token };
   // setToken: (token: string) => void;
   getOne: ResourceStoreMethod;
@@ -137,7 +143,7 @@ export {
   Resource,
   ResourceList,
   ResourceState,
-  ResourceProps,
+  ResourceHook,
   ResourceListHook,
   ResourceStoreMethod,
   ResourceStoreState,
