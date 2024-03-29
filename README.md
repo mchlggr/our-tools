@@ -1,6 +1,6 @@
 # Simple Design Tool
 
-To run locally 
+To run locally:
 
 ```
 cd ./frontend
