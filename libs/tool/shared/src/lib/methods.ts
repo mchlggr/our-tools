@@ -4,6 +4,7 @@ import { StageStore } from '@penumbra/edit-shared';
 
 //---
 
+// Standard Tools
 type HandTool = 'tool:hand'
 type SelectTool = 'tool:select'
 type RectangleTool = 'tool:rectangle'
@@ -29,11 +30,16 @@ const fallback: ToolMethod = (_tool, model) => model;
 //---
 
 const clickTool = multi(dispatch, method(fallback));
+const doubleClickTool = multi(dispatch, method(fallback));
 const deleteTool = multi(dispatch, method(fallback));
 const dragTool = multi(dispatch, method(fallback));
 const inputTool = multi(dispatch, method(fallback));
 const wheelTool = multi(dispatch, method(fallback));
 const placeTool = multi(dispatch, method(fallback));
+const nudgeTool = multi(dispatch, method(fallback));
+const copyTool = multi(dispatch, method(fallback));
+const cutTool = multi(dispatch, method(fallback));
+const pasteTool = multi(dispatch, method(fallback));
 
 //---
 
@@ -48,12 +54,16 @@ export {
   ToolDispatch,
   ToolMethod,
   clickTool,
+  doubleClickTool,
   deleteTool,
   dragTool,
   inputTool,
   wheelTool,
   placeTool,
-  nudgeTool
+  nudgeTool,
+  copyTool,
+  cutTool,
+  pasteTool,
   // panTool
   // pinchTool
   // shakeTool
