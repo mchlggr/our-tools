@@ -1,0 +1,19 @@
+{
+  "name": "edit-shared",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/edit/shared/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/edit/shared",
+        "main": "libs/edit/shared/src/index.ts",
+        "tsConfig": "libs/edit/shared/tsconfig.lib.json",
+        "assets": ["libs/edit/shared/*.md"]
+      }
+    }
+  },
+  "tags": []
+}

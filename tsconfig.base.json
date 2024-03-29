@@ -15,6 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@penumbra/edit-shared": ["libs/edit/shared/src/index.ts"],
+      "@penumbra/edit-world": ["libs/edit/world/src/index.ts"],
       "@penumbra/endpoint-jsonapi": ["libs/endpoint/jsonapi/src/index.ts"],
       "@penumbra/endpoint-resource": ["libs/endpoint/resource/src/index.ts"],
       "@penumbra/endpoint-shared": ["libs/endpoint/shared/src/index.ts"],
