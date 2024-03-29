@@ -11,7 +11,7 @@ import {
 // Helpers
 import { makeSuccess, makeFail, ResultResponse, EndpointError } from '@penumbra/endpoint-shared';
 import { normalizePayload, NormalizedResponse } from '@penumbra/endpoint-transform';
-import { JsonApiResponse } from '@penumbra/endpoint-jsonapi';
+import { JsonApiResponse } from './types';
 
 // ---
 

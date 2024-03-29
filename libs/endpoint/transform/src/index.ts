@@ -1,3 +1,3 @@
 export * from './lib/types';
-export * from './lib/endpoint-normalization'
-export * from './lib/ endpoint-deserialization'
+export * from './lib/normalization'
+export * from './lib/deserialization'

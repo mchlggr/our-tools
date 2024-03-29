@@ -142,7 +142,7 @@ export {
   ResourceActions,
   Resource,
   ResourceList,
-  ResourceState,
+  // ResourceState,
   ResourceHook,
   ResourceListHook,
   ResourceStoreMethod,

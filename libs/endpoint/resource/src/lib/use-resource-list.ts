@@ -34,8 +34,9 @@ const useAliasParams = (recordType: string, alias: string) => {
 
 //---
 
-const defaultListOptions = { alias: "LIST"}
-
+const defaultListOptions = Object.freeze({
+  alias: "LIST"
+})
 
 const useResourceList : ResourceListHook = (endpoint, options  = defaultListOptions)  => {
     if (!endpoint) throw new Error(`Missing endpoint got: ${endpoint} instead`);
