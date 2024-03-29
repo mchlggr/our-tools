@@ -1,4 +1,5 @@
 import { Boundary, EntityUuid, Entity } from './types';
+import { FontSizeFacet, PathFacet } from './facet-types';
 
 type LayerBoundary = Boundary
 type LayerEntity = Entity

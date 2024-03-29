@@ -6,8 +6,11 @@ import { Tool } from '@penumbra/tool-shared';
 type StageComponentType = ComponentType
 
 type StageComponents = {
-  ToolDock: StageComponentType,
-  ToolPack: StageComponentType,
+  Dock: StageComponentType,
+  Dash: StageComponentType,
+  Park: StageComponentType,
+  Inspector: StageComponentType,
+  Outline: StageComponentType,
   MiniMap: StageComponentType,
   Background: StageComponentType
   Brush: StageComponentType
