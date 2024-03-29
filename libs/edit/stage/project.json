@@ -1,0 +1,9 @@
+{
+  "name": "edit-stage",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/edit/stage/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project edit-stage --web",
+  "targets": {}
+}
