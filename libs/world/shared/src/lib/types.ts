@@ -1,11 +1,14 @@
-type Uuid = string
+import { NonEmptyString } from '@penumbra/extension';
 
-type EntitySet = Set<string>
+type Uuid = string | ""
+
+type EntitySet = Set<Uuid>
 type EntitySelection = EntitySet
 
 type EntityUuid = string
+type EntityType = NonEmptyString
 type Entity = {
-  type: string,
+  type: EntityType ,
   uuid: Uuid
 }
 

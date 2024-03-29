@@ -1,3 +1,5 @@
-export function types(): string {
-  return 'types';
-}
+type NonEmptyString = string & { __brand: 'NonEmptyString' };
+
+// ---
+
+export { NonEmptyString }

@@ -5,11 +5,16 @@ type AnyEntity = AnyLayer
 type WorldModel = {
   uuid: Uuid
   view: object
-  committedAt: number
+  committedAt: Date,
   tool: number
-  selection: EntitySelection
-  locked: EntitySet
-  parked: EntitySet
+  selectingIds: EntitySelection
+  lockingIds: EntitySet
+  parkingIds: EntitySet
+  erasingIds: EntitySet
+  hintingIds: EntitySet
+  editingId: Uuid
+  croppingId: Uuid
+  focusingId: Uuid
   facets: AnyFacet[]
   boundary: Boundary
   entities: AnyEntity[]
