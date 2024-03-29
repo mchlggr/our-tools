@@ -1,18 +1,9 @@
 import { method, multi } from '@penumbra/extension';
 import { WorldModel } from '@penumbra/world-shared';
 import { StageStore } from '@penumbra/edit-shared';
+import { AnyTool } from './types';
 
 //---
-
-// Standard Tools
-type HandTool = 'tool:hand'
-type SelectTool = 'tool:select'
-type RectangleTool = 'tool:rectangle'
-type LineTool = 'tool:line'
-type TextTool = 'tool:text'
-type PencilTool = 'tool:pencil'
-
-type AnyTool = HandTool | SelectTool | RectangleTool | LineTool | TextTool | PencilTool
 
 interface ToolDispatch {
   (tool: AnyTool, model: WorldModel, stage: StageStore, evt: Event): AnyTool;
@@ -31,6 +22,9 @@ const fallback: ToolMethod = (_tool, model) => model;
 
 const clickTool = multi(dispatch, method(fallback));
 const doubleClickTool = multi(dispatch, method(fallback));
+const tripleClickTool = multi(dispatch, method(fallback));
+const middleClickTool = multi(dispatch, method(fallback));
+const rightClickTool = multi(dispatch, method(fallback));
 const deleteTool = multi(dispatch, method(fallback));
 const dragTool = multi(dispatch, method(fallback));
 const inputTool = multi(dispatch, method(fallback));
@@ -40,21 +34,18 @@ const nudgeTool = multi(dispatch, method(fallback));
 const copyTool = multi(dispatch, method(fallback));
 const cutTool = multi(dispatch, method(fallback));
 const pasteTool = multi(dispatch, method(fallback));
+const tickTool = multi(dispatch, method(fallback));
 
 //---
 
 export {
-  HandTool,
-  SelectTool,
-  RectangleTool,
-  LineTool,
-  TextTool,
-  PencilTool,
-  AnyTool,
   ToolDispatch,
   ToolMethod,
   clickTool,
   doubleClickTool,
+  tripleClickTool,
+  middleClickTool,
+  rightClickTool,
   deleteTool,
   dragTool,
   inputTool,
@@ -64,6 +55,7 @@ export {
   copyTool,
   cutTool,
   pasteTool,
+  tickTool
   // panTool
   // pinchTool
   // shakeTool
