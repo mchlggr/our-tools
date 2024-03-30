@@ -19,3 +19,7 @@ type View = {
   }
 }
 
+// ---
+
+export { View }
+

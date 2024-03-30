@@ -18,8 +18,8 @@ export interface NormalizedResponse {
     normalized?: NormalizedRecords,
     url?: string,
     params?: any,
-    record?: ResourceRecord | {},
-    records?: (ResourceRecord | {})[],
+    record?: ResourceRecord,
+    records?: ResourceRecord[],
     // [key as string]: any
 }
 

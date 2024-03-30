@@ -9,24 +9,30 @@ import {
 } from '@penumbra/endpoint-shared';
 
 // Helpers
-import { makeSuccess, makeFail, ResultResponse, EndpointError } from '@penumbra/endpoint-shared';
+import { makeSuccess, makeFail, Result, EndpointError } from '@penumbra/endpoint-shared';
 import { normalizePayload, NormalizedResponse } from '@penumbra/endpoint-transform';
 import { JsonApiResponse } from './types';
 
 // ---
 
-interface ResponseError extends Error {
+interface ResponseError extends EndpointError {
     response: any
+}
+
+interface Normalizer<Input, Output> {
+
 }
 
 // ---
 
 // Refactor as JsonApiEndpoint
-class JsonApiEndpoint {
+class JsonApiEndpoint<Normalizer> {
   public client: Client;
+  public tranform: Client;
 
-  constructor({ client }: EndpointOptions) {
+  constructor({ client, transform }: EndpointOptions) {
     this.client = client;
+    this.transform = transform;
   }
 
   // ---
@@ -36,13 +42,13 @@ class JsonApiEndpoint {
     url: string,
     tokens: Token = {},
     params: any = {}
-  ): Promise<ResultResponse<Error, NormalizedResponse>> {
+  ): Promise<Result<EndpointError, NormalizedResponse>> {
       // debugger
     try {
       const headers = this.makeHeaders(tokens);
       const request: HttpRequest = { url, method, headers, params };
       const response = await this.client.fetch(request);
-      const value : NormalizedResponse = await this.normalizeData(response.data);
+      const value : NormalizedResponse = await this.transform(response.data);
 
       return makeSuccess({url,  params, ...value });
     } catch (e) {

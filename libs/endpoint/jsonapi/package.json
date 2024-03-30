@@ -1,7 +1,10 @@
 {
   "name": "@penumbra/endpoint-jsonapi",
   "version": "0.0.1",
-  "dependencies": {},
+  "dependencies": {
+    "@penumbra/endpoint-shared": "workspace:^",
+    "@penumbra/endpoint-transform": "workspace:^"
+  },
   "main": "./index.js",
   "module": "./index.mjs",
   "typings": "./index.d.ts",

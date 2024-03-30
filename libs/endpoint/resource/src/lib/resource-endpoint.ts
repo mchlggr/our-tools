@@ -1,7 +1,7 @@
 import {JsonApiQuery, JsonApiResponse, JsonApiEndpoint} from '@penumbra/endpoint-jsonapi';
 import { HTTP_METHOD, Token } from '@penumbra/endpoint-shared';
 // import {  } from '';
-// import { ResultResponse } from './resultResponse'
+// import { Result } from './resultResponse'
 
 // ----
 

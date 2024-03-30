@@ -51,12 +51,13 @@ type OutlineToolComponent = ComponentType<OutlineToolProps>
 
 // Slots are dependency injection locations for Tools
 type SpaceSlot = 'slot:space'
-type SurfaceSlot = 'slot:space'
+type SurfaceSlot = 'slot:surface'
+type MassSlot = 'slot:mass'
 type DockSlot = 'slot:dock'
 type InspectorSlot = 'slot:inspector'
 type OutlineSlot = 'slot:outline'
 
-type AnySlot = SpaceSlot | SurfaceSlot | DockSlot | InspectorSlot | OutlineSlot
+type AnySlot = SpaceSlot | SurfaceSlot | DockSlot | InspectorSlot | OutlineSlot | MassSlot
 
 type Tool = {
   type: NonEmptyString

@@ -1,5 +1,5 @@
 // Types
-interface ResultResponse<FailureType extends Error, SuccessType> {
+interface Result<FailureType extends Error, SuccessType> {
   isSuccess(): boolean;
 
   isFail(): boolean;
@@ -13,7 +13,7 @@ interface ResultResponse<FailureType extends Error, SuccessType> {
 
 // Functional Constructors
 
-const makeSuccess = <F extends Error, S>(value: S): ResultResponse<F, S> => {
+const makeSuccess = <F extends Error, S>(value: S): Result<F, S> => {
   return {
     isSuccess: ():boolean => true,
     isFail: ():boolean => false,
@@ -24,7 +24,7 @@ const makeSuccess = <F extends Error, S>(value: S): ResultResponse<F, S> => {
   };
 };
 
-const makeFail = <F extends Error, S>(value: F): ResultResponse<F, S> => {
+const makeFail = <F extends Error, S>(value: F): Result<F, S> => {
   return {
     isSuccess: ():boolean => false,
     isFail: ():boolean => true,
@@ -38,4 +38,4 @@ const makeFail = <F extends Error, S>(value: F): ResultResponse<F, S> => {
 // ---
 
 // Exports
-export { makeSuccess, makeFail, ResultResponse };
+export { makeSuccess, makeFail, Result };
