@@ -1,5 +1,4 @@
-import { AnyTool } from '@penumbra/tool-shared';
-import { ModelTransaction, Point2D, Time1D, WorldModel } from '@penumbra/world-shared';
+import { ModelTransaction, Point2D, Time1D, UnknownToolTag, WorldModel } from '@penumbra/world-shared';
 
 type PointerState = {
   down: Point2D,
@@ -11,7 +10,7 @@ type PointerState = {
 }
 
 interface PointerFunction {
-  (evt: Event, tool: AnyTool, model: WorldModel, transact: ModelTransaction): void;
+  (evt: Event, tool: UnknownToolTag, model: WorldModel, transact: ModelTransaction): void;
 }
 
 type PointerHandlers = {

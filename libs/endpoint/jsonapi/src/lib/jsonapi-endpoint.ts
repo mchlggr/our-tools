@@ -19,8 +19,9 @@ interface ResponseError extends EndpointError {
     response: any
 }
 
-interface Normalizer<Input, Output> {
-
+// Generic normalizer 
+interface Normalizer<DenormalizedInput, NormalizedOutput> {
+  (response: DenormalizedInput): Promise<NormalizedOutput>
 }
 
 // ---

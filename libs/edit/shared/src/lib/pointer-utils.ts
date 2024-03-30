@@ -1,12 +1,13 @@
-import { PointerFunction, PointerStore, StageStore } from '@penumbra/edit-shared';
-import {  Point2D } from '@penumbra/world-shared';
+import {  Point2D, Path2D } from '@penumbra/world-shared';
+import { PointerFunction, PointerStore } from './pointer-types'
+import { StageStore } from './stage-types';
 
 // ---
 
 
 type IdentitySelector = (pointer: PointerStore) => PointerStore
 type HandlerSelector = (pointer: PointerStore) => PointerFunction
-type Path2DSelector = (pointer: PointerStore) => Point2D[]
+type Path2DSelector = (pointer: PointerStore) => Path2D
 type PointSelector = (pointer: PointerStore) => Point2D
 type NumberSelector = (pointer: PointerStore) => number
 
