@@ -1,18 +1,27 @@
 // Dependencies
-import {filter, groupBy, keyBy} from "lodash";
+import { filter, groupBy, keyBy } from 'lodash';
 import { Entity, EntitySelection } from './types';
 import { LayerEntity } from './layer-types';
 import { WorldModel } from './world-types';
 
 // ---
 
-export const typePatternLayer = /layer:/
+const layerTagRegex = /layer:/;
 
-export const filterLayers = (entities: Entity[]) : LayerEntity[] => entities.filter(({type}) => typePatternLayer.test(type))
+const filterLayers = (entities: Entity[]): LayerEntity[] => entities.filter(({ type }) => layerTagRegex.test(type));
 
-export const filterSelectionLayers = ({entities, selection}: WorldModel) => {
-    const layers = filterLayers(entities)
-    return filter(layers, ({ uuid }) => selection.has(uuid))
-}
+const selectingLayers = ({ entities, selectingIds }: WorldModel) => {
+  const layers = filterLayers(entities);
+  return filter(layers, ({ uuid }) => selectingIds.has(uuid));
+};
 
-//TODO: export const groupLayersBySurface = (layers: LayerEntity[]) => groupBy(layers, 'surface_uuid')
+
+// const groupLayersBySurface = (layers: LayerEntity[]) => groupBy(layers, 'groupId')
+
+// ---
+
+export {
+  layerTagRegex,
+  filterLayers,
+  selectingLayers
+};

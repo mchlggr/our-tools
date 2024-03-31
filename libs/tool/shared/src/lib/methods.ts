@@ -15,8 +15,8 @@ interface ToolMethod {
 
 //---
 
-const dispatch: ToolDispatch = (tool) => tool;
-const fallback: ToolMethod = (_tool, model) => model;
+const dispatch: ToolDispatch = (tool /* model, stage, evt */) => tool;
+const fallback: ToolMethod = (_tool, model /* stage, evt */) => model;
 
 //---
 

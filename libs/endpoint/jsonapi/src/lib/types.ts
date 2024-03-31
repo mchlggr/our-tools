@@ -27,8 +27,11 @@ interface JsonApiOneResponse extends JsonApiResponse {
   data: JsonApiDocument;
 }
 
+type JsonApiInclude = Set<string>
+type JsonApiSort = string[]
+
 interface JsonApiQuery {
-  include?: string;
+  include?: JsonApiInclude;
   fields?: {
     [key: string]: string;
   };
@@ -37,7 +40,7 @@ interface JsonApiQuery {
   };
   page?: number;
   per_page?: number;
-  sort?: number;
+  sort?: JsonApiSort
 }
 
 type JsonApiReference = EndpointReference
@@ -49,6 +52,8 @@ type JsonApiTransform<RecordEntry> = EndpointTransform<JsonApiResponse, Normaliz
 // ---
 
 export {
+  JsonApiSort,
+  JsonApiInclude,
   JsonApiDocument,
   JsonApiReference,
   JsonApiQuery,

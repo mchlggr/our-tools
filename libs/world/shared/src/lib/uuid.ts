@@ -2,7 +2,7 @@ import { nanoid } from 'nanoid';
 
 // ---
 
-const uuid = (type:string) => `${type}_:${nanoid()}`
+const uuid = (type:string) => `${type}:${nanoid()}`
 
 // ---
 

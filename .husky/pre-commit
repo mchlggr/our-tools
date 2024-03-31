@@ -1,1 +1,3 @@
+# Switch to nx affected if this is running to slowly
 nx run-many --all --target=lint
+nx run-many --all --target=test

@@ -7,7 +7,7 @@ type WorldModel = {
   view: object
   committedAt: Date,
   tool: number
-  selectingIds: EntitySelection
+  selectingIds: EntitySet
   lockingIds: EntitySet
   parkingIds: EntitySet
   erasingIds: EntitySet
