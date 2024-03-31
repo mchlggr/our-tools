@@ -7,8 +7,8 @@ type AnyRender = RenderWebGL | RenderWebXR | RenderHTML
 
 type ViewLayerType = "view:layer"
 type ViewSurfaceType = "view:surface"
-type ViewSpaceType = "view:space"
-type AnyView = ViewLayerType | ViewSurfaceType | ViewSpaceType
+type ViewSceneType = "view:space"
+type AnyView = ViewLayerType | ViewSurfaceType | ViewSceneType
 
 type View = {
   type: AnyView,

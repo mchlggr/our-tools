@@ -12,7 +12,7 @@ const filterLayers = (entities: Entity[]): LayerEntity[] => entities.filter(({ t
 
 const selectingLayers = ({ entities, selectingIds }: WorldModel) => {
   const layers = filterLayers(entities);
-  return filter(layers, ({ uuid }) => selectingIds.has(uuid));
+  return filter(layers, ({ id }) => selectingIds.has(id));
 };
 
 

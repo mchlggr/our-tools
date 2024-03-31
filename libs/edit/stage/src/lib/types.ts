@@ -27,7 +27,7 @@ type StageComponents = {
 }
 
 type User = {
-  uuid: Uuid,
+  id: Uuid,
   name: NonEmptyString
   email: NonEmptyString
 }

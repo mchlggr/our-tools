@@ -12,7 +12,7 @@ type PencilLayerType = 'layer:pencil'
 
 type RectangleLayer =  LayerEntity & {
   type: RectangleLayerType,
-  uuid: EntityUuid,
+  id: EntityUuid,
   x: number,
   y: number,
   width: number,
@@ -21,7 +21,7 @@ type RectangleLayer =  LayerEntity & {
 
 type EllipseLayer =  LayerEntity &  {
   type: EllipseLayerType,
-  uuid: EntityUuid,
+  id: EntityUuid,
   cx: number,
   cy: number,
   rx: number,
@@ -30,7 +30,7 @@ type EllipseLayer =  LayerEntity &  {
 
 type LineLayer =  LayerEntity & {
   type: LineLayerType,
-  uuid: EntityUuid,
+  id: EntityUuid,
   x1: number,
   y1: number,
   x2: number,
@@ -39,7 +39,7 @@ type LineLayer =  LayerEntity & {
 
 type TextLayer =  LayerEntity &  {
   type: TextLayerType,
-  uuid: EntityUuid,
+  id: EntityUuid,
   x: number,
   y: number,
   fontSize: FontSizeFacet,
@@ -50,7 +50,7 @@ type TextLayer =  LayerEntity &  {
 
 type PencilLayer = LayerEntity & {
   type: PencilLayerType,
-  uuid: EntityUuid,
+  id: EntityUuid,
   path: PathFacet,
   d: string,
   fill: 'none',

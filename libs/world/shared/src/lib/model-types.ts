@@ -3,7 +3,7 @@ import { AnyFacet, AnyLayer, Boundary, EntitySelection, EntitySet, Uuid } from '
 type AnyEntity = AnyLayer
 
 type WorldModel = {
-  uuid: Uuid
+  id: Uuid
   view: object
   committedAt: Date,
   tool: number

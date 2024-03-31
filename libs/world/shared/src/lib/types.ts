@@ -9,7 +9,7 @@ type EntityUuid = string
 type EntityType = NonEmptyString
 type Entity = {
   type: EntityType ,
-  uuid: Uuid
+  id: Uuid
 }
 
 // ---

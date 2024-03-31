@@ -6,7 +6,7 @@ import { WorldModel } from './model-types';
 type WorldHistory = WorldModel[]
 
 type WorldArchive = {
-  uuid: Uuid
+  id: Uuid
   buildVersion: string
   at: number
   unit: WorldUnit,
