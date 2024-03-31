@@ -2,7 +2,12 @@
     "name": "@penumbra/endpoint-transform",
     "version": "0.0.1",
     "dependencies": {
-        "jsonapi-serializer": "^3.6.9"
+        "@penumbra/endpoint-jsonapi": "workspace:^",
+        "@penumbra/endpoint-resource": "workspace:^",
+        "@penumbra/endpoint-shared": "workspace:^",
+        "@penumbra/extension": "workspace:^",
+        "jsonapi-serializer": "^3.6.9",
+        "lodash": "^4.17.21"
     },
     "main": "./index.js",
     "module": "./index.mjs",

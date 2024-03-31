@@ -1,9 +1,17 @@
+import { NonEmptyString } from '@penumbra/extension';
+
 interface Client {
   fetch: (request: HttpRequest) => Promise<{ data: any }>;
 }
 
-interface EndpointOptions {
+// Generic normalizer
+interface EndpointTransform<DenormalizedInput, NormalizedOutput> {
+  (response: DenormalizedInput): Promise<NormalizedOutput>;
+}
+
+interface EndpointOptions<Transform = EndpointTransform<never, never>> {
   client: Client;
+  transform: Transform;
 }
 
 type HttpMethod = 'GET' | 'DELETE' | 'POST' | 'PUT' | 'PATCH';
@@ -12,7 +20,7 @@ const HTTP_METHOD: { [key: string]: HttpMethod } = {
   delete: 'DELETE',
   post: 'POST',
   put: 'PUT',
-  patch: 'PATCH',
+  patch: 'PATCH'
 };
 
 interface Token {
@@ -39,6 +47,43 @@ interface EndpointReference {
 
 // ---
 
+interface Normalization {
+  (recordType: string, data: object): object;
+}
+
+interface NormalizedRecords<RecordEntry> {
+  [recordType: NonEmptyString]: RecordEntry[];
+}
+
+type UnknownRecordEntry = {
+  id: NonEmptyString
+}
+
+type UnkownDataEntry = {
+  id: NonEmptyString
+}
+
+type UnkownParamsEntry = {
+  id?: NonEmptyString
+  ids?: NonEmptyString[]
+}
+
+type UnknownIncludedEntries = {
+  [recordType: NonEmptyString]: any
+}
+
+interface NormalizedResponse<RecordEntry extends UnknownRecordEntry, DataEntry extends UnkownDataEntry, ParamsEntry extends UnkownParamsEntry, IncludedEntries = any> {
+  normalized?: NormalizedRecords<RecordEntry>,
+  record?: RecordEntry,
+  records?: RecordEntry[],
+  data: DataEntry,
+  included: IncludedEntries,
+  params?: ParamsEntry,
+  url?: string,
+}
+
+// ---
+
 export {
   Client,
   EndpointOptions,
@@ -50,7 +95,13 @@ export {
   // ---
   HttpHeaders,
   // ---
-  EndpointReference
+  EndpointReference,
+  // ---
+  EndpointTransform,
+  // ---
+  Normalization,
+  NormalizedRecords,
+  NormalizedResponse
 };
 
 export function types(): string {

@@ -1,7 +1,11 @@
 {
   "name": "@penumbra/world-shared",
   "version": "0.0.1",
-  "dependencies": {},
+  "dependencies": {
+    "@penumbra/extension": "workspace:^",
+    "lodash": "^4.17.21",
+    "nanoid": "^5.0.6"
+  },
   "main": "./index.js",
   "module": "./index.mjs",
   "typings": "./index.d.ts",

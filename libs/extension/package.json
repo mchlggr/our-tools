@@ -1,7 +1,10 @@
 {
   "name": "@penumbra/extension",
   "version": "0.0.1",
-  "dependencies": {},
+  "dependencies": {
+    "@arrows/multimethod": "^2.1.0",
+    "lodash": "^4.17.21"
+  },
   "main": "./index.js",
   "module": "./index.mjs",
   "typings": "./index.d.ts",

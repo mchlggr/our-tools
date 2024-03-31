@@ -5,7 +5,7 @@ import { HTTP_METHOD, Token } from '@penumbra/endpoint-shared';
 
 // ----
 
-class ResourceEndpoint extends JsonApiEndpoint {
+class ResourceEndpoint<Reocord> extends JsonApiEndpoint<Reocord> {
   // ---
 
   public recordType(): string {
@@ -22,10 +22,10 @@ class ResourceEndpoint extends JsonApiEndpoint {
 
   // ---
 
-  public async create<JsonApiResponse>(token: Token, params: object, url: string = "") {
+  public async create<JsonApiResponse>(token: Token, params: object, url = "") {
     const payload = await this.denormalizeData(params);
     if(url === "") url = `/api/v2/${this.recordType()}`;
-    return await this.response<JsonApiResponse>(
+    return await this.response(
       HTTP_METHOD.post,
       url,
       token,
@@ -33,10 +33,10 @@ class ResourceEndpoint extends JsonApiEndpoint {
     );
   }
 
-  public async list<JsonApiResponse>(token: Token, params: JsonApiQuery = {}, url: string = "") {
+  public async list<JsonApiResponse>(token: Token, params: JsonApiQuery = {}, url = "") {
     // debugger
     if(url === "") url = `/api/v2/${this.recordType()}`;
-    return await this.response<JsonApiResponse>(
+    return await this.response(
       HTTP_METHOD.get,
       url,
       token,
@@ -44,9 +44,9 @@ class ResourceEndpoint extends JsonApiEndpoint {
     );
   }
 
-  public async find<JsonApiResponse>(id: string, token: Token, _params: JsonApiQuery = {}, url: string = "") {
+  public async find<JsonApiResponse>(id: string, token: Token, _params: JsonApiQuery = {}, url = "") {
     if(url === "") url = `/api/v2/${this.recordType()}`;
-    return await this.response<JsonApiResponse>(
+    return await this.response(
       HTTP_METHOD.get,
       `${url}/${id}`,
       token,
@@ -58,11 +58,11 @@ class ResourceEndpoint extends JsonApiEndpoint {
     id: string,
     token: Token,
     params: object,
-    url: string = ""
+    url = ""
   ) {
     const payload = await this.denormalizeData(params);
     if(url === "") url = `/api/v2/${this.recordType()}`;
-    return await this.response<JsonApiResponse>(
+    return await this.response(
       HTTP_METHOD.put,
       `${url}/${id}`,
       token,
@@ -74,10 +74,11 @@ class ResourceEndpoint extends JsonApiEndpoint {
     id: string,
     token: Token,
     _params: JsonApiQuery = {},
-    url: string = ""
+    url = ""
   ) {
     if(url === "") url = `/api/v2/${this.recordType()}`;
-    return await this.response<JsonApiResponse>(
+    return await this.response(
+
       HTTP_METHOD.delete,
       `${url}/${id}`,
       token,

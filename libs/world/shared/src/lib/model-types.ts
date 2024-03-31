@@ -1,4 +1,4 @@
-import { AnyFacet, AnyLayer, Boundary, EntitySelection, EntitySet, Uuid } from '@penumbra/world-shared';
+import { AnyFacet, AnyLayer, Boundary, EntitySelection, EntitySet, Uuid } from '../types';
 
 type AnyEntity = AnyLayer
 

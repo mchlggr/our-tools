@@ -1,4 +1,3 @@
-// Types
 import {
   Client,
   EndpointOptions,
@@ -6,32 +5,25 @@ import {
   HttpMethod,
   HttpRequest,
   Token,
+  EndpointTransform,
+  NormalizedResponse,
+  ResponseError
 } from '@penumbra/endpoint-shared';
 
 // Helpers
 import { makeSuccess, makeFail, Result, EndpointError } from '@penumbra/endpoint-shared';
-import { normalizePayload, NormalizedResponse } from '@penumbra/endpoint-transform';
-import { JsonApiResponse } from './types';
+import { JsonApiResponse, JsonApiTransform } from './types';
 
 // ---
 
-interface ResponseError extends EndpointError {
-    response: any
-}
 
-// Generic normalizer 
-interface Normalizer<DenormalizedInput, NormalizedOutput> {
-  (response: DenormalizedInput): Promise<NormalizedOutput>
-}
-
-// ---
 
 // Refactor as JsonApiEndpoint
-class JsonApiEndpoint<Normalizer> {
+class JsonApiEndpoint<RecordEntry> {
   public client: Client;
-  public tranform: Client;
+  public transform: JsonApiTransform<RecordEntry>
 
-  constructor({ client, transform }: EndpointOptions) {
+  constructor({ client, transform }: EndpointOptions<JsonApiTransform<RecordEntry>>) {
     this.client = client;
     this.transform = transform;
   }
@@ -43,26 +35,27 @@ class JsonApiEndpoint<Normalizer> {
     url: string,
     tokens: Token = {},
     params: any = {}
-  ): Promise<Result<EndpointError, NormalizedResponse>> {
-      // debugger
+  ): Promise<Result<EndpointError, NormalizedResponse<RecordEntry>>> {
     try {
       const headers = this.makeHeaders(tokens);
-      const request: HttpRequest = { url, method, headers, params };
+      const request = { url, method, headers, params };
       const response = await this.client.fetch(request);
-      const value : NormalizedResponse = await this.transform(response.data);
+      const value = await this.normalizeData(response.data);
 
       return makeSuccess({url,  params, ...value });
-    } catch (e) {
-      // debugger;
-      return makeFail(this.processError(e));
+    } catch (e: unknown) {
+      if(e instanceof Error) {
+        return makeFail(this.processError(e));
+      }
+      return makeFail(new EndpointError("Unknown Type from Catch"));
     }
   }
 
   private async normalizeData(
     resp: JsonApiResponse
-  ): Promise<NormalizedResponse> {
+  ): Promise<NormalizedResponse<RecordEntry>> {
 
-    const normalPayload = await normalizePayload(resp); //, included);
+    const normalPayload = await this.transform(resp); //, included);
 
     // Normalize response
     return {
@@ -70,10 +63,11 @@ class JsonApiEndpoint<Normalizer> {
     };
   }
 
-  private processError(error: ResponseError): EndpointError {
-    if (error?.response && error?.response?.status === 401) {
-      console.warn('error.response.status', error.response.status);
-    }
+  private processError(error: Error): EndpointError {
+    console.error(error);
+    // if (error?.response && error?.response?.status === 401) {
+    //   console.warn('error.response.status', error.response.status);
+    // }
     return new EndpointError(error.message);
   }
 

@@ -1,7 +1,10 @@
 {
   "name": "@penumbra/tool-shared",
   "version": "0.0.1",
-  "dependencies": {},
+  "dependencies": {
+    "@penumbra/edit-shared": "workspace:^",
+    "@penumbra/world-shared": "workspace:^"
+  },
   "main": "./index.js",
   "module": "./index.mjs",
   "typings": "./index.d.ts",

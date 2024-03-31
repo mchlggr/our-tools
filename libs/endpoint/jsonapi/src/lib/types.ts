@@ -1,4 +1,5 @@
-import { EndpointReference } from "@penumbra/endpoint-shared";
+import { EndpointReference, EndpointTransform } from '@penumbra/endpoint-shared';
+import { NormalizedResponse } from '@penumbra/endpoint-shared';
 
 interface JsonApiDocument {
   id: string;
@@ -43,6 +44,10 @@ type JsonApiReference = EndpointReference
 
 // ---
 
+type JsonApiTransform<RecordEntry> = EndpointTransform<JsonApiResponse, NormalizedResponse<RecordEntry>>;
+
+// ---
+
 export {
   JsonApiDocument,
   JsonApiReference,
@@ -50,4 +55,5 @@ export {
   JsonApiOneResponse,
   JsonApiListResponse,
   JsonApiResponse,
+  JsonApiTransform
 };

@@ -1,27 +1,9 @@
 import { chain, keys, values, zipObject } from 'lodash';
-import { anyDeserializer } from '@penumbra/endpoint-transform';
+import { anyDeserializer } from './deserialization';
 import {JsonApiResponse, JsonApiDocument} from "@penumbra/endpoint-jsonapi";
 import {typeOf} from "@penumbra/extension";
-import {ResourceRecord} from "@penumbra/endpoint-resource";
-
-interface Normalization {
-  (recordType: string, data: object): object;
-}
-
-interface NormalizedRecords {
-    [recordType: string]: ResourceRecord[]
-}
-
-export interface NormalizedResponse {
-    data: any,
-    included: any,
-    normalized?: NormalizedRecords,
-    url?: string,
-    params?: any,
-    record?: ResourceRecord,
-    records?: ResourceRecord[],
-    // [key as string]: any
-}
+// import {ResourceRecord} from "@penumbra/endpoint-resource";
+import { Normalization, NormalizedRecords, NormalizedResponse } from '@penumbra/endpoint-shared';
 
 export const normalizeItem: Normalization = (recordType : string, data : object) => {
   return anyDeserializer.deserialize(data);
@@ -29,11 +11,12 @@ export const normalizeItem: Normalization = (recordType : string, data : object)
 
 // ---
 
-export const normalizePayload = async ({
+
+async function normalizePayload<RecordEntry>({
   data = [],
   included = [],
   ...rest
-}: JsonApiResponse) : Promise<NormalizedResponse> => {
+}: JsonApiResponse) : Promise<NormalizedResponse<RecordEntry>> {
   const dataByType = chain(data)
     .castArray()
     .concat(included)
@@ -48,23 +31,24 @@ export const normalizePayload = async ({
     )
   );
 
-  const normalized  = zipObject(keys(dataByType), normalizedItems) as NormalizedRecords;
+  const normalized  = zipObject(keys(dataByType), normalizedItems) as NormalizedRecords<RecordEntry>;
 
-    let record = {}
+    let record = {} as RecordEntry
     if (typeOf(data) == "object") {
         const {type, id} = data as JsonApiDocument
-        record = normalized[type].find((i) => i.id === id)
+        const found = normalized[type].find((i) => i.id === id)
+        if(found) record = found
     }
 
-    let records = []
+    const records = []
     if (typeOf(data) == "array") {
         for (const item of data as JsonApiDocument[]) {
             records.push(normalized[item.type].filter((i) => i.id === item.id))
         }
     }
 
-  return { ...rest, data, included, normalized, record, records };
-};
+  return { ...rest, data, included, normalized, record, records: records.flat() };
+}
 
 // ---
 

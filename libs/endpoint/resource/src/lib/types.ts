@@ -1,11 +1,17 @@
-// import { Token } from '../endpoint/endpointTypes';
+import { Token } from '@penumbra/endpoint-shared';
 import { JsonApiQuery } from '@penumbra/endpoint-jsonapi';
-
-type Token = {} //TODO: use Token from endpoint-shared
-
 import { ResourceEndpoint } from './resource-endpoint';
+import { extend } from 'lodash';
 
-interface ResourceRecord {
+// ---
+
+// type Token = {} //TODO: use Token from endpoint-shared
+
+interface UnkownResourceEntry {
+  id: string
+}
+
+type AnyResourceEntry = {
   id: string;
   [key: string]: any;
 }
@@ -30,7 +36,7 @@ interface ResourceActions {
 
 // ---
 
-interface Resource<RecordType = ResourceRecord> extends ResourceActions {
+interface Resource<RecordType = AnyResourceEntry> extends ResourceActions {
   record: RecordType;
   recordId: string;
   recordType: string;
@@ -55,7 +61,7 @@ interface Resource<RecordType = ResourceRecord> extends ResourceActions {
   onDelete: (state: Resource) => (e: any) => void;
 }
 
-interface ResourceList<RecordType = ResourceRecord> extends ResourceActions {
+interface ResourceList<RecordType = AnyResourceEntry> extends ResourceActions {
   params: any,
 
   // ---
@@ -84,38 +90,38 @@ interface ResourceList<RecordType = ResourceRecord> extends ResourceActions {
 // ---
 
 
-interface ResourceHook {
-  (endpoint: ResourceEndpoint, config: ResourceConfig): Resource;
+interface ResourceHook<RecordEntry> {
+  (endpoint: ResourceEndpoint<RecordEntry>, config: ResourceConfig): Resource;
 }
 
-interface ResourceListHook {
-  (endpoint: ResourceEndpoint, config: ResourceConfig): ResourceList;
+interface ResourceListHook<RecordEntry> {
+  (endpoint: ResourceEndpoint<RecordEntry>, config: ResourceConfig): ResourceList;
 }
 
 // ---
 
-interface ResourceStoreMethod {
+interface ResourceStoreMethod<RecordEntry> {
   (
-    endpoint: ResourceEndpoint,
+    endpoint: ResourceEndpoint<RecordEntry>,
     payload: object,
     config: ResourceConfig,
     token: Token
   ): Promise<any>;
 }
 
-interface ResourceStoreData<RecordData=ResourceRecord> {
+interface ResourceStoreData<RecordData=AnyResourceEntry> {
   [recordType: string]: { byId: {[id:string]: RecordData} };
 }
 
 type ResourceStoreState<T> = ResourceStoreData<T> & {
   // auth: { token: Token };
   // setToken: (token: string) => void;
-  getOne: ResourceStoreMethod;
-  getList: ResourceStoreMethod;
-  getMany: ResourceStoreMethod;
-  createResource: ResourceStoreMethod;
-  updateResource: ResourceStoreMethod;
-  deleteResource: ResourceStoreMethod;
+  getOne: ResourceStoreMethod<T>;
+  getList: ResourceStoreMethod<T>;
+  getMany: ResourceStoreMethod<T>;
+  createResource: ResourceStoreMethod<T>;
+  updateResource: ResourceStoreMethod<T>;
+  deleteResource: ResourceStoreMethod<T>;
 }
 
 // ---
@@ -136,7 +142,7 @@ interface RecordPayload extends JsonApiQuery {
 // ---
 
 export {
-  ResourceRecord,
+  AnyResourceEntry,
   ResourceAction,
   ResourceConfig,
   ResourceActions,

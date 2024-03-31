@@ -3,7 +3,7 @@ import { isArray, isNull } from 'lodash';
 
 // ---
 
-const typeOf = (value: never) : string => {
+const typeOf = (value: unknown) : string => {
   switch (typeof value) {
     case 'object':
       switch (true) {

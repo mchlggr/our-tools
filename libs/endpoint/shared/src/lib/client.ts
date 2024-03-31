@@ -5,16 +5,16 @@ The default client for endpoints
 // ---
 
 // Dependencies
-import axios from 'axios';
+import axios, { CustomParamsSerializer } from 'axios';
 import qs from 'qs';
 
 // Types
 import { AxiosInstance } from 'axios';
-import {Client, HTTP_METHOD } from '@penumbra/endpoint-shared';
+import {Client, HTTP_METHOD } from './types';
 import * as process from 'node:process';
 //---
 
-const objectToQuerystring = (params) =>
+const objectToQuerystring: CustomParamsSerializer = (params) =>
   qs.stringify(params, { format: 'RFC1738', arrayFormat: 'brackets' });
 
 const createAxiosClient = (baseURL= ""): Client => {
@@ -45,7 +45,6 @@ const createAxiosClient = (baseURL= ""): Client => {
     (error) => Promise.reject(error)
   );
 
-  // @ts-ignore
   return {
     fetch: async (options) => {
             // debugger;

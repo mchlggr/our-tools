@@ -47,7 +47,6 @@ const getOne =  (set, get: () => ResourceStoreState) : ResourceStoreMethod => as
 };
 
 const getList = (set, get: () => ResourceStoreState) : ResourceStoreMethod =>async (endpoint, payload: RecordPayload, config, token) => {
-    debugger
     const {alias, url} = config;
     const configPayload: JsonApiQuery = pick(config, ['filter', 'sort', 'page', 'include']);
     const type = endpoint.recordType();
@@ -55,23 +54,18 @@ const getList = (set, get: () => ResourceStoreState) : ResourceStoreMethod =>asy
     const result = await endpoint.list(token, params, url);
 
     if (result.isSuccess()) {
-            debugger
 
         const value = result.success();
         set((state) => {
-                        debugger
 
             addNormalized(state, value);
             if (alias) {
-                debugger
                 const content = makeAliasList(value);
                 //TODO: _.set(state, [type, 'lookup', alias],  content)
                 _.set(state, [type, alias], content);
             }
         });
     } else {
-            debugger
-
         const error = result.fail();
         throw new Error(`getList Failed! ${error.message}`);
     }
@@ -167,9 +161,9 @@ const ResourceStore = ({children}: any) => {
 
 //---
 
-interface ResourceStoreHook {
-
-}
+// interface ResourceStoreHook {
+//
+// }
 
 //---
 
