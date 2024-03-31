@@ -33,9 +33,6 @@ describe("mergeParams Function", () => {
 
     const result = mergeParams(objValue, srcValue);
 
-    console.log('expectedValue', expectedValue)
-    console.log('result', result)
-
     expect(result).toEqual(expectedValue);
   });
 });
