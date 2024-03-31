@@ -2,7 +2,9 @@
   "name": "@penumbra/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "prepare": "husky"
+  },
   "private": true,
   "dependencies": {
     "@arrows/multimethod": "^2.1.0",
