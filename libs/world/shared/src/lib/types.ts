@@ -6,9 +6,9 @@ type EntitySet = Set<Uuid>
 type EntitySelection = EntitySet
 
 type EntityUuid = string
-type EntityType = NonEmptyString
+type EntityTypeTag = NonEmptyString
 type Entity = {
-  type: EntityType ,
+  type: EntityTypeTag ,
   id: Uuid
 }
 

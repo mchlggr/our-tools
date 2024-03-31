@@ -4,14 +4,14 @@ import { FontSizeFacet, PathFacet } from './facet-types';
 type LayerBoundary = Boundary
 type LayerEntity = Entity
 
-type RectangleLayerType = 'layer:rectangle'
-type EllipseLayerType = 'layer:ellipse'
-type LineLayerType = 'layer:line'
-type TextLayerType = 'layer:text'
-type PencilLayerType = 'layer:pencil'
+type RectangleLayerTypeTag = 'layer:rectangle'
+type EllipseLayerTypeTag = 'layer:ellipse'
+type LineLayerTypeTag = 'layer:line'
+type TextLayerTypeTag = 'layer:text'
+type PencilLayerTypeTag = 'layer:pencil'
 
 type RectangleLayer =  LayerEntity & {
-  type: RectangleLayerType,
+  type: RectangleLayerTypeTag,
   id: EntityUuid,
   x: number,
   y: number,
@@ -20,7 +20,7 @@ type RectangleLayer =  LayerEntity & {
 }
 
 type EllipseLayer =  LayerEntity &  {
-  type: EllipseLayerType,
+  type: EllipseLayerTypeTag,
   id: EntityUuid,
   cx: number,
   cy: number,
@@ -29,7 +29,7 @@ type EllipseLayer =  LayerEntity &  {
 }
 
 type LineLayer =  LayerEntity & {
-  type: LineLayerType,
+  type: LineLayerTypeTag,
   id: EntityUuid,
   x1: number,
   y1: number,
@@ -38,7 +38,7 @@ type LineLayer =  LayerEntity & {
 }
 
 type TextLayer =  LayerEntity &  {
-  type: TextLayerType,
+  type: TextLayerTypeTag,
   id: EntityUuid,
   x: number,
   y: number,
@@ -49,7 +49,7 @@ type TextLayer =  LayerEntity &  {
 
 
 type PencilLayer = LayerEntity & {
-  type: PencilLayerType,
+  type: PencilLayerTypeTag,
   id: EntityUuid,
   path: PathFacet,
   d: string,
@@ -58,24 +58,24 @@ type PencilLayer = LayerEntity & {
   boundary: LayerBoundary // Use for better selection performance
 }
 
-type AnyLayerType = RectangleLayerType | EllipseLayerType | LineLayerType | TextLayerType | PencilLayerType
+type AnyLayerTypeTag = RectangleLayerTypeTag | EllipseLayerTypeTag | LineLayerTypeTag | TextLayerTypeTag | PencilLayerTypeTag
 type AnyLayer = RectangleLayer | EllipseLayer |
   LineLayer | TextLayer | PencilLayer
 
 // ---
 
 export {
-  AnyLayerType,
+  AnyLayerTypeTag,
   LayerEntity,
-  RectangleLayerType,
+  RectangleLayerTypeTag,
   RectangleLayer,
-  EllipseLayerType,
+  EllipseLayerTypeTag,
   EllipseLayer,
-  LineLayerType,
+  LineLayerTypeTag,
   LineLayer,
-  TextLayerType,
+  TextLayerTypeTag,
   TextLayer,
-  PencilLayerType,
+  PencilLayerTypeTag,
   PencilLayer,
   AnyLayer
 };

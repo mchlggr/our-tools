@@ -1,25 +1,25 @@
 type Facet = { type: string}
 
-type FillType = 'fill:none' | 'fill:solid' | 'fill:gradient' | 'fill:image'
-type FillFacet = Facet & { type: FillType }
+type FillTypeTag = 'fill:none' | 'fill:solid' | 'fill:gradient' | 'fill:image'
+type FillFacet = Facet & { type: FillTypeTag }
 
-type StrokeType = 'stroke:none' | 'stroke:solid' | 'stroke:gradient'
-type StrokeFacet = { type: StrokeType }
+type StrokeTypeTag = 'stroke:none' | 'stroke:solid' | 'stroke:gradient'
+type StrokeFacet = { type: StrokeTypeTag }
 
-type PositionType = 'position:2d' | 'position:3d'
-type PositionFacet = { type: PositionType }
+type PositionTypeTag = 'position:2d' | 'position:3d'
+type PositionFacet = { type: PositionTypeTag }
 
-type PathType = 'path:rough'
-type PathFacet = { type: PathType }
+type PathTypeTag = 'path:rough'
+type PathFacet = { type: PathTypeTag }
 
-type FontType = 'bold' | 'regular' | 'italic'
-type FontUnit = 'pt' | 'in' | 'px'
-type FontSizeFacet = { type: FontType, unit: FontUnit, value: number }
+type FontTypeTag = 'bold' | 'regular' | 'italic'
+type FontUnitTag = 'pt' | 'in' | 'px'
+type FontSizeFacet = { type: FontTypeTag, unit: FontUnitTag, value: number }
 
-type AnyFacetType = FillType | StrokeType | PositionType |
-  PathType | FontType
+type AnyFacetTypeTag = FillTypeTag | StrokeTypeTag | PositionTypeTag |
+  PathTypeTag | FontTypeTag
 
-type AnyFacet = FillFacet | StrokeFacet | PositionFacet | PathFacet | FontSizeFacet
+type AnyFacetTag = FillFacet | StrokeFacet | PositionFacet | PathFacet | FontSizeFacet
 
 // ---
 
@@ -30,19 +30,19 @@ type FacetTransaction = (facet: Facet) => void
 
 export {
   Facet,
-  FillType,
+  FillTypeTag,
   FillFacet,
-  StrokeType,
+  StrokeTypeTag,
   StrokeFacet,
-  PositionType,
+  PositionTypeTag,
   PositionFacet,
-  PathType,
+  PathTypeTag,
   PathFacet,
-  FontType,
-  FontUnit,
+  FontTypeTag,
+  FontUnitTag,
   FontSizeFacet,
-  AnyFacetType,
-  AnyFacet,
+  AnyFacetTypeTag,
+  AnyFacetTag,
   FacetTransform,
   FacetTransaction
 }
