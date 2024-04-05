@@ -6,17 +6,33 @@ import { UnknownToolTag } from './unknown-types';
 
 type WorldTimeline = WorldModel[]
 
+type WorldPointer = {
+  click: Point2D,
+  drag: Point2D,
+  tool: UnknownToolTag
+  path: Point2D[]
+}
+
+type WorldComment = {
+  by: "",
+  content: ""
+}
+
+type WorldReview = {
+  comments: {
+    [entityId: Uuid]: [
+
+    ]
+  }
+}
+
 type WorldAwareness = {
- [userId: Uuid]: {
-   name: string,
-   pointers: {
-     [pointerId: Uuid]: {
-       click: Point2D,
-       drag: Point2D,
-       tool: UnknownToolTag
-     }
-   }
- }
+  [userId: Uuid]: {
+    name: string,
+    pointers: {
+      [pointerId: Uuid]: WorldPointer
+    }
+  }
 }
 
 type WorldArchive = {
@@ -34,5 +50,5 @@ type WorldArchive = {
 export {
   WorldModel,
   WorldTimeline,
-  WorldArchive,
+  WorldArchive
 };
