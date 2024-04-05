@@ -28,7 +28,9 @@
       "@penumbra/tool-ui": ["libs/tool/ui/src/index.ts"],
       "@penumbra/view-shared": ["libs/view/shared/src/index.ts"],
       "@penumbra/world-crdt": ["libs/world/crdt/src/index.ts"],
-      "@penumbra/world-shared": ["libs/world/shared/src/index.ts"]
+      "@penumbra/world-doc": ["libs/world/doc/src/index.ts"],
+      "@penumbra/world-shared": ["libs/world/shared/src/index.ts"],
+      "@penumbra/world-store": ["libs/world/store/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

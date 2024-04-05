@@ -1,16 +1,16 @@
 import { method, multi } from '@penumbra/extension';
 import { WorldModel } from '@penumbra/world-shared';
 import { StageStore } from '@penumbra/edit-shared';
-import { AnyTool } from './types';
+import { AnyToolTag } from './types';
 
 //---
 
 interface ToolDispatch {
-  (tool: AnyTool, model: WorldModel, stage: StageStore, evt: Event): AnyTool;
+  (tool: AnyToolTag, model: WorldModel, stage: StageStore, evt: Event): AnyToolTag;
 }
 
 interface ToolMethod {
-  (tool: AnyTool, model: WorldModel, stage: StageStore, evt: Event): WorldModel;
+  (tool: AnyToolTag, model: WorldModel, stage: StageStore, evt: Event): WorldModel;
 }
 
 //---

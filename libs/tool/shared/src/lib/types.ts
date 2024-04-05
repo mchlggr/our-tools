@@ -5,12 +5,12 @@ import { NonEmptyString } from '@penumbra/extension';
 import { Component, ComponentType } from 'react';
 
 // TODO: rename * to *Type
-type HandTool = 'tool:hand'
-type SelectTool = 'tool:select'
-type RectangleTool = 'tool:rectangle'
-type LineTool = 'tool:line'
-type TextTool = 'tool:text'
-type PencilTool = 'tool:pencil'
+type HandToolTag = 'tool:hand'
+type SelectToolTag = 'tool:select'
+type RectangleToolTag = 'tool:rectangle'
+type LineToolTag = 'tool:line'
+type TextToolTag = 'tool:text'
+type PencilToolTag = 'tool:pencil'
 // type LaserTool = 'tool:laser'
 // type ZoomTool = 'tool:zoom'
 // type EraserTool = 'tool:eraser'
@@ -25,8 +25,8 @@ type PencilTool = 'tool:pencil'
 // type RecordingTool = 'tool:recording'
 // type MagicTool = 'tool:magic' like chalktalk with AI, squeck
 
-type StandardTool = HandTool | SelectTool | RectangleTool | LineTool | TextTool | PencilTool
-type AnyTool = StandardTool
+type StandardToolTag = HandToolTag | SelectToolTag | RectangleToolTag | LineToolTag | TextToolTag | PencilToolTag
+type AnyToolTag = StandardToolTag
 
 type NormalMode = 'mode:normal'
 type InputMode = 'mode:input'
@@ -50,19 +50,20 @@ type InspectorToolComponent = ComponentType<InspectorToolProps>
 type OutlineToolComponent = ComponentType<OutlineToolProps>
 
 // Slots are dependency injection locations for Tools
-type SpaceSlot = 'slot:space'
-type SurfaceSlot = 'slot:surface'
-type MassSlot = 'slot:mass'
-type DockSlot = 'slot:dock'
-type InspectorSlot = 'slot:inspector'
-type OutlineSlot = 'slot:outline'
+type SpaceSlotTag = 'slot:space'
+type SceneSlotTag = 'slot:scene'
+type SurfaceSlotTag = 'slot:surface'
+type MassSlotTag = 'slot:mass'
+type DockSlotTag = 'slot:dock'
+type InspectorSlotTag = 'slot:inspector'
+type OutlineSlotTag = 'slot:outline'
 
-type AnySlot = SpaceSlot | SurfaceSlot | DockSlot | InspectorSlot | OutlineSlot | MassSlot
+type AnySlotTag = SpaceSlotTag | SurfaceSlotTag | DockSlotTag | InspectorSlotTag | OutlineSlotTag | MassSlotTag
 
 type Tool = {
   type: NonEmptyString
   icon: NonEmptyString // css class name for icon
-  slots: Set<AnySlot>
+  slots: Set<AnySlotTag>
   enabled: boolean
   components: {
     // The following components will be injected into UI slots when it's active loaded
@@ -77,12 +78,12 @@ type Tool = {
 
 export {
   Tool,
-  HandTool,
-  SelectTool,
-  RectangleTool,
-  LineTool,
-  TextTool,
-  PencilTool,
-  StandardTool,
-  AnyTool
+  HandToolTag,
+  SelectToolTag,
+  RectangleToolTag,
+  LineToolTag,
+  TextToolTag,
+  PencilToolTag,
+  StandardToolTag,
+  AnyToolTag
 };

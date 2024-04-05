@@ -2,6 +2,10 @@ import { AnyFacet, AnyLayer, Boundary, EntitySelection, EntitySet, Uuid } from '
 
 type AnyEntity = AnyLayer
 
+// type EntityMap = {
+//   [uuid: Uuid]: EntityMap
+// }
+
 type WorldModel = {
   id: Uuid
   view: object
@@ -18,6 +22,13 @@ type WorldModel = {
   facets: AnyFacet[]
   boundary: Boundary
   entities: AnyEntity[]
+}
+
+const alternativeEntityMapping = {
+  "123": {
+    childrenIds: ["1"],
+    childrenOrder: ["1"]
+  }
 }
 
 type ModelTransform = (model: WorldModel) => WorldModel
