@@ -1,4 +1,5 @@
 import { NonEmptyString } from '@penumbra/extension';
+import { UnknownFacetTag } from './facet-types';
 
 type Uuid = string | ""
 
@@ -8,8 +9,18 @@ type EntitySelection = EntitySet
 type EntityUuid = string
 type EntityTypeTag = NonEmptyString
 type Entity = {
-  type: EntityTypeTag ,
-  id: Uuid
+  type: EntityTypeTag,
+  id: Uuid,
+  //
+  facets: UnknownFacetTag[]
+  //
+  x1: number
+  y1: number
+  z1: number
+  //
+  x2: number
+  y2: number
+  z2: number
 }
 
 // ---

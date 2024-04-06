@@ -1,7 +1,13 @@
 {
   "name": "@penumbra/world-doc",
   "version": "0.0.1",
-  "dependencies": {},
+  "dependencies": {
+    "@automerge/automerge": "^2.1.13",
+    "@automerge/automerge-repo": "^1.1.5",
+    "@automerge/automerge-repo-network-broadcastchannel": "^1.1.5",
+    "@automerge/automerge-repo-network-websocket": "^1.1.5",
+    "@automerge/automerge-repo-storage-indexeddb": "^1.1.5"
+  },
   "main": "./index.js",
   "module": "./index.mjs",
   "typings": "./index.d.ts",

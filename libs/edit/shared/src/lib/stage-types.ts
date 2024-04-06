@@ -1,10 +1,27 @@
-import { PointerStore } from './pointer-types';
-import { ViewStore } from './view-types';
+import { PointerState, PointerStore } from './pointer-types';
+import { ViewportState, ViewportStore } from './view-types';
 
 // ---
 
-type StageStore = PointerStore & ViewStore
+type EditStage = {
+  viewport: ViewportState,
+  pointers: PointerState[]
+}
+
+type EditAwareness = {
+  [userId: string]: {
+    name: string,
+    onlineAt: Date,
+    stages: {
+      [stageId: string]: EditStage
+    }
+  }
+}
 
 // ---
 
-export { StageStore }
+type StageStore = PointerStore & ViewportStore
+
+// ---
+
+export { StageStore, EditAwareness };

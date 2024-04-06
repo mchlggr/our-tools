@@ -4,6 +4,15 @@
 import { NonEmptyString } from '@penumbra/extension';
 import { Component, ComponentType } from 'react';
 
+const toolTag = {
+  hand: "tool:hand",
+  select: "tool:select",
+  rectangle: "tool:rectangle",
+  line: "tool:line",
+  text: "tool:text",
+  pencil: "tool:pencil",
+}
+
 // TODO: rename * to *Type
 type HandToolTag = 'tool:hand'
 type SelectToolTag = 'tool:select'
@@ -11,6 +20,7 @@ type RectangleToolTag = 'tool:rectangle'
 type LineToolTag = 'tool:line'
 type TextToolTag = 'tool:text'
 type PencilToolTag = 'tool:pencil'
+// type FileToolTag = 'tool:file'
 // type LaserTool = 'tool:laser'
 // type ZoomTool = 'tool:zoom'
 // type EraserTool = 'tool:eraser'
@@ -28,6 +38,10 @@ type PencilToolTag = 'tool:pencil'
 type StandardToolTag = HandToolTag | SelectToolTag | RectangleToolTag | LineToolTag | TextToolTag | PencilToolTag
 type AnyToolTag = StandardToolTag
 
+const modeTag = Object.freeze({
+  normal: 'mode:normal',
+  input: 'mode:input'
+})
 type NormalMode = 'mode:normal'
 type InputMode = 'mode:input'
 
@@ -49,6 +63,16 @@ type SurfaceToolComponent = ComponentType<SurfaceToolProps>
 type InspectorToolComponent = ComponentType<InspectorToolProps>
 type OutlineToolComponent = ComponentType<OutlineToolProps>
 
+const slotTag = {
+  space: "slot:space",
+  scene: "slot:scene",
+  surface: "slot:surface",
+  mass: "slot:mass",
+  dock: "slot:dock",
+  inspector: "slot:inspector",
+  outline: "slot:outline",
+}
+
 // Slots are dependency injection locations for Tools
 type SpaceSlotTag = 'slot:space'
 type SceneSlotTag = 'slot:scene'
@@ -59,6 +83,7 @@ type InspectorSlotTag = 'slot:inspector'
 type OutlineSlotTag = 'slot:outline'
 
 type AnySlotTag = SpaceSlotTag | SurfaceSlotTag | DockSlotTag | InspectorSlotTag | OutlineSlotTag | MassSlotTag
+type UnknownSlotTag = string
 
 type Tool = {
   type: NonEmptyString
@@ -85,5 +110,7 @@ export {
   TextToolTag,
   PencilToolTag,
   StandardToolTag,
-  AnyToolTag
+  AnyToolTag,
+  toolTag,
+  slotTag
 };

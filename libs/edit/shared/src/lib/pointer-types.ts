@@ -1,6 +1,7 @@
 import { ModelTransaction, Point2D, Time1D, UnknownToolTag, WorldModel } from '@penumbra/world-shared';
 
 type PointerState = {
+  // active: boolean,
   down: Point2D,
   up: Point2D,
   drag: Point2D,

@@ -4,45 +4,54 @@ import { UnknownToolTag } from './unknown-types';
 
 // ---
 
-type WorldTimeline = WorldModel[]
-
-type WorldPointer = {
-  click: Point2D,
-  drag: Point2D,
-  tool: UnknownToolTag
-  path: Point2D[]
-}
-
 type WorldComment = {
-  by: "",
-  content: ""
+  by: '',
+  content: ''
 }
 
+// Is loaded as a separate CRDT
 type WorldReview = {
   comments: {
-    [entityId: Uuid]: [
-
-    ]
+    [entityId: Uuid]: WorldComment[]
   }
 }
 
-type WorldAwareness = {
-  [userId: Uuid]: {
-    name: string,
-    pointers: {
-      [pointerId: Uuid]: WorldPointer
-    }
-  }
+// type TokenReference = {}
+type FacetReference = { type: string, id: Uuid }
+
+type LayerEntitySegment = "entity:layer"
+type SurfaceEntitySegment = "entity:surface"
+type SceneEntitySegment = "entity:scene"
+type SpaceEntitySegment = "entity:space"
+type AnyEntitySegment = LayerEntitySegment | SurfaceEntitySegment | SceneEntitySegment | SpaceEntitySegment
+
+type EntityReference = { type: AnyEntitySegment, id: Uuid }
+
+type WorldDocUrl = string
+
+// ---
+
+type WorldTimeline = WorldModel[]
+
+type WorldHistory = {
+  at: number[] // branching address for present timeline location
+  timeline: WorldTimeline, // Cached spacial history of document
 }
+
+const timeline = (model: WorldModel): WorldTimeline => {
+  return [];
+};
+
+// ---
 
 type WorldArchive = {
   id: Uuid
   version: string
   unit: WorldUnit,
-  // document: WorldDoc
+  // doc: WorldDoc
+  docUrl: WorldDocUrl
   // overlay: WorldOverlay,
-  at: number
-  timeline: WorldTimeline,
+  history: WorldHistory
 }
 
 // ---
@@ -50,5 +59,6 @@ type WorldArchive = {
 export {
   WorldModel,
   WorldTimeline,
-  WorldArchive
+  WorldArchive,
+  EntityReference
 };

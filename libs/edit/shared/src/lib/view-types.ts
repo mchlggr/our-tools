@@ -1,10 +1,13 @@
-import { Boundary, Point2D } from '@penumbra/world-shared';
+import { Boundary, EntityReference, Point2D } from '@penumbra/world-shared';
 
 // ---
 
-type ViewState = {
-  viewport: { width: number, height: number }
-  setViewport: (target: EventTarget) => void
+type ViewportState = {
+  size: {
+    width: number,
+    height: number
+  }
+  target: EntityReference,
   boundary: Boundary,
   minZoom: number,
   maxZoom: number,
@@ -13,18 +16,19 @@ type ViewState = {
   offset: Point2D,
   origin: Point2D,
   wheel: number,
-  center: Point2D, // TODO: is this still needed
+  center: Point2D, // TODO: is this still needed?
 }
 
 type ViewHanlders = {
+  setViewport: (target: EventTarget) => void
   viewZoomInc: (inc: number) => void
   viewZoomTo: (v: number) => void
   viewMove: ({ x, y }: Point2D) => void
   viewMoveTo: ({ x, y }: Point2D) => void
 }
 
-type ViewStore = ViewState & ViewHanlders
+type ViewportStore = ViewportState & ViewHanlders
 
 // ---
 
-export { ViewStore };
+export { ViewportStore, ViewportState };

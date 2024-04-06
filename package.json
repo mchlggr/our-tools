@@ -4,8 +4,8 @@
   "license": "MIT",
   "scripts": {
     "prepare": "pnpx husky",
-    "test:all": "nx run-many --all -t test -skip-nx-cache",
-    "lint:all": "nx run-many --all -t lint -skip-nx-cache"
+    "test:all": "nx run-many --all --target=test -skip-nx-cache",
+    "lint:all": "nx run-many --all --target=lint -skip-nx-cache"
   },
   "private": true,
   "dependencies": {
