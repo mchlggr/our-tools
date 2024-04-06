@@ -6,7 +6,8 @@
     "@automerge/automerge-repo": "^1.1.5",
     "@automerge/automerge-repo-network-broadcastchannel": "^1.1.5",
     "@automerge/automerge-repo-network-websocket": "^1.1.5",
-    "@automerge/automerge-repo-storage-indexeddb": "^1.1.5"
+    "@automerge/automerge-repo-storage-indexeddb": "^1.1.5",
+    "@penumbra/world-shared": "workspace:^"
   },
   "main": "./index.js",
   "module": "./index.mjs",

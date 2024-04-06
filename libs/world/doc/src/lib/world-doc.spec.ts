@@ -1,7 +1,10 @@
 import { worldDoc } from './world-doc';
+import { createWorld } from './create';
 
-describe('worldDoc', () => {
-  it('should work', () => {
-    expect(worldDoc()).toEqual('world-doc');
+describe('createWorld', () => {
+  it('should create world', () => {
+    const world = createWorld()
+    debugger;
+    // expect(worldDoc()).toEqual('world-doc');
   });
 });

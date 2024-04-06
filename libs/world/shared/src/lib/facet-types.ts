@@ -1,7 +1,7 @@
 type Facet = { type: string }
 
-type TypeTagMapping = {
-  [name: string]: string
+type TypeTagMapping<Tags=string> = {
+  [tag: string]: Tags
 }
 
 const fillTag: TypeTagMapping = {
@@ -99,12 +99,12 @@ type FacetTransaction = (facet: Facet) => void
 // type UnknownEntitySegment = string
 // type AnyEntitySegment =
 
-type FillFacetSegment = 'facet:fill'
-type PathFacetSegment = 'facet:path'
-type FontFacetStyleSegment = 'facet:font-style'
-type FontFacetUnitSegment = 'facet:font-unit'
-type FontFacetSizeSegment = 'facet:font-size'
-type StrokeFacetSegment = 'facet:stroke'
+type FillFacetSegment = 'fill'
+type PathFacetSegment = 'path'
+type FontFacetStyleSegment = 'font-style'
+type FontFacetUnitSegment = 'font-unit'
+type FontFacetSizeSegment = 'font-size'
+type StrokeFacetSegment = 'stroke'
 type AnyFacetSegment =
   StrokeFacetSegment
   | FillFacetSegment
@@ -142,5 +142,6 @@ export {
   FontFacetUnitSegment,
   FontFacetSizeSegment,
   StrokeFacetSegment,
-  fillTag
+  fillTag,
+  TypeTagMapping
 };

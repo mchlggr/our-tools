@@ -1,4 +1,4 @@
-import { Point2D, Uuid, WorldUnit } from './types';
+import { Point2D, Uuid, AnyWorldUnit, worldUnitTag } from './types';
 import { WorldModel } from './model-types';
 import { UnknownToolTag } from './unknown-types';
 
@@ -19,10 +19,10 @@ type WorldReview = {
 // type TokenReference = {}
 type FacetReference = { type: string, id: Uuid }
 
-type LayerEntitySegment = "entity:layer"
-type SurfaceEntitySegment = "entity:surface"
-type SceneEntitySegment = "entity:scene"
-type SpaceEntitySegment = "entity:space"
+type LayerEntitySegment = 'entity:layer'
+type SurfaceEntitySegment = 'entity:surface'
+type SceneEntitySegment = 'entity:scene'
+type SpaceEntitySegment = 'entity:space'
 type AnyEntitySegment = LayerEntitySegment | SurfaceEntitySegment | SceneEntitySegment | SpaceEntitySegment
 
 type EntityReference = { type: AnyEntitySegment, id: Uuid }
@@ -44,11 +44,17 @@ const timeline = (model: WorldModel): WorldTimeline => {
 
 // ---
 
+const latestVersion = '0.0.1';
+const defaultVersion = latestVersion;
+const defaultUnit = worldUnitTag.pixel;
+
+// ---
+
 type WorldArchive = {
   id: Uuid
   version: string
-  unit: WorldUnit,
-  // doc: WorldDoc
+  unit: AnyWorldUnit,
+  doc: WorldModel,
   docUrl: WorldDocUrl
   // overlay: WorldOverlay,
   history: WorldHistory
@@ -60,5 +66,9 @@ export {
   WorldModel,
   WorldTimeline,
   WorldArchive,
-  EntityReference
+  EntityReference,
+  latestVersion,
+  defaultVersion,
+  defaultUnit,
+  FacetReference
 };

@@ -1,9 +1,11 @@
 import { NonEmptyString } from '@penumbra/extension';
-import { UnknownFacetTag } from './facet-types';
+import { TypeTagMapping, UnknownFacetTag } from './facet-types';
 
-type Uuid = string | ""
+type Uuid = string | ''
 
-type EntitySet = Set<Uuid>
+type EntitySet = {
+  [userId: string]: Uuid[]
+}
 type EntitySelection = EntitySet
 
 type EntityUuid = string
@@ -25,6 +27,13 @@ type Entity = {
 
 // ---
 
+
+const emptyBoundary = Object.freeze({
+  minX: 0,
+  minY: 0,
+  maxX: 0,
+  maxY: 0
+});
 
 type Boundary = {
   minX: number
@@ -54,7 +63,15 @@ type Time1D = Date[]
 
 // ---
 
-type WorldUnit = 'pt' | 'in' | 'px'
+
+type InchWorldUnitTag = 'in'
+type PixelWorldUnitTag = 'px'
+type AnyWorldUnit = InchWorldUnitTag | PixelWorldUnitTag
+type UnkownWorldUnit = string
+const worldUnitTag: TypeTagMapping<AnyWorldUnit> = {
+  inch: 'in',
+  pixel: 'px'
+};
 
 // ---
 
@@ -71,6 +88,10 @@ export {
   Point3D,
   Path2D,
   Path3D,
-  WorldUnit,
-  Time1D
+  AnyWorldUnit,
+  Time1D,
+  worldUnitTag,
+  InchWorldUnitTag,
+  PixelWorldUnitTag,
+  emptyBoundary
 };

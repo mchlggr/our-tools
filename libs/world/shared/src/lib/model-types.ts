@@ -6,6 +6,7 @@ import { AnySpace } from './space-types';
 import { AnyScene } from './scene-types';
 import { AnyFacet, AnyFacetSegment } from './facet-types';
 import { AnyLayer } from './layer-types';
+import { FacetReference } from './world-types';
 
 
 type ModelEntities<EntityType> = {
@@ -13,7 +14,9 @@ type ModelEntities<EntityType> = {
 }
 
 type ModelFacets<FacetType> = {
-  [facetSegment in AnyFacetSegment]: FacetType[];
+  [facetSegment: string]: {
+    [entityOrTokenId: string]: FacetType | FacetReference
+  }
 };
 
 type EdgeEnd = 'none' | 'arrow' | 'reverse-arrow'
@@ -35,23 +38,38 @@ type ModelEdge = {
   // Facets color
 }
 
+const emptyEntities = Object.freeze({
+  layers: {},
+  surfaces: {},
+  scenes: {},
+  spaces: {}
+});
+
+const emptyFacets: ModelFacets<AnyFacet> = Object.freeze({
+  'fill': {},
+  'path': {},
+  'font-style': {},
+  'font-unit': {},
+  'font-size': {},
+  'stroke': {}
+});
 
 type WorldModel = {
-  id: Uuid
-  view: object
-  changedBy: Uuid,
-  changedAt: Date,
+  // id: Uuid
+  modifiedBy: Uuid,
+  modifiedAt: Date,
+  modifiedCounter: unknown, // Add A.Counter
   tool: UnknownToolTag,
-  selectingIds: EntitySet
+  selectingIds: EntitySet // Gets applied from awareness on commit
   // Consider moving down to space, scene or surface
-  lockingIds: EntitySet
-  parkingIds: EntitySet
-  erasingIds: EntitySet
-  hintingIds: EntitySet
+  lockingIds: EntitySet // Gets applied from awareness on commit
+  parkingIds: EntitySet // Gets applied from awareness on commit
+  erasingIds: EntitySet // Gets applied from awareness on commit
+  hintingIds: EntitySet // Gets applied from awareness on commit
   //
-  editingId: Uuid
-  croppingId: Uuid
-  focusingId: Uuid
+  editingIds: EntitySet
+  croppingIds: EntitySet
+  focusingIds: EntitySet
   //
   // Used for history snapshot previews
   boundary: Boundary
@@ -81,5 +99,7 @@ type ModelTransaction = (model: WorldModel) => void
 export {
   WorldModel,
   ModelTransform,
-  ModelTransaction
+  ModelTransaction,
+  emptyEntities,
+  emptyFacets
 };

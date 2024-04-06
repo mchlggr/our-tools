@@ -17,6 +17,10 @@ export default defineConfig({
     }),
   ],
 
+  // resolve: {
+  //   preserveSymlinks: true
+  // },
+
   // Uncomment this if you are using workers.
   // worker: {
   //  plugins: [ nxViteTsPaths() ],
