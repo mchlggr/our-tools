@@ -2,7 +2,7 @@
 import { filter, groupBy, keyBy } from 'lodash';
 import { Entity, EntitySelection } from './types';
 import { LayerEntity } from './layer-types';
-import { WorldModel } from './world-types';
+import { WorldModel } from './model-types';
 
 // ---
 
@@ -10,9 +10,9 @@ const layerTagRegex = /layer:/;
 
 const filterLayers = (entities: Entity[]): LayerEntity[] => entities.filter(({ type }) => layerTagRegex.test(type));
 
-const selectingLayers = ({ entities, selectingIds }: WorldModel) => {
-  const layers = filterLayers(entities);
-  return filter(layers, ({ id }) => selectingIds.has(id));
+const selectingLayers = ({ entities: { layers }, selectingIds }: WorldModel) => {
+  // const layers = filterLayers(layers);
+  return filter(layers, ({ id }) => selectingIds["user:213321"].includes(id));
 };
 
 

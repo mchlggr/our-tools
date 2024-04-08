@@ -336,7 +336,7 @@ export default function Index() {
                 </a>
               </div>
               <a
-                id="nx-repo"
+                id="nx-historyRepo"
                 className="button-pill rounded shadow"
                 href="https://github.com/nrwl/nx?utm_source=nx-project"
                 target="_blank"

@@ -27,7 +27,7 @@ import { chain } from 'lodash';
 //
 // }
 
-const change = (model: WorldModel, draft: WorldModel) => {
+const editWorld = (model: WorldModel, draft: WorldModel) => {
   const changedEntities = model.entities !== draft.entities
   const changedFacets = model.entities !== draft.entities
   const hasChanged = changedEntities || changedFacets
@@ -38,3 +38,8 @@ const change = (model: WorldModel, draft: WorldModel) => {
   //
   // }
 }
+
+
+// ---
+
+export { editWorld }

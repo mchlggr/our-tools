@@ -1,10 +1,16 @@
 import { worldDoc } from './world-doc';
 import { createWorld } from './create';
+import "fake-indexeddb/auto";
+import { expect } from 'vitest';
+import { defaultVersion } from '@penumbra/world-shared';
 
 describe('createWorld', () => {
-  it('should create world', () => {
-    const world = createWorld()
-    debugger;
-    // expect(worldDoc()).toEqual('world-doc');
+  it('should create world', async () => {
+    // const world = await createWorld("test:123")
+    // expect(world.version).toEqual(defaultVersion)
   });
+
+  it("changes world", async () => {
+
+  })
 });

@@ -277,9 +277,19 @@ importers:
       '@penumbra/world-shared':
         specifier: workspace:^
         version: link:../shared
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
+    devDependencies:
+      fake-indexeddb:
+        specifier: ^5.0.2
+        version: 5.0.2
 
   libs/world/shared:
     dependencies:
+      '@automerge/automerge':
+        specifier: ^2.1.13
+        version: 2.1.13
       '@penumbra/extension':
         specifier: workspace:^
         version: link:../../extension
@@ -6796,6 +6806,11 @@ packages:
       vary: 1.1.2
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /fake-indexeddb@5.0.2:
+    resolution: {integrity: sha512-cB507r5T3D55DfclY01GLkninZLfU7HXV/mhVRTnTRm5k2u+fY7Fof2dBkr80p5t7G7dlA/G5dI87QiMdPpMCQ==}
+    engines: {node: '>=18'}
     dev: true
 
   /fast-deep-equal@3.1.3:

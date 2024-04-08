@@ -7,10 +7,14 @@
     "@automerge/automerge-repo-network-broadcastchannel": "^1.1.5",
     "@automerge/automerge-repo-network-websocket": "^1.1.5",
     "@automerge/automerge-repo-storage-indexeddb": "^1.1.5",
-    "@penumbra/world-shared": "workspace:^"
+    "@penumbra/world-shared": "workspace:^",
+    "lodash": "^4.17.21"
   },
   "main": "./index.js",
   "module": "./index.mjs",
   "typings": "./index.d.ts",
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "fake-indexeddb": "^5.0.2"
+  }
 }

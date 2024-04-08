@@ -1,5 +1,6 @@
 import { NonEmptyString } from '@penumbra/extension';
 import { TypeTagMapping, UnknownFacetTag } from './facet-types';
+import { EntityReference } from './world-types';
 
 type Uuid = string | ''
 
@@ -23,6 +24,9 @@ type Entity = {
   x2: number
   y2: number
   z2: number
+  //
+  parent: EntityReference
+  children: EntityReference[]
 }
 
 // ---

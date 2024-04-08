@@ -1,6 +1,8 @@
 import { Point2D, Uuid, AnyWorldUnit, worldUnitTag } from './types';
-import { WorldModel } from './model-types';
 import { UnknownToolTag } from './unknown-types';
+import { WorldModel } from './model-types';
+import { Patch } from 'immer';
+import { WorldChange, WorldHistory } from './history-types';
 
 // ---
 
@@ -31,22 +33,9 @@ type WorldDocUrl = string
 
 // ---
 
-type WorldTimeline = WorldModel[]
-
-type WorldHistory = {
-  at: number[] // branching address for present timeline location
-  timeline: WorldTimeline, // Cached spacial history of document
-}
-
-const timeline = (model: WorldModel): WorldTimeline => {
-  return [];
-};
-
-// ---
-
 const latestVersion = '0.0.1';
 const defaultVersion = latestVersion;
-const defaultUnit = worldUnitTag.pixel;
+const defaultUnit = worldUnitTag['pixel'];
 
 // ---
 
@@ -57,14 +46,12 @@ type WorldArchive = {
   doc: WorldModel,
   docUrl: WorldDocUrl
   // overlay: WorldOverlay,
-  history: WorldHistory
+  history: WorldHistory // TODO: consider moving to WorldModel
 }
 
 // ---
 
-export {
-  WorldModel,
-  WorldTimeline,
+  export {
   WorldArchive,
   EntityReference,
   latestVersion,

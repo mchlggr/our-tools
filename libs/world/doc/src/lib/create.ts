@@ -9,23 +9,22 @@ import {
   WorldModel
 } from '@penumbra/world-shared';
 import { isValidAutomergeUrl } from '@automerge/automerge-repo';
-import { worldRepo } from './repo';
+import { worldRepo } from './history-repo';
 import { next as A } from '@automerge/automerge';
 
 //TODO: move to another shared module
 const defaultTool = 'tool:select';
 
-const createWorld = async (): Promise<WorldArchive> => {
-  const docUrl = `${document.location.hash.substring(1)}`;
+const createWorld = async (docUrl: string): Promise<WorldArchive> => {
   if (isValidAutomergeUrl(docUrl)) {
     throw new Error(`WorldDoc already exists, docUrl=${docUrl}`);
   }
-  const handle = worldRepo.create<WorldModel>();
+  const handle =
   handle.change((doc: WorldModel) => {
     // doc = { ...doc }
     doc.modifiedBy = 'user:13221';
     doc.modifiedAt = new Date();
-    doc.modifiedCounter = A.Counter;
+    doc.modifiedCounter = new A.Counter();
     //
     doc.tool = defaultTool;
     doc.selectingIds = {};

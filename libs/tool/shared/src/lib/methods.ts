@@ -1,5 +1,5 @@
 import { method, multi } from '@penumbra/extension';
-import { defaultUnit, WorldModel } from '@penumbra/world-shared';
+import { WorldModel } from '@penumbra/world-shared';
 import { StageStore } from '@penumbra/edit-shared';
 import { AnyToolTag } from './types';
 
@@ -20,10 +20,7 @@ const fallback: ToolMethod = (_tool, model /* stage, evt */) => model;
 
 //---
 
-// const clickTool = multi(dispatch, method(fallback));
-const clickTool = () => {
-  return defaultUnit
-}
+const clickTool = multi(dispatch, method(fallback));
 const doubleClickTool = multi(dispatch, method(fallback));
 const tripleClickTool = multi(dispatch, method(fallback));
 const middleClickTool = multi(dispatch, method(fallback));
