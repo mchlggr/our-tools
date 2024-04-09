@@ -1,4 +1,4 @@
-import { NonEmptyString } from '@penumbra/extension';
+import { NonEmptyString } from '@our-tools/extension';
 import { TypeTagMapping, UnknownFacetTag } from './facet-types';
 import { EntityReference } from './world-types';
 

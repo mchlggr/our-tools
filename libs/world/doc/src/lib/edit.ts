@@ -1,4 +1,4 @@
-// import { WorldModel } from '@penumbra/world-shared';
+// import { WorldModel } from '@our-tools/world-shared';
 // import { chain } from 'lodash';
 //
 //

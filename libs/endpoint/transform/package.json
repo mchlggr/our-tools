@@ -1,11 +1,11 @@
 {
-    "name": "@penumbra/endpoint-transform",
+    "name": "@our-tools/endpoint-transform",
     "version": "0.0.1",
     "dependencies": {
-        "@penumbra/endpoint-jsonapi": "workspace:^",
-        "@penumbra/endpoint-resource": "workspace:^",
-        "@penumbra/endpoint-shared": "workspace:^",
-        "@penumbra/extension": "workspace:^",
+        "@our-tools/endpoint-jsonapi": "workspace:^",
+        "@our-tools/endpoint-resource": "workspace:^",
+        "@our-tools/endpoint-shared": "workspace:^",
+        "@our-tools/extension": "workspace:^",
         "jsonapi-serializer": "^3.6.9",
         "lodash": "^4.17.21"
     },

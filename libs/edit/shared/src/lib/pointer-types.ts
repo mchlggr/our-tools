@@ -1,4 +1,4 @@
-import { ModelTransaction, Point2D, Time1D, UnknownToolTag, WorldModel } from '@penumbra/world-shared';
+import { ModelTransaction, Point2D, Time1D, UnknownToolTag, WorldModel } from '@our-tools/world-shared';
 
 type PointerState = {
   // active: boolean,

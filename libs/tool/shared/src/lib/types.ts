@@ -1,7 +1,7 @@
 //---
 
 // Standard Tools
-import { NonEmptyString } from '@penumbra/extension';
+import { NonEmptyString } from '@our-tools/extension';
 import { Component, ComponentType } from 'react';
 
 const toolTag = {

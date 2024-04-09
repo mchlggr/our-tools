@@ -1,10 +1,10 @@
 {
-  "name": "@penumbra/crdt-history",
+  "name": "@our-tools/crdt-history",
   "version": "0.0.1",
   "dependencies": {
     "@automerge/automerge": "^2.1.13",
     "@automerge/automerge-repo": "^1.1.5",
-    "@penumbra/crdt-patch": "workspace:^"
+    "@our-tools/crdt-patch": "workspace:^"
   },
   "main": "./index.js",
   "module": "./index.mjs",

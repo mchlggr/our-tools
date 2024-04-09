@@ -1,7 +1,7 @@
 import { ReactNode, ComponentType } from 'react';
-import { NonEmptyString } from '@penumbra/extension';
-import { Uuid } from '@penumbra/world-shared';
-import { Tool } from '@penumbra/tool-shared';
+import { NonEmptyString } from '@our-tools/extension';
+import { Uuid } from '@our-tools/world-shared';
+import { Tool } from '@our-tools/tool-shared';
 
 type StageComponentType = ComponentType
 

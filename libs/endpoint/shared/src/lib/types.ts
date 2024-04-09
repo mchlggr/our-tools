@@ -1,4 +1,4 @@
-import { NonEmptyString } from '@penumbra/extension';
+import { NonEmptyString } from '@our-tools/extension';
 
 interface Client {
   fetch: (request: HttpRequest) => Promise<{ data: any }>;

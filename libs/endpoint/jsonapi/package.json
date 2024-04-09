@@ -1,8 +1,8 @@
 {
-  "name": "@penumbra/endpoint-jsonapi",
+  "name": "@our-tools/endpoint-jsonapi",
   "version": "0.0.1",
   "dependencies": {
-    "@penumbra/endpoint-shared": "workspace:^"
+    "@our-tools/endpoint-shared": "workspace:^"
   },
   "main": "./index.js",
   "module": "./index.mjs",

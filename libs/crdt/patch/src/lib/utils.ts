@@ -1,6 +1,6 @@
 import { cloneDeepWith } from 'lodash';
 import { Text } from '@automerge/automerge'
-import { typeOf } from '@penumbra/extension';
+import { typeOf } from '@our-tools/extension';
 
 // ---
 

@@ -1,9 +1,9 @@
 {
-  "name": "@penumbra/world-shared",
+  "name": "@our-tools/world-shared",
   "version": "0.0.1",
   "dependencies": {
     "@automerge/automerge": "^2.1.13",
-    "@penumbra/extension": "workspace:^",
+    "@our-tools/extension": "workspace:^",
     "lodash": "^4.17.21",
     "nanoid": "^5.0.6"
   },

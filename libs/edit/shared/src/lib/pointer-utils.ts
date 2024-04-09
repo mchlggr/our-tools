@@ -1,4 +1,4 @@
-import {  Point2D, Path2D } from '@penumbra/world-shared';
+import {  Point2D, Path2D } from '@our-tools/world-shared';
 import { PointerFunction, PointerStore } from './pointer-types'
 import { StageStore } from './stage-types';
 

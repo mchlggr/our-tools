@@ -1,5 +1,5 @@
-import { EndpointReference, EndpointTransform } from '@penumbra/endpoint-shared';
-import { NormalizedResponse } from '@penumbra/endpoint-shared';
+import { EndpointReference, EndpointTransform } from '@our-tools/endpoint-shared';
+import { NormalizedResponse } from '@our-tools/endpoint-shared';
 
 interface JsonApiDocument {
   id: string;

@@ -2,7 +2,7 @@ import {get} from "lodash";
 import {useMemo} from "react";
 import { ResourceListHook } from "./types";
 import {useResourceStore} from "./resource-store";
-import { emptyArray, emptyObject } from '@penumbra/extension';
+import { emptyArray, emptyObject } from '@our-tools/extension';
 
 //---
 

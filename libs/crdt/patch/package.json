@@ -1,5 +1,5 @@
 {
-  "name": "@penumbra/crdt-patch",
+  "name": "@our-tools/crdt-patch",
   "version": "0.0.1",
   "dependencies": {
     "@automerge/automerge": "^2.1.13",

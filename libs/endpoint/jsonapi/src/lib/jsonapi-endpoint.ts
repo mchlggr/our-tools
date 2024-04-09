@@ -8,10 +8,10 @@ import {
   EndpointTransform,
   NormalizedResponse,
   ResponseError
-} from '@penumbra/endpoint-shared';
+} from '@our-tools/endpoint-shared';
 
 // Helpers
-import { makeSuccess, makeFail, Result, EndpointError } from '@penumbra/endpoint-shared';
+import { makeSuccess, makeFail, Result, EndpointError } from '@our-tools/endpoint-shared';
 import { JsonApiResponse, JsonApiTransform } from './types';
 
 // ---

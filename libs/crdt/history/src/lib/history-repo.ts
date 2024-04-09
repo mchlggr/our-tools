@@ -9,11 +9,11 @@ import {
   // HistoryStacks,
   // UndoRedoOptions,
   // WorldChange
-} from '@penumbra/world-shared';
+} from '@our-tools/world-shared';
 import { Change, ChangeFn, ChangeOptions, Patch, PatchInfo } from '@automerge/automerge';
 import { next as A} from '@automerge/automerge';
-import { unpatchAll } from '@penumbra/crdt-patch';
-import { patch } from '@penumbra/crdt-patch';
+import { unpatchAll } from '@our-tools/crdt-patch';
+import { patch } from '@our-tools/crdt-patch';
 import * as path from 'path';
 import { head } from 'lodash';
 

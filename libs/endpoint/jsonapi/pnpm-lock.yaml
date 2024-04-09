@@ -5,10 +5,10 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@penumbra/endpoint-shared':
+  '@our-tools/endpoint-shared':
     specifier: workspace:^
     version: link:../shared
-  '@penumbra/endpoint-transform':
+  '@our-tools/endpoint-transform':
     specifier: workspace:^
     version: link:../transform
   lodash:

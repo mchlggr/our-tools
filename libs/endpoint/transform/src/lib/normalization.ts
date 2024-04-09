@@ -1,9 +1,9 @@
 import { chain, keys, values, zipObject } from 'lodash';
 import { anyDeserializer } from './deserialization';
-import {JsonApiResponse, JsonApiDocument} from "@penumbra/endpoint-jsonapi";
-import {typeOf} from "@penumbra/extension";
-// import {ResourceRecord} from "@penumbra/endpoint-resource";
-import { Normalization, NormalizedRecords, NormalizedResponse } from '@penumbra/endpoint-shared';
+import {JsonApiResponse, JsonApiDocument} from "@our-tools/endpoint-jsonapi";
+import {typeOf} from "@our-tools/extension";
+// import {ResourceRecord} from "@our-tools/endpoint-resource";
+import { Normalization, NormalizedRecords, NormalizedResponse } from '@our-tools/endpoint-shared';
 
 export const normalizeItem: Normalization = (recordType : string, data : object) => {
   return anyDeserializer.deserialize(data);

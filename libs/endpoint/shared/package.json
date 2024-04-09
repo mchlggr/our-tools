@@ -1,5 +1,5 @@
 {
-    "name": "@penumbra/endpoint-shared",
+    "name": "@our-tools/endpoint-shared",
     "version": "0.0.1",
     "dependencies": {
         "axios": "^1.6.8",

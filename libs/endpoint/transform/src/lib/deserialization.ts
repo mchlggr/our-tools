@@ -1,5 +1,5 @@
 import { Deserializer } from 'jsonapi-serializer';
-import { EndpointReference } from '@penumbra/endpoint-shared';
+import { EndpointReference } from '@our-tools/endpoint-shared';
 
 
 // ---

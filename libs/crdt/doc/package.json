@@ -1,5 +1,5 @@
 {
-  "name": "@penumbra/crdt-doc",
+  "name": "@our-tools/crdt-doc",
   "version": "0.0.1",
   "dependencies": {},
   "main": "./index.js",

@@ -1,6 +1,6 @@
-import { method, multi } from '@penumbra/extension';
-import { WorldModel } from '@penumbra/world-shared';
-import { StageStore } from '@penumbra/edit-shared';
+import { method, multi } from '@our-tools/extension';
+import { WorldModel } from '@our-tools/world-shared';
+import { StageStore } from '@our-tools/edit-shared';
 import { AnyToolTag } from './types';
 
 //---

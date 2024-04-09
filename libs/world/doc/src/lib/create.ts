@@ -7,7 +7,7 @@ import {
   uuid,
   WorldArchive,
   WorldModel
-} from '@penumbra/world-shared';
+} from '@our-tools/world-shared';
 import { isValidAutomergeUrl } from '@automerge/automerge-repo';
 import { worldRepo } from './history-repo';
 import { next as A } from '@automerge/automerge';

@@ -12,9 +12,9 @@ import {ResourceStoreMethod, ResourceStoreState, ResourceAction, RecordPayload} 
 
 import {flow, omit, pick} from 'lodash';
 import * as _ from 'lodash'
-import {JsonApiQuery} from "@penumbra/endpoint-jsonapi";
+import {JsonApiQuery} from "@our-tools/endpoint-jsonapi";
 import {addLinks, addNormalized, makeAlias, makeAliasList} from "./utils";
-import {mergeParams} from "@penumbra/endpoint-jsonapi";
+import {mergeParams} from "@our-tools/endpoint-jsonapi";
 
 //---
 

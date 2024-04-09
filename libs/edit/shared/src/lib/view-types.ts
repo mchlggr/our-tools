@@ -1,4 +1,4 @@
-import { Boundary, EntityReference, Point2D } from '@penumbra/world-shared';
+import { Boundary, EntityReference, Point2D } from '@our-tools/world-shared';
 
 // ---
 

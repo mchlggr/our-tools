@@ -1,9 +1,9 @@
 {
-  "name": "@penumbra/tool-shared",
+  "name": "@our-tools/tool-shared",
   "version": "0.0.1",
   "dependencies": {
-    "@penumbra/edit-shared": "workspace:^",
-    "@penumbra/world-shared": "workspace:^"
+    "@our-tools/edit-shared": "workspace:^",
+    "@our-tools/world-shared": "workspace:^"
   },
   "main": "./index.js",
   "module": "./index.mjs",

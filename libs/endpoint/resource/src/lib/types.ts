@@ -1,5 +1,5 @@
-import { Token } from '@penumbra/endpoint-shared';
-import { JsonApiQuery } from '@penumbra/endpoint-jsonapi';
+import { Token } from '@our-tools/endpoint-shared';
+import { JsonApiQuery } from '@our-tools/endpoint-jsonapi';
 import { ResourceEndpoint } from './resource-endpoint';
 import { extend } from 'lodash';
 

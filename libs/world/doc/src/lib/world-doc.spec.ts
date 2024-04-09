@@ -2,7 +2,7 @@ import { worldDoc } from './world-doc';
 import { createWorld } from './create';
 import "fake-indexeddb/auto";
 import { expect } from 'vitest';
-import { defaultVersion } from '@penumbra/world-shared';
+import { defaultVersion } from '@our-tools/world-shared';
 
 describe('createWorld', () => {
   it('should create world', async () => {

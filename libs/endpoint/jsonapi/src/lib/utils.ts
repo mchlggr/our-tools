@@ -4,7 +4,7 @@ This file is selector and transformations of JsonApi Request (Query, Params, Etc
 
 import { chain, isArray, isString, merge, mergeWith } from 'lodash';
 import { JsonApiInclude, JsonApiQuery, JsonApiSort } from './types';
-// import { typeOf } from '@penumbra/extensions';
+// import { typeOf } from '@our-tools/extensions';
 
 // ---
 

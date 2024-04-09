@@ -3,7 +3,7 @@ import { filter, groupBy, isEmpty, keyBy, keys } from 'lodash';
 import { Entity, EntitySelection, Uuid } from './types';
 import { AnyLayer, LayerEntity, RectangleLayer } from './layer-types';
 import { WorldModel, IdRegistryKeys, EntityRegistryKeys, ModelEntities } from './model-types';
-import { isPresent } from '@penumbra/extension'
+import { isPresent } from '@our-tools/extension'
 
 // ---
 
