@@ -292,7 +292,7 @@ importers:
     dependencies:
       '@our-tools/edit-shared':
         specifier: workspace:^
-        version: link:../../edit/shared
+        version: link:../../editor/shared
       '@our-tools/world-shared':
         specifier: workspace:^
         version: link:../../world/shared

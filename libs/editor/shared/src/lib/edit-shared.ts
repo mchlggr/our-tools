@@ -1,3 +1,3 @@
 export function editShared(): string {
-  return 'edit-shared';
+  return 'editor-shared';
 }
