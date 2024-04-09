@@ -6,25 +6,20 @@ import {
   type Patch,
   isAutomerge,
 } from "@automerge/automerge";
+import {  get, isPlainObject, set } from "lodash";
+import { isText } from './utils';
 
-import {
-  getProperty,
-  isPlainObject,
-  isTextObject,
-  setProperty,
-} from "./helpers";
-
-export function patch<T>(doc: Doc<T>, patch: Patch) {
+const patch = <T>(doc: Doc<T>, patch: Patch) => {
   const automerge = isAutomerge(doc);
 
   if (patch.action === "insert") {
     const [index, ...path] = [...patch.path].reverse();
 
-    const value = getProperty(doc, path.reverse()) as string | Text | any[];
+    const value = get(doc, path.reverse()) as string | Text | any[];
 
     if (typeof value === "string") {
       if (automerge) {
-        setProperty(
+        set(
           doc,
           path.reverse(),
           new Text(
@@ -34,7 +29,7 @@ export function patch<T>(doc: Doc<T>, patch: Patch) {
           ),
         );
       } else {
-        setProperty(
+        set(
           doc,
           path.reverse(),
           value.slice(0, Number(index)) +
@@ -45,7 +40,7 @@ export function patch<T>(doc: Doc<T>, patch: Patch) {
       return;
     }
 
-    if (isTextObject(value)) {
+    if (isText(value)) {
       value.insertAt(Number(index), ...patch.values);
       return;
     }
@@ -61,13 +56,13 @@ export function patch<T>(doc: Doc<T>, patch: Patch) {
   if (patch.action === "del") {
     const [index, ...path] = [...patch.path].reverse();
 
-    const value: any = path.length ? getProperty(doc, path.reverse()) : doc;
+    const value: any = path.length ? get(doc, path.reverse()) : doc;
 
     if (typeof value === "string") {
       if (automerge) {
         next.splice(doc, path, index as number, patch.length || 1);
       } else {
-        setProperty(
+        set(
           doc,
           path,
           value.substring(0, Number(index)) +
@@ -93,17 +88,17 @@ export function patch<T>(doc: Doc<T>, patch: Patch) {
   }
 
   if (patch.action === "put") {
-    setProperty(doc, patch.path, patch.value);
+    set(doc, patch.path, patch.value);
     return;
   }
 
   if (patch.action === "inc") {
-    let value: any = getProperty(doc, patch.path);
+    let value: any = get(doc, patch.path);
     if (automerge) {
       value.increment(patch.value);
     } else {
       value = Number(value);
-      setProperty(doc, patch.path, value + patch.value);
+      set(doc, patch.path, value + patch.value);
     }
     return;
   }
@@ -113,9 +108,9 @@ export function patch<T>(doc: Doc<T>, patch: Patch) {
     if (automerge) {
       next.splice(doc, path.reverse(), index as number, 0, patch.value);
     } else {
-      const value: any = getProperty(doc, path.reverse());
+      const value: any = get(doc, path.reverse());
 
-      setProperty(
+      set(
         doc,
         path,
         value.substring(0, Number(index)) +
@@ -129,3 +124,7 @@ export function patch<T>(doc: Doc<T>, patch: Patch) {
 
   throw new Error(`Unknown patch action: ${(patch as any).action}`);
 }
+
+// ---
+
+export { patch }

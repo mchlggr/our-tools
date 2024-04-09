@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, test } from "vitest";
 import { HistoryRepo as AutomergeRepoUndoRedo } from "./history-repo";
 import { Data, getHandle } from "./data";
 
+
 describe("basic tests", () => {
   let handle: DocHandle<Data>;
   let repo: Repo;

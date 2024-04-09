@@ -1,5 +1,5 @@
 // Deps
-import { isArray, isNull } from 'lodash';
+import { isArray, isDate, isNull } from 'lodash';
 
 // ---
 
@@ -7,6 +7,10 @@ const typeOf = (value: unknown) : string => {
   switch (typeof value) {
     case 'object':
       switch (true) {
+        case value instanceof Uint8Array:
+          return 'bytes';
+        case isDate(value):
+          return 'date';
         case isNull(value):
           return 'null';
         case isArray(value):

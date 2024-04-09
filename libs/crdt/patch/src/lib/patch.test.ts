@@ -2,7 +2,9 @@ import { change, type Doc, from, Patch, next } from "@automerge/automerge";
 import { patch as applyPatch } from "./patch";
 import { beforeEach, describe, expect, test } from "vitest";
 import { documentData } from "./data";
-import { clone, getProperty } from "./helpers";
+// import { clone as cloneDeep } from "./helpers";
+import { get, cloneDeep, clone } from 'lodash';
+import { cloneDeepCrdt } from './utils';
 
 describe("Applying Patches", () => {
   let doc: Doc<typeof documentData>;
@@ -10,7 +12,7 @@ describe("Applying Patches", () => {
   let plainDoc: Doc<typeof documentData>;
 
   beforeEach(() => {
-    plainDoc = clone(documentData);
+    plainDoc = cloneDeepCrdt(documentData)
     doc = from(documentData);
     const { text, ...withoutText } = documentData;
     nextDoc = next.from({ ...withoutText });
@@ -163,7 +165,7 @@ describe("Applying Patches", () => {
 
       expect(
         JSON.parse(
-          JSON.stringify(getProperty(newDoc, path.split(".")) || null),
+          JSON.stringify(get(newDoc, path.split(".")) || null),
         ),
       ).toEqual(expected);
     });
@@ -174,7 +176,7 @@ describe("Applying Patches", () => {
       test("JS: " + name, () => {
         applyPatch(plainDoc, patch);
 
-        expect(getProperty(plainDoc, path.split(".")) || null).toEqual(
+        expect(get(plainDoc, path.split(".")) || null).toEqual(
           expected,
         );
       });
@@ -189,7 +191,7 @@ describe("Applying Patches", () => {
 
       expect(
         JSON.parse(
-          JSON.stringify(getProperty(newDoc, path.split(".")) || null),
+          JSON.stringify(get(newDoc, path.split(".")) || null),
         ),
       ).toEqual(expected);
     });

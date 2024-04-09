@@ -4,7 +4,7 @@ import { unpatch } from "./unpatch";
 import { documentData } from "./data";
 
 describe("Un-patching patches", () => {
-  beforeEach(() => {});
+  // beforeEach(() => {});
 
   const tests: { name: string; patch: Patch; expected: Patch }[] = [
     {

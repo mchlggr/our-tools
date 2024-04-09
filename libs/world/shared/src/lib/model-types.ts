@@ -54,6 +54,10 @@ const emptyFacets: ModelFacets<AnyFacet> = Object.freeze({
   'stroke': {}
 });
 
+
+type IdRegistryKeys = 'selectingIds' | 'lockingIds'| 'parkingIds' | 'erasingIds' | 'hintingIds'
+type EntityRegistryKeys = 'layers' | 'surfaces' | 'scenes' | 'spaces'
+
 type WorldModel = {
   // id: Uuid
   modifiedBy: Uuid,
@@ -97,9 +101,12 @@ type ModelTransform = (model: WorldModel) => WorldModel
 type ModelTransaction = (model: WorldModel) => void
 
 export {
+  IdRegistryKeys,
+  EntityRegistryKeys,
   WorldModel,
   ModelTransform,
   ModelTransaction,
+  ModelEntities,
   emptyEntities,
   emptyFacets
 };

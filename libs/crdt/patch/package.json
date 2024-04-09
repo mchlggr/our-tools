@@ -1,0 +1,12 @@
+{
+  "name": "@penumbra/crdt-patch",
+  "version": "0.0.1",
+  "dependencies": {
+    "@automerge/automerge": "^2.1.13",
+    "lodash": "^4.17.21"
+  },
+  "main": "./src/index.ts",
+  "module": "./index.mjs",
+  "typings": "./index.d.ts",
+  "private": true
+}

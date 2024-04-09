@@ -2,12 +2,13 @@ import {
   type Doc,
   type Patch,
   type Prop,
-  type Text,
 } from "@automerge/automerge";
-import { clone, getProperty, isTextObject } from "./helpers";
 import { patch } from "./patch";
+import { cloneDeep, get } from 'lodash';
+import { isText } from './utils';
 
-export const unpatch = <T>(doc: Doc<T>, patch: Patch): Patch => {
+
+const unpatch = <T>(doc: Doc<T>, patch: Patch): Patch => {
   if (patch.action === "insert") {
     return {
       action: "del",
@@ -19,7 +20,7 @@ export const unpatch = <T>(doc: Doc<T>, patch: Patch): Patch => {
   if (patch.action === "del") {
     const [index, ...path] = [...patch.path].reverse();
 
-    const value = getProperty(doc, path.reverse(), doc) as
+    const value = get(doc, path.reverse(), doc) as
       | Record<Prop, any>
       | Text
       | Array<any>
@@ -35,12 +36,12 @@ export const unpatch = <T>(doc: Doc<T>, patch: Patch): Patch => {
       };
     }
 
-    if (!Array.isArray(value) && !isTextObject(value)) {
+    if (!Array.isArray(value) && !isText(value)) {
       return {
         action: "put",
         path: patch.path,
         conflict: false,
-        value: clone(value[index]),
+        value: cloneDeep(value[index]),
       };
     }
 
@@ -49,28 +50,28 @@ export const unpatch = <T>(doc: Doc<T>, patch: Patch): Patch => {
     return {
       action: "insert",
       path: patch.path,
-      values: isTextObject(value)
+      values: isText(value)
         ? [...Array(length)].map((_, i) => value.get(Number(index) + i))
-        : [...Array(length)].map((_, i) => clone(value[Number(index) + i])),
+        : [...Array(length)].map((_, i) => cloneDeep(value[Number(index) + i])),
     };
   }
 
   if (patch.action === "put") {
-    const value = getProperty(doc, patch.path);
+    const value = get(doc, patch.path);
 
     if (value !== undefined) {
       return {
         action: "put",
         path: patch.path,
         conflict: false,
-        value: clone(value),
+        value: cloneDeep(value),
       };
     } else {
-      // getProperty cannot look up the value of text on put actions,
+      // get cannot look up the value of text on put actions,
       // so handle that case separately here.
-      const parent = getProperty(doc, patch.path.slice(0, -1));
+      const parent = get(doc, patch.path.slice(0, -1));
       const lastPart = patch.path[patch.path.length - 1];
-      if (isTextObject(parent) && typeof lastPart === "number") {
+      if (isText(parent) && typeof lastPart === "number") {
         return {
           action: "put",
           path: patch.path,
@@ -105,15 +106,19 @@ export const unpatch = <T>(doc: Doc<T>, patch: Patch): Patch => {
   throw new Error(`Unknown patch action: ${patch.action}`);
 };
 
-export const unpatchAll = <T>(beforeDoc: Doc<T>, patches: Patch[]): Patch[] => {
-  const copy = clone(beforeDoc);
+const unpatchAll = <T>(beforeDoc: Doc<T>, patches: Patch[]): Patch[] => {
+  const copy = cloneDeep(beforeDoc);
 
   const inverse: Patch[] = [];
 
-  clone(patches).forEach((p) => {
+  cloneDeep(patches).forEach((p) => {
     inverse.push(unpatch(copy, p));
     patch(copy, p);
   });
 
   return inverse.reverse();
 };
+
+// ---
+
+export { unpatch, unpatchAll }

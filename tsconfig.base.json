@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@penumbra/crdt-doc": ["libs/crdt/doc/src/index.ts"],
+      "@penumbra/crdt-history": ["libs/crdt/history/src/index.ts"],
+      "@penumbra/crdt-patch": ["libs/crdt/patch/src/index.ts"],
       "@penumbra/edit-pointer-ui": ["libs/edit/pointer-ui/src/index.ts"],
       "@penumbra/edit-shared": ["libs/edit/shared/src/index.ts"],
       "@penumbra/edit-stage": ["libs/edit/stage/src/index.ts"],

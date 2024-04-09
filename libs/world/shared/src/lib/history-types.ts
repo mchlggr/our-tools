@@ -1,5 +1,5 @@
 import { ChangeOptions, Patch } from '@automerge/automerge';
-import { WorldModel } from '@penumbra/world-shared';
+import { WorldModel } from './model-types';
 
 // ---
 // type WorldTimeline = WorldEvent[]
@@ -14,37 +14,19 @@ type WorldHistory = {
 
 // ---
 
-type WorldChange = {
-  undo: { heads: string[]; patches: Patch[] }
-  redo: { heads: string[]; patches: Patch[] }
-  description?: string
-}
-
-type HistoryItem = { undos: WorldChange[], redos: WorldChange[] }
-type HistoryStacks = Record<string, HistoryItem >
-
-type UndoRedoOptions<T> = ChangeOptions<T> & {
-  description?: string,
-  scope?: string,
-}
-
-// TODO: move to extensions
-const equalArrays = (a: any[], b: any[]) => a.length === b.length && a.every((v, i) => v === b[i]);
-const defaultScope = 'scope:root'
-
 // ---
 
 
 // ---
 
 export {
-  WorldChange,
+  // WorldChange,
   // WorldTimeline,
-  HistoryStacks,
+  // HistoryStacks,
   WorldHistory,
-  equalArrays,
-  defaultScope,
+  // equalArrays,
+  // defaultScope,
   // WorldRepo,
-  UndoRedoOptions,
-  HistoryItem
+  // UndoRedoOptions,
+  // HistoryItem
 };
