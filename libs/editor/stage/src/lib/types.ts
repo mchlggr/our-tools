@@ -34,7 +34,7 @@ type User = {
 
 
 type StageTools = {
-[tool: NonEmptyString]:  Tool
+  [tool: NonEmptyString]:  Tool
 }
 
 type StageOptions = {
