@@ -1,0 +1,8 @@
+{
+  "name": "remote-app-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/remote-app-e2e/src",
+  "implicitDependencies": ["remote-app"],
+  "// targets": "to see all targets run: nx show project remote-app-e2e --web",
+  "targets": {}
+}

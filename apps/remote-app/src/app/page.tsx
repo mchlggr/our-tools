@@ -17,7 +17,7 @@ export default function Index() {
    */
   return (
     <>
-      <div className={'w-full h-full'}>
+      <div className={'w-full h-full bg-blue-500'}>
         <EditStage></EditStage>
       </div>
     </>

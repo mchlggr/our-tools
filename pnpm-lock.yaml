@@ -193,6 +193,15 @@ importers:
         specifier: ^1.3.1
         version: 1.4.0(@types/node@18.16.9)(@vitest/ui@1.4.0)(jsdom@22.1.0)(less@4.1.3)(stylus@0.59.0)
 
+  apps/remote-app:
+    dependencies:
+      '@our-tools/crdt-track':
+        specifier: workspace:^
+        version: link:../../libs/crdt/track
+      '@our-tools/editor-stage':
+        specifier: workspace:^
+        version: link:../../libs/editor/stage
+
   apps/webapp:
     dependencies:
       '@our-tools/crdt-track':
