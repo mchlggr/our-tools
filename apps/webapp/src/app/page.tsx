@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { EditStage } from '@our-tools/editor-stage';
 // import { History } from '@our-tools/crdt-track';
 // window.__history__ = new History()
@@ -17,10 +17,9 @@ export default function Index() {
    */
   return (
     <>
-     <div className={"w-full h-full"}>
-       <EditStage>
-       </EditStage>
-     </div>
+      <div className={'w-full h-full'}>
+        <EditStage></EditStage>
+      </div>
     </>
   );
 }
