@@ -1,0 +1,16 @@
+{
+  "name": "@our-tools/crdt-repo",
+  "version": "0.0.1",
+  "dependencies": {
+    "@automerge/automerge": "^2.1.13",
+    "@automerge/automerge-repo": "^1.1.5",
+    "@automerge/automerge-repo-network-broadcastchannel": "^1.1.5",
+    "@automerge/automerge-repo-network-websocket": "^1.1.5",
+    "@automerge/automerge-repo-storage-indexeddb": "^1.1.5",
+    "@our-tools/crdt-track": "workspace:^"
+  },
+  "main": "./index.js",
+  "module": "./index.mjs",
+  "typings": "./index.d.ts",
+  "private": true
+}

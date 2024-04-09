@@ -6,7 +6,7 @@ import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 
 export default defineConfig({
   root: __dirname,
-  cacheDir: '../../../node_modules/.vite/libs/crdt/doc',
+  cacheDir: '../../../node_modules/.vite/libs/crdt/repo',
 
   plugins: [
     nxViteTsPaths(),
@@ -25,7 +25,7 @@ export default defineConfig({
   // Configuration for building your library.
   // See: https://vitejs.dev/guide/build.html#library-mode
   build: {
-    outDir: '../../../dist/libs/crdt/doc',
+    outDir: '../../../dist/libs/crdt/repo',
     reportCompressedSize: true,
     commonjsOptions: {
       transformMixedEsModules: true,
@@ -33,7 +33,7 @@ export default defineConfig({
     lib: {
       // Could also be a dictionary or array of multiple entry points.
       entry: 'src/index.ts',
-      name: 'crdt-doc',
+      name: 'crdt-repo',
       fileName: 'index',
       // Change this to the formats you want to support.
       // Don't forget to update your package.json as well.
@@ -55,7 +55,7 @@ export default defineConfig({
 
     reporters: ['default'],
     coverage: {
-      reportsDirectory: '../../../coverage/libs/crdt/doc',
+      reportsDirectory: '../../../coverage/libs/crdt/repo',
       provider: 'v8',
     },
   },

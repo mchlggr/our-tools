@@ -1,25 +1,25 @@
 import type { DocHandle, DocumentId } from "@automerge/automerge-repo";
-import { HistoryRepo, defaultScope, UndoRedoOptions } from './history-repo';
+import { History, defaultScope, UndoRedoOptions } from './history';
 // import {
-//    HistoryRepo,
+//    History,
 //   UndoRedoOptions,
 //   defaultScope,
 // } from "./automerge-repo-undo-redo";
 
 type Change = { description: string | undefined; ids: DocumentId[] };
 
-class UndoRedoManager {
-  #handles: Map<DocumentId,  HistoryRepo<any>> = new Map();
+class HistoryManager {
+  #handles: Map<DocumentId,  History<any>> = new Map();
 
   #undoStack: Record<string | symbol, Change[]> = { [defaultScope]: [] };
 
   #redoStack: Record<string | symbol, Change[]> = { [defaultScope]: [] };
 
-  addHandle<T>(handle: DocHandle<T> |  HistoryRepo<T>) {
+  addHandle<T>(handle: DocHandle<T> |  History<T>) {
     const undoableHandle =
-      handle instanceof HistoryRepo
+      handle instanceof History
         ? handle
-        : new  HistoryRepo(handle);
+        : new  History(handle);
     this.#handles.set(undoableHandle.handle.documentId, undoableHandle);
 
     return undoableHandle;
@@ -27,7 +27,7 @@ class UndoRedoManager {
 
   getUndoRedoHandle<T>(
     documentId: DocumentId,
-  ):  HistoryRepo<T> | undefined {
+  ):  History<T> | undefined {
     return this.#handles.get(documentId);
   }
 
@@ -79,7 +79,7 @@ class UndoRedoManager {
     };
   }
 
-  #undo(scope: string | symbol = defaultScope) {
+  #undo(scope: string = defaultScope) {
     const change = this.#undoStack[scope].pop();
 
     if (!change) {
@@ -106,7 +106,7 @@ class UndoRedoManager {
     return this.#undoStack[scope].map((change) => change.description);
   }
 
-  #redo(scope: string | symbol = defaultScope) {
+  #redo(scope: string = defaultScope) {
     scope = scope ?? defaultScope;
 
     const change = this.#redoStack[scope].pop();
@@ -148,4 +148,4 @@ class UndoRedoManager {
 
 // ---
 
-export { UndoRedoManager }
+export { HistoryManager }

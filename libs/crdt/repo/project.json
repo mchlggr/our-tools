@@ -1,0 +1,19 @@
+{
+  "name": "crdt-repo",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/crdt/repo/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/crdt/repo",
+        "main": "libs/crdt/repo/src/index.ts",
+        "tsConfig": "libs/crdt/repo/tsconfig.lib.json",
+        "assets": ["libs/crdt/repo/*.md"]
+      }
+    }
+  },
+  "tags": []
+}

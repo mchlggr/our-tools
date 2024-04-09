@@ -59,6 +59,7 @@ type IdRegistryKeys = 'selectingIds' | 'lockingIds'| 'parkingIds' | 'erasingIds'
 type EntityRegistryKeys = 'layers' | 'surfaces' | 'scenes' | 'spaces'
 
 type WorldModel = {
+  version: string
   // id: Uuid
   modifiedBy: Uuid,
   modifiedAt: Date,

@@ -1,8 +1,10 @@
 import { Boundary, EntityUuid, Entity } from './types';
-import { FontSizeFacet, PathFacet } from './facet-types';
+import { FontSizeFacet, LayerFacetSegment, PathFacet } from './facet-types';
 
 type LayerBoundary = Boundary
-type LayerEntity = Entity
+type LayerEntity = Entity & {
+ facets: LayerFacetSegment[]
+}
 
 const layerTag = {
  rectangle: "layer:rectangle",
@@ -20,6 +22,7 @@ type PencilLayerTypeTag = 'layer:pencil'
 type RectangleLayer =  LayerEntity & {
   type: RectangleLayerTypeTag,
   id: EntityUuid,
+  facets: ['fill', 'stroke']
   // x: number,
   // y: number,
   // width: number,
@@ -29,6 +32,7 @@ type RectangleLayer =  LayerEntity & {
 type EllipseLayer =  LayerEntity &  {
   type: EllipseLayerTypeTag,
   id: EntityUuid,
+  facets: ['fill', 'stroke']
   // cx: number,
   // cy: number,
   // rx: number,
@@ -38,6 +42,7 @@ type EllipseLayer =  LayerEntity &  {
 type LineLayer =  LayerEntity & {
   type: LineLayerTypeTag,
   id: EntityUuid,
+  facets: ['stroke']
   // x1: number,
   // y1: number,
   // x2: number,
@@ -47,7 +52,7 @@ type LineLayer =  LayerEntity & {
 type TextLayer =  LayerEntity &  {
   type: TextLayerTypeTag,
   id: EntityUuid,
-  facets: [],
+  facets: ['font-style', 'font-unit', 'font-size'],
   // x: number,
   // y: number,
   // fontSize: FontSizeFacet,
@@ -59,6 +64,7 @@ type TextLayer =  LayerEntity &  {
 type PencilLayer = LayerEntity & {
   type: PencilLayerTypeTag,
   id: EntityUuid,
+  facets: ['stroke', 'path']
   // path: PathFacet,
   // d: string,
   // fill: 'none',

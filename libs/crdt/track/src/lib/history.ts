@@ -1,7 +1,4 @@
 import { DocHandle, Repo } from '@automerge/automerge-repo';
-// import { BroadcastChannelNetworkAdapter } from '@automerge/automerge-repo-network-broadcastchannel';
-// import { BrowserWebSocketClientAdapter } from '@automerge/automerge-repo-network-websocket';
-// import { IndexedDBStorageAdapter } from '@automerge/automerge-repo-storage-indexeddb';
 import {
   // defaultScope,
   // equalArrays,
@@ -93,7 +90,7 @@ interface PatchCallbackFn<T> {
 }
 
 
-class HistoryRepo<T> {
+class History<T> {
   #docHandle: DocHandle<T>;
 
   get handle() {
@@ -132,14 +129,14 @@ class HistoryRepo<T> {
   endTransaction(options: UndoRedoOptions<T>) {
     this.#isTransaction = false;
 
-    return this.change((doc) => {
+    return this.trackChange((doc) => {
       this.#changeStack.forEach((change) => {
         change(doc);
       });
     }, options);
   }
 
-  change(changeFn: ChangeFn<T>, options: UndoRedoOptions<T> = {}) {
+  trackChange(changeFn: ChangeFn<T>, options: UndoRedoOptions<T> = {}) {
     if (this.#isTransaction) {
       this.#changeStack.push(changeFn);
       return;
@@ -301,4 +298,4 @@ class HistoryRepo<T> {
 }
 // ---
 
-export { HistoryRepo, defaultScope, UndoRedoOptions };
+export { History, defaultScope, UndoRedoOptions };

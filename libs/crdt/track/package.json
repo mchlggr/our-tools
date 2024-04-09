@@ -1,5 +1,5 @@
 {
-  "name": "@our-tools/crdt-history",
+  "name": "@our-tools/crdt-track",
   "version": "0.0.1",
   "dependencies": {
     "@automerge/automerge": "^2.1.13",

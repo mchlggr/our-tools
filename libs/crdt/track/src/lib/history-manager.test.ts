@@ -1,9 +1,9 @@
 import { insertAt, next } from "@automerge/automerge";
 import { DocHandle, Repo } from "@automerge/automerge-repo";
 import { beforeEach, describe, expect, test } from "vitest";
-import { HistoryRepo, defaultScope } from "./history-repo";
+import { History, defaultScope } from "./history";
 import { Data, State, getHandle, getStateHandle } from "./data";
-import { UndoRedoManager } from './history-manager';
+import { HistoryManager } from './history-manager';
 
 
 describe("Manager Tests", () => {
@@ -11,10 +11,10 @@ describe("Manager Tests", () => {
   let stateHandle: DocHandle<State>;
   let repo: Repo;
 
-  let undoableHandle: HistoryRepo<Data>;
-  let undoableStateHandle: HistoryRepo<State>;
+  let undoableHandle: History<Data>;
+  let undoableStateHandle: History<State>;
 
-  let manager: UndoRedoManager;
+  let manager: HistoryManager;
 
   beforeEach(() => {
     repo = new Repo({
@@ -25,20 +25,20 @@ describe("Manager Tests", () => {
 
     stateHandle = getStateHandle(repo);
 
-    manager = new UndoRedoManager();
+    manager = new HistoryManager();
     undoableHandle = manager.addHandle(handle);
     undoableStateHandle = manager.addHandle(stateHandle);
   });
 
   test("A manager can take a plain DocHandle and return an undoable handle", () => {
     expect(undoableHandle).toBeDefined();
-    expect(undoableHandle).toBeInstanceOf(HistoryRepo);
+    expect(undoableHandle).toBeInstanceOf(History);
     expect(undoableStateHandle).toBeDefined();
   });
 
-  test("A manager can take an instance of HistoryRepo and return the same instance", () => {
+  test("A manager can take an instance of History and return the same instance", () => {
     const anotherHandle = repo.create();
-    const undoableAnotherHandle = new HistoryRepo(anotherHandle);
+    const undoableAnotherHandle = new History(anotherHandle);
     const newHandle = manager.addHandle(undoableAnotherHandle);
     expect(newHandle).toBe(undoableAnotherHandle);
   });
@@ -48,7 +48,7 @@ describe("Manager Tests", () => {
 
     transaction(
       () => {
-        undoableHandle.change((doc) => {
+        undoableHandle.trackChange((doc) => {
           next.updateText(
             doc,
             ["text"],
@@ -56,7 +56,7 @@ describe("Manager Tests", () => {
           );
         });
 
-        undoableStateHandle.change((doc) => {
+        undoableStateHandle.trackChange((doc) => {
           insertAt(doc.selected, 1, 1);
         });
       },
@@ -91,7 +91,7 @@ describe("Manager Tests", () => {
   test("a transaction doesn't have to involve all handles", () => {
     manager.transaction(
       () => {
-        undoableHandle.change((doc) => {
+        undoableHandle.trackChange((doc) => {
           next.updateText(
             doc,
             ["text"],
@@ -109,7 +109,7 @@ describe("Manager Tests", () => {
 
     manager.transaction(
       () => {
-        undoableStateHandle.change((doc) => {
+        undoableStateHandle.trackChange((doc) => {
           insertAt(doc.selected, 1, 1);
         });
       },
@@ -149,7 +149,7 @@ describe("Manager Tests", () => {
   test("A transaction returns the list of changes handles and the scope", () => {
     const changes = manager.transaction(
       () => {
-        undoableHandle.change((doc) => {
+        undoableHandle.trackChange((doc) => {
           next.updateText(
             doc,
             ["text"],
@@ -157,7 +157,7 @@ describe("Manager Tests", () => {
           );
         });
 
-        undoableStateHandle.change((doc) => {
+        undoableStateHandle.trackChange((doc) => {
           insertAt(doc.selected, 1, 1);
         });
       },
@@ -174,7 +174,7 @@ describe("Manager Tests", () => {
   test("A transaction which is undone, sets the redo stack. A followind change clears the redo stack", () => {
     manager.transaction(
       () => {
-        undoableHandle.change((doc) => {
+        undoableHandle.trackChange((doc) => {
           next.updateText(
             doc,
             ["text"],
@@ -182,7 +182,7 @@ describe("Manager Tests", () => {
           );
         });
 
-        undoableStateHandle.change((doc) => {
+        undoableStateHandle.trackChange((doc) => {
           insertAt(doc.selected, 1, 1);
         });
       },
@@ -195,7 +195,7 @@ describe("Manager Tests", () => {
 
     manager.transaction(
       () => {
-        undoableHandle.change((doc) => {
+        undoableHandle.trackChange((doc) => {
           next.updateText(
             doc,
             ["text"],
@@ -203,7 +203,7 @@ describe("Manager Tests", () => {
           );
         });
 
-        undoableStateHandle.change((doc) => {
+        undoableStateHandle.trackChange((doc) => {
           insertAt(doc.selected, 1, 1);
         });
       },

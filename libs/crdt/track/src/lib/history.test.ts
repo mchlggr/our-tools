@@ -1,7 +1,7 @@
 import { next } from "@automerge/automerge";
 import { DocHandle, Repo } from "@automerge/automerge-repo";
 import { beforeEach, describe, expect, test } from "vitest";
-import { HistoryRepo as AutomergeRepoUndoRedo } from "./history-repo";
+import { History as AutomergeRepoUndoRedo } from "./history";
 import { Data, getHandle } from "./data";
 
 
@@ -24,7 +24,7 @@ describe("basic tests", () => {
 
   test("a tracked change can be initiated and a change made to the document", () => {
     const undoRedo = new AutomergeRepoUndoRedo(handle);
-    undoRedo.change((doc) => {
+    undoRedo.trackChange((doc) => {
       next.updateText(doc, ["name"], "Jane");
     });
 
@@ -33,13 +33,13 @@ describe("basic tests", () => {
 
   test("a change returns true if a change has been made", () => {
     const undoRedo = new AutomergeRepoUndoRedo(handle);
-    const result = undoRedo.change((doc) => {
+    const result = undoRedo.trackChange((doc) => {
       next.updateText(doc, ["name"], "Jane");
     });
 
     expect(result).toBe(true);
 
-    const result2 = undoRedo.change((doc) => {
+    const result2 = undoRedo.trackChange((doc) => {
       next.updateText(doc, ["name"], "Jane");
     });
 
@@ -49,7 +49,7 @@ describe("basic tests", () => {
   test("a change can take a patch callback", () => {
     const undoRedo = new AutomergeRepoUndoRedo(handle);
     return new Promise((resolve) => {
-      undoRedo.change(
+      undoRedo.trackChange(
         (doc) => {
           next.updateText(doc, ["name"], "Jane");
         },
@@ -64,7 +64,7 @@ describe("basic tests", () => {
 
   test("when a change is made in a tracked change, the undo stack is formed", () => {
     const undoRedo = new AutomergeRepoUndoRedo(handle);
-    undoRedo.change((doc) => {
+    undoRedo.trackChange((doc) => {
       next.updateText(doc, ["name"], "Jane");
     });
 
@@ -74,7 +74,7 @@ describe("basic tests", () => {
 
   test("a description can be set on a tracked change", () => {
     const undoRedo = new AutomergeRepoUndoRedo(handle);
-    undoRedo.change(
+    undoRedo.trackChange(
       (doc) => {
         next.updateText(doc, ["name"], "Jane");
       },
@@ -86,7 +86,7 @@ describe("basic tests", () => {
 
   test("a tracked change can be undone", () => {
     const undoRedo = new AutomergeRepoUndoRedo(handle);
-    undoRedo.change((doc) => {
+    undoRedo.trackChange((doc) => {
       next.updateText(doc, ["name"], "Jane");
     });
 
@@ -103,7 +103,7 @@ describe("basic tests", () => {
 
   test("a change following an undo resets the redo stack", () => {
     const undoRedo = new AutomergeRepoUndoRedo(handle);
-    undoRedo.change((doc) => {
+    undoRedo.trackChange((doc) => {
       next.updateText(doc, ["name"], "Jane");
     });
 
@@ -111,7 +111,7 @@ describe("basic tests", () => {
 
     expect(undoRedo.canRedo()).toBe(true);
 
-    undoRedo.change((doc) => {
+    undoRedo.trackChange((doc) => {
       next.updateText(doc, ["name"], "Jane");
     });
 
@@ -121,7 +121,7 @@ describe("basic tests", () => {
 
   test("a tracked change can be undone even when another untracked change has been made", () => {
     const undoRedo = new AutomergeRepoUndoRedo(handle);
-    undoRedo.change((doc) => {
+    undoRedo.trackChange((doc) => {
       next.updateText(
         doc,
         ["text"],
@@ -145,7 +145,7 @@ describe("basic tests", () => {
 
   test("a tracked change can be undone at the head of the document even when another untracked change has been made", () => {
     const undoRedo = new AutomergeRepoUndoRedo(handle);
-    undoRedo.change((doc) => {
+    undoRedo.trackChange((doc) => {
       next.updateText(
         doc,
         ["text"],
@@ -161,7 +161,7 @@ describe("basic tests", () => {
       );
     });
 
-    undoRedo.change((doc) => {
+    undoRedo.trackChange((doc) => {
       next.updateText(
         doc,
         ["text"],
@@ -188,7 +188,7 @@ describe("basic tests", () => {
 
     const branch = repo.clone(handle);
 
-    undoRedo.change((doc) => {
+    undoRedo.trackChange((doc) => {
       next.updateText(
         doc,
         ["text"],
@@ -214,11 +214,11 @@ describe("basic tests", () => {
 
   test("local undo + global redo", () => {
     const undoRedo = new AutomergeRepoUndoRedo(handle);
-    undoRedo.change((doc) => {
+    undoRedo.trackChange((doc) => {
       doc.name = "Jane";
     });
 
-    undoRedo.change((doc) => {
+    undoRedo.trackChange((doc) => {
       doc.name = "Reginald";
     });
 
@@ -241,7 +241,7 @@ describe("basic tests", () => {
 
   test("a tracked change can be redone", () => {
     const undoRedo = new AutomergeRepoUndoRedo(handle);
-    undoRedo.change((doc) => {
+    undoRedo.trackChange((doc) => {
       next.updateText(doc, ["name"], "Jane");
     });
 
@@ -261,21 +261,21 @@ describe("basic tests", () => {
   test("changes can be scoped and selectively undone and redone", () => {
     const undoRedo = new AutomergeRepoUndoRedo(handle);
 
-    undoRedo.change(
+    undoRedo.trackChange(
       (doc) => {
         doc.age = 31;
       },
       { scope: "Modal" },
     );
 
-    undoRedo.change(
+    undoRedo.trackChange(
       (doc) => {
         doc.todos.push("buy bread");
       },
       { scope: "Modal" },
     );
 
-    undoRedo.change(
+    undoRedo.trackChange(
       (doc) => {
         next.updateText(doc, ["name"], "Jane");
       },
@@ -330,7 +330,7 @@ describe("basic tests", () => {
   test("changes can be scoped and selectively undone and redone 2", () => {
     const undoRedo = new AutomergeRepoUndoRedo(handle);
 
-    undoRedo.change(
+    undoRedo.trackChange(
       (doc) => {
         next.updateText(
           doc,
@@ -341,7 +341,7 @@ describe("basic tests", () => {
       { scope: "Modal" },
     );
 
-    undoRedo.change(
+    undoRedo.trackChange(
       (doc) => {
         next.updateText(
           doc,
@@ -387,21 +387,21 @@ describe("basic tests", () => {
   test("can get the list of undos for a specific scope", () => {
     const undoRedo = new AutomergeRepoUndoRedo(handle);
 
-    undoRedo.change(
+    undoRedo.trackChange(
       (doc) => {
         doc.age = 31;
       },
       { scope: "Modal" },
     );
 
-    undoRedo.change(
+    undoRedo.trackChange(
       (doc) => {
         doc.todos.push("buy bread");
       },
       { scope: "Modal" },
     );
 
-    undoRedo.change(
+    undoRedo.trackChange(
       (doc) => {
         next.updateText(doc, ["name"], "Jane");
       },

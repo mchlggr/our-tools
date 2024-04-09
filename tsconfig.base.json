@@ -15,9 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@our-tools/crdt-doc": ["libs/crdt/doc/src/index.ts"],
-      "@our-tools/crdt-history": ["libs/crdt/history/src/index.ts"],
+      "@our-tools/crdt-track": ["libs/crdt/track/src/index.ts"],
       "@our-tools/crdt-patch": ["libs/crdt/patch/src/index.ts"],
+      "@our-tools/crdt-repo": ["libs/crdt/repo/src/index.ts"],
       "@our-tools/edit-pointer-ui": ["libs/edit/pointer-ui/src/index.ts"],
       "@our-tools/edit-shared": ["libs/edit/shared/src/index.ts"],
       "@our-tools/edit-stage": ["libs/edit/stage/src/index.ts"],

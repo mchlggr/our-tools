@@ -39,6 +39,11 @@ const emptyBoundary = Object.freeze({
   maxY: 0
 });
 
+//TODO: refactor Boundary to: type BoundaryBox = {
+//   min: Point2D
+//   max: Point2D
+// }
+
 type Boundary = {
   minX: number
   minY: number

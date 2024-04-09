@@ -105,13 +105,14 @@ type FontFacetStyleSegment = 'font-style'
 type FontFacetUnitSegment = 'font-unit'
 type FontFacetSizeSegment = 'font-size'
 type StrokeFacetSegment = 'stroke'
-type AnyFacetSegment =
+type LayerFacetSegment =
   StrokeFacetSegment
   | FillFacetSegment
   | PathFacetSegment
   | FontFacetStyleSegment
   | FontFacetUnitSegment
   | FontFacetSizeSegment
+type AnyFacetSegment = LayerFacetSegment
 type UnknownFacetSegment = string
 
 // ---
@@ -143,5 +144,6 @@ export {
   FontFacetSizeSegment,
   StrokeFacetSegment,
   fillTag,
-  TypeTagMapping
+  TypeTagMapping,
+  LayerFacetSegment
 };
