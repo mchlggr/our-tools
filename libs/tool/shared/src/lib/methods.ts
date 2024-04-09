@@ -1,6 +1,6 @@
 import { method, multi } from '@our-tools/extension';
 import { WorldModel } from '@our-tools/world-shared';
-import { StageStore } from '@our-tools/edit-shared';
+import { StageStore } from '@our-tools/editor-shared';
 import { AnyToolTag } from './types';
 
 //---

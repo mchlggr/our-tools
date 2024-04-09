@@ -1,5 +1,5 @@
 {
-  "name": "@our-tools/edit-shared",
+  "name": "@our-tools/editor-shared",
   "version": "0.0.1",
   "dependencies": {
     "@our-tools/world-shared": "workspace:*"

@@ -2,7 +2,7 @@
   "name": "@our-tools/tool-shared",
   "version": "0.0.1",
   "dependencies": {
-    "@our-tools/edit-shared": "workspace:^",
+    "@our-tools/editor-shared": "workspace:^",
     "@our-tools/world-shared": "workspace:^"
   },
   "main": "./index.js",

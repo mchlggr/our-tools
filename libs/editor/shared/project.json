@@ -1,5 +1,5 @@
 {
-  "name": "edit-shared",
+  "name": "editor-shared",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/edit/shared/src",
   "projectType": "library",

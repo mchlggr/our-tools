@@ -57,7 +57,8 @@
     "@nx/next": {
       "application": {
         "style": "tailwind",
-        "linter": "eslint"
+        "linter": "eslint",
+        "unitTestRunner": "jest"
       }
     },
     "@nx/react": {
