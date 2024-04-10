@@ -9,7 +9,13 @@ export default defineConfig({
 
   server: {
     port: 4200,
+    // tauri expects a fixed port, fail if that port is not available
+    strictPort: true,
     host: 'localhost',
+    watch: {
+      // tell vite to ignore watching `src-tauri`
+      ignored: ["**/src-backend/**"],
+    },
   },
 
   preview: {
@@ -23,6 +29,9 @@ export default defineConfig({
   // worker: {
   //  plugins: [ nxViteTsPaths() ],
   // },
+
+  // prevent vite from obscuring tauri/rust errors
+  clearScreen: false,
 
   build: {
     outDir: '../../dist/apps/local-app',
