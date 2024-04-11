@@ -1,6 +1,6 @@
 import { allSelectingLayers } from './layer-utils';
 import { WorldModel } from './model-types';
-import { RectangleLayer } from '@our-tools/world-shared';
+import { RectangleLayer } from './layer-types';
 
 describe('selectingLayers function', () => {
   it('should filter and return only layers the user is selecting', () => {
