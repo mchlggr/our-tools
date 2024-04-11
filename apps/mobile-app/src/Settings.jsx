@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-  
+
 export default function Settings(props) {
   const [openaival, Setopenaival] = useState("");
 
@@ -13,22 +13,24 @@ export default function Settings(props) {
      async function setvals() {
        const store = new Store(".settings.json");
        let js1 = null;
-       try { js1 = await store.get("openai"); } catch(e) {}
+       try { js1 = await store.get("openai"); } catch(e) {
+         console.log("error from openai", e)
+       }
        if (js1 !== null) Setopenaival(js1.val);
      }
      setvals();
-  }, []); 
+  }, []);
 
   async function StoreSettings() {
-  
+
     const store = new Store(".settings.json");
     let h = document.getElementById('openai');
     h.value = h.value.replace(/\s+/g,'');
- 
+
   try {
   await store.set("openai", { val: h.value });
   await store.save();
- 
+
   } catch(error) {
     console.log("SETTINGS ERROR:", JSON.stringify(error));
   }

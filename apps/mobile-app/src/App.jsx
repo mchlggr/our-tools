@@ -49,8 +49,8 @@ function App() {
 }
 
   async function handleSubmit() {
-     event.preventDefault();
-     event.stopPropagation();
+     // event.preventDefault();
+     // event.stopPropagation();
 
      if (prompt === null || prompt === "")  {
        Swal.fire({
@@ -73,7 +73,7 @@ function App() {
            n: 1,
            size: "1024x1024",
            quality: "standard",
-           style: "vivid", 
+           style: "vivid",
            response_format: "url"
      };
 
@@ -83,7 +83,7 @@ function App() {
       body: JSON.stringify(params),
       headers: {
        "Authorization" : "Bearer " + apikey.val,
-        "Content-Type" : "application/json" 
+        "Content-Type" : "application/json"
       }
       });
 
@@ -106,12 +106,12 @@ function App() {
   }
 
   function ShowImg(url, rvprompt) {
-     if (rvprompt === null) rvprompt = "There is no revised prompt"; 
+     if (rvprompt === null) rvprompt = "There is no revised prompt";
      if (isIOS()  || isAndroid()) {
-           setContent(<Image title={rvprompt} id="theimg" 
+           setContent(<Image title={rvprompt} id="theimg"
                 className="centerfit" src={url}/>);
      } else {
-           setContent(<Image title={rvprompt} id="theimg" 
+           setContent(<Image title={rvprompt} id="theimg"
                 onClick={() => Download(showSpinner)}
                 className="centerfit" src={url}/>);
      }
@@ -133,12 +133,12 @@ function App() {
          setContent(<center><h1>PICTURE THIS</h1></center>);
       }
     },
-    [] 
+    []
    );
 
   function gotoSettings() {
      setSettings(true);
-  } 
+  }
 
   return (
     <Container className="sizing" fluid>
@@ -153,7 +153,7 @@ function App() {
      </Row>
 
      <Row className="bottom mb-2" >
-      <Form  
+      <Form
          onSubmit={(e) => {
           e.preventDefault();
           handleSubmit();
@@ -169,9 +169,9 @@ function App() {
           onChange={(e) => setPrompt(e.currentTarget.value)}
         />
         <Button onClick={handleSubmit} variant="primary" id="mainbut">
-         Create Image 
+         Create Image
         </Button>
-      </InputGroup> 
+      </InputGroup>
 
       </Form>
 
