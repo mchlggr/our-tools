@@ -1,4 +1,4 @@
-import { Boundary, EntitySet, Uuid } from './types';
+import { Boundary, Uuid } from './types';
 import { Point2D } from './types';
 import { UnknownToolTag } from './unknown-types';
 import { AnySurface } from './surface-types';
@@ -7,6 +7,7 @@ import { AnyScene } from './scene-types';
 import { AnyFacet, AnyFacetSegment } from './facet-types';
 import { AnyLayer } from './layer-types';
 import { FacetReference } from './world-types';
+import { AnyEntitySegment } from './entity-types';
 
 
 type ModelEntities<EntityType> = {
@@ -55,38 +56,62 @@ const emptyFacets: ModelFacets<AnyFacet> = Object.freeze({
 });
 
 
-type IdRegistryKeys = 'selectingIds' | 'lockingIds'| 'parkingIds' | 'erasingIds' | 'hintingIds'
-type EntityRegistryKeys = 'layers' | 'surfaces' | 'scenes' | 'spaces'
+type AnyAwarenessIdKey = 'selectingIds' | 'lockingIds'| 'parkingIds' | 'erasingIds' | 'hintingIds'
+type AnyEntityAwarenessTypeTag = AnyEntitySegment
+type AnyFacetAwarenessTypeTag = AnyFacetSegment
+
+type AnyAwarenessTypeTag =  AnyEntityAwarenessTypeTag | AnyFacetAwarenessTypeTag
+
+// const awareKey : Record<string, AnyAwarenessIdKey> = {
+const awareKey = {
+  selecting: 'selectingIds',
+  locking: 'lockingIds',
+  parking: 'parkingIds',
+  erasing: 'erasingIds',
+  hinting: 'hintingIds'
+}
+
+type AwareIdsByType = {
+  [entityOrFacetType: string]: Uuid[]
+}
+
+type AwareUser = {
+    tool: UnknownToolTag,
+      //TODO:   toolTag: { UserId: toolTag }
+    selectingIds: AwareIdsByType // Gets applied from awareness on commit
+    // Consider moving down to space, scene or surface
+    lockingIds: AwareIdsByType // Gets applied from awareness on commit
+    parkingIds: AwareIdsByType // Gets applied from awareness on commit
+    erasingIds: AwareIdsByType // Gets applied from awareness on commit
+    hintingIds: AwareIdsByType // Gets applied from awareness on commit
+    //
+    editingIds: AwareIdsByType
+    croppingIds: AwareIdsByType
+    focusingIds: AwareIdsByType
+}
+
 
 type WorldModel = {
   version: string
   // id: Uuid
-  modifiedBy: Uuid,
-  modifiedAt: Date,
-  modifiedCounter: unknown, // Add A.Counter
-  tool: UnknownToolTag,
-  selectingIds: EntitySet // Gets applied from awareness on commit
-  // Consider moving down to space, scene or surface
-  lockingIds: EntitySet // Gets applied from awareness on commit
-  parkingIds: EntitySet // Gets applied from awareness on commit
-  erasingIds: EntitySet // Gets applied from awareness on commit
-  hintingIds: EntitySet // Gets applied from awareness on commit
-  //
-  editingIds: EntitySet
-  croppingIds: EntitySet
-  focusingIds: EntitySet
-  //
+  lastModifiedBy?: Uuid,
+  lastModifiedAt: Date,
+  lastModifiedCounter: unknown, // Add A.Counter
+  lastModifiedIds?: AwareIdsByType, // Add A.Counter
+  users: {
+    [userId: string]: AwareUser
+  }
   // Used for history snapshot previews
   boundary: Boundary
   // Segmented Facet Arrays
   facets: ModelFacets<AnyFacet>
   // Segmented Entity Arrays
   entities: {
-    layers: ModelEntities<AnyLayer>
-    surfaces: ModelEntities<AnySurface>
-    scenes: ModelEntities<AnyScene>
-    spaces: ModelEntities<AnySpace>
-  }
+    'entity:layer': ModelEntities<AnyLayer>
+    'entity:surface': ModelEntities<AnySurface>
+    'entity:scene': ModelEntities<AnyScene>
+    'entity:space': ModelEntities<AnySpace>
+  },
   // Connections between entities
   edges: ModelEdge[]
 }
@@ -102,12 +127,15 @@ type ModelTransform = (model: WorldModel) => WorldModel
 type ModelTransaction = (model: WorldModel) => void
 
 export {
-  IdRegistryKeys,
-  EntityRegistryKeys,
+  AnyAwarenessIdKey,
+  AnyAwarenessTypeTag,
+  AnyFacetAwarenessTypeTag,
+  AnyEntityAwarenessTypeTag,
   WorldModel,
   ModelTransform,
   ModelTransaction,
   ModelEntities,
+  awareKey,
   emptyEntities,
   emptyFacets
 };

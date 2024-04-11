@@ -1,18 +1,14 @@
 import { NonEmptyString } from '@our-tools/extension';
 import { TypeTagMapping, UnknownFacetTag } from './facet-types';
-import { EntityReference } from './world-types';
+import { AnyEntitySegment, EntityReference } from './entity-types';
 
 type Uuid = string | ''
 
-type EntitySet = {
-  [userId: string]: Uuid[]
-}
-type EntitySelection = EntitySet
 
 type EntityUuid = string
 type EntityTypeTag = NonEmptyString
 type Entity = {
-  type: EntityTypeTag,
+  type: string,
   id: Uuid,
   //
   facets: UnknownFacetTag[]
@@ -25,8 +21,8 @@ type Entity = {
   y2: number
   z2: number
   //
-  parent: EntityReference
-  children: EntityReference[]
+  parent?: EntityReference
+  children?: EntityReference[]
 }
 
 // ---
@@ -67,9 +63,9 @@ type Path2D = Point2D[]
 type Path3D = Point3D[]
 
 type PathNetwork2D = {
- vertices: Point2D[],
- edges: Point2D[],
- faces: Point2D[]
+  vertices: Point2D[],
+  edges: Point2D[],
+  faces: Point2D[]
 }
 
 // ---
@@ -92,8 +88,7 @@ const worldUnitTag: TypeTagMapping<AnyWorldUnit> = {
 
 export {
   Uuid,
-  EntitySet,
-  EntitySelection,
+  // AwareIds,
   EntityUuid,
   Entity,
   Boundary,

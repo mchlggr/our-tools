@@ -1,6 +1,6 @@
 type Facet = { type: string }
 
-type TypeTagMapping<Tags=string> = {
+type TypeTagMapping<Tags = string> = {
   [tag: string]: Tags
 }
 
@@ -99,6 +99,9 @@ type FacetTransaction = (facet: Facet) => void
 // type UnknownEntitySegment = string
 // type AnyEntitySegment =
 
+//TODO: type Point2DFacetSegment = 'point2D'
+//TODO: type ScalarFacetSegment = 'scalar'
+//TODO: type SpacingFacetSegment = ['scalar', 'scalar', 'scalar', 'scalar'] // for margin or padding?
 type FillFacetSegment = 'fill'
 type PathFacetSegment = 'path'
 type FontFacetStyleSegment = 'font-style'
@@ -114,6 +117,16 @@ type LayerFacetSegment =
   | FontFacetSizeSegment
 type AnyFacetSegment = LayerFacetSegment
 type UnknownFacetSegment = string
+
+const facetTag = {
+  fill: 'facet:fill',
+  path: 'facet:path',
+  fontStyle: 'facet:font-style',
+  fontUnit: 'facet:font-unit',
+  fontSize: 'facet:font-size',
+  stroke: 'facet:stroke'
+};
+
 
 // ---
 
@@ -143,7 +156,8 @@ export {
   FontFacetUnitSegment,
   FontFacetSizeSegment,
   StrokeFacetSegment,
-  fillTag,
   TypeTagMapping,
-  LayerFacetSegment
+  LayerFacetSegment,
+  fillTag,
+  facetTag,
 };

@@ -5,19 +5,18 @@ import {
   emptyFacets,
   WorldModel
 } from '@our-tools/world-shared';
-import { next as A } from '@automerge/automerge';
-import { create as _create } from '@our-tools/crdt-repo';
+import { createCounter, createDoc, createDate } from '@our-tools/crdt-repo';
 
 //TODO: move to another shared module
 const defaultTool = 'tool:select';
 
 const createWorld = async (docUrl: string): Promise<WorldModel> => {
-  return await _create((doc: WorldModel) => {
+  return await createDoc((doc: WorldModel) => {
     doc.version = defaultVersion
     //
     doc.modifiedBy = 'user:13221';
-    doc.modifiedAt = new Date();
-    doc.modifiedCounter = new A.Counter();
+    doc.modifiedAt = createDate()
+    doc.modifiedCounter = createCounter()
     //
     doc.tool = defaultTool;
     doc.selectingIds = {};

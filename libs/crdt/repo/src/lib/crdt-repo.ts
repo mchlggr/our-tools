@@ -24,7 +24,7 @@ interface DocInit<T> {
 
 type CreateOpts = { docUrl: string, historyManager?: boolean }
 
-const create = async <T>(init: DocInit<T>, opts: CreateOpts): Promise<A.Doc<T>> => {
+const createDoc = async <T>(init: DocInit<T>, opts: CreateOpts): Promise<A.Doc<T>> => {
   if (isValidAutomergeUrl(opts.docUrl)) {
     throw new Error(`Doc already exists, docUrl=${opts.docUrl}`);
   }
@@ -38,7 +38,12 @@ const create = async <T>(init: DocInit<T>, opts: CreateOpts): Promise<A.Doc<T>> 
 
 // ---
 
-export { repo, create };
+const createCounter = () => new A.Counter();
+const createDate = () => new Date();
+
+// ---
+
+export { repo, createDoc, createCounter, createDate };
 
 export function crdtRepo(): string {
   return 'crdt-repo';
