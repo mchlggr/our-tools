@@ -1,4 +1,7 @@
-type Facet = { type: string }
+type Facet = {
+  type: string
+  tokenizedIds?: [] // Facet Ids of Tokens that refer to this Facet
+}
 
 type TypeTagMapping<Tags = string> = {
   [tag: string]: Tags

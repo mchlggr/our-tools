@@ -8,7 +8,8 @@ const surfaceTag = {
   flat: 'surface:flat'
 }
 
-type FlatSurfaceTag = 'surface:flat'
+type PaperSurfaceTag = 'surface:paper' // Stack based flow for blocks
+type FlatSurfaceTag = 'surface:flat' // Free Form placement of layers
 
 type FlatSurfaceFacets = FillFacetSegment
 type FlatSurface = SurfaceEntity & {

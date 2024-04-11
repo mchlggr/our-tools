@@ -1,3 +1,5 @@
+import { Uuid } from './types';
+
 type FillFacetToken = 'fill:token'
 type PathFacetToken = 'path:token'
 type FontFacetStyleToken = 'font-style:token'
@@ -11,6 +13,12 @@ type AnyFacetToken = FillFacetToken
   | FontFacetUnitToken
   | FontFacetSizeToken
   | StrokeFacetToken
+
+
+type FacetToken = {
+  type: AnyFacetToken
+  facetId: Uuid // ID of Facet that this token sources
+}
 
 // ---
 

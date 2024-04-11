@@ -111,6 +111,8 @@ type WorldModel = {
     'entity:surface': ModelEntities<AnySurface>
     'entity:scene': ModelEntities<AnyScene>
     'entity:space': ModelEntities<AnySpace>
+    //TODO: 'entity:block': {} // Portable Text Block
+    //TODO: 'entity:model': {} // 3D equivalent of a layer
   },
   // Connections between entities
   edges: ModelEdge[]

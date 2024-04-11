@@ -19,6 +19,7 @@
       "@our-tools/crdt-repo": ["libs/crdt/repo/src/index.ts"],
       "@our-tools/crdt-track": ["libs/crdt/track/src/index.ts"],
       "@our-tools/edit-world": ["libs/edit/world/src/index.ts"],
+      "@our-tools/editor-entity": ["libs/editor/entity/src/index.ts"],
       "@our-tools/editor-shared": ["libs/editor/shared/src/index.ts"],
       "@our-tools/editor-stage": ["libs/editor/stage/src/index.ts"],
       "@our-tools/endpoint-jsonapi": ["libs/endpoint/jsonapi/src/index.ts"],
