@@ -66,6 +66,12 @@ type Point3D = { x: number, y: number, z: number }
 type Path2D = Point2D[]
 type Path3D = Point3D[]
 
+type PathNetwork2D = {
+ vertices: Point2D[],
+ edges: Point2D[],
+ faces: Point2D[]
+}
+
 // ---
 
 type Time1D = Date[]
