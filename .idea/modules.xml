@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/penumbra-monrepo.iml" filepath="$PROJECT_DIR$/.idea/penumbra-monrepo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/our-tools.iml" filepath="$PROJECT_DIR$/.idea/our-tools.iml" />
     </modules>
   </component>
 </project>
