@@ -1,0 +1,9 @@
+{
+  "name": "view-svg",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/view/svg/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project view-svg --web",
+  "targets": {}
+}
