@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ViewSvg } from './view-svg';
+import { SvgRectangle } from './svg-rectangle';
 
 import { within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 
-const meta: Meta<typeof ViewSvg> = {
-  component: ViewSvg,
-  title: 'ViewSvg',
+const meta: Meta<typeof SvgRectangle> = {
+  component: SvgRectangle,
+  title: 'SvgRectangle',
 };
 export default meta;
-type Story = StoryObj<typeof ViewSvg>;
+type Story = StoryObj<typeof SvgRectangle>;
 
 export const Primary = {
   args: {},
@@ -19,6 +19,6 @@ export const Heading: Story = {
   args: {},
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    expect(canvas.getByText(/Welcome to ViewSvg!/gi)).toBeTruthy();
+    expect(canvas.getByText(/Welcome to SvgRectangle!/gi)).toBeTruthy();
   },
 };

@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import ViewSvg from './view-svg';
+import SvgDoc from './svg-doc';
 
-describe('ViewSvg', () => {
+describe('DisplaySvg', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<ViewSvg />);
+    const { baseElement } = render(<SvgDoc />);
     expect(baseElement).toBeTruthy();
   });
 });

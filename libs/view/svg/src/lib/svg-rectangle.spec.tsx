@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import ViewShared from './view-shared';
+import SvgRectangle from './svg-rectangle';
 
-describe('ViewShared', () => {
+describe('SvgRectangle', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<ViewShared />);
+    const { baseElement } = render(<SvgRectangle />);
     expect(baseElement).toBeTruthy();
   });
 });

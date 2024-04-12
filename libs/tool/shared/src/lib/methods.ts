@@ -9,6 +9,8 @@ interface ToolDispatch {
   (tool: AnyToolTag, model: WorldModel, stage: StageStore, evt: Event): AnyToolTag;
 }
 
+
+// TODO: this interface will need to change and maybe return void
 interface ToolMethod {
   (tool: AnyToolTag, model: WorldModel, stage: StageStore, evt: Event): WorldModel;
 }
@@ -16,7 +18,10 @@ interface ToolMethod {
 //---
 
 const dispatch: ToolDispatch = (tool /* model, stage, evt */) => tool;
-const fallback: ToolMethod = (_tool, model /* stage, evt */) => model;
+const fallback: ToolMethod = (tool, model /* stage, evt */) => {
+  console.error(`No Tool Method Found for: ${tool}`);
+  return model;
+}
 
 //---
 

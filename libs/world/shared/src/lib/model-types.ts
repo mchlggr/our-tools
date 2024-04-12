@@ -77,7 +77,7 @@ type AwareIdsByType = {
 
 type AwareUser = {
     tool: UnknownToolTag,
-      //TODO:   toolTag: { UserId: toolTag }
+    // TODO: pointers: {}
     selectingIds: AwareIdsByType // Gets applied from awareness on commit
     // Consider moving down to space, scene or surface
     lockingIds: AwareIdsByType // Gets applied from awareness on commit
@@ -115,7 +115,7 @@ type WorldModel = {
     //TODO: 'entity:model': {} // 3D equivalent of a layer
   },
   // Connections between entities
-  edges: ModelEdge[]
+  // edges: Record<string, ModelEdge>
 }
 
 // const alternativeEntityMapping = {

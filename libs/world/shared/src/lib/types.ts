@@ -13,13 +13,15 @@ type Entity = {
   //
   facets: UnknownFacetTag[]
   //
-  x1: number
-  y1: number
-  z1: number
+  pt1: Point2D,
+  pt2: Point2D,
+  // x1: number
+  // y1: number
+  // z1: number
   //
-  x2: number
-  y2: number
-  z2: number
+  // x2: number
+  // y2: number
+  // z2: number
   //
   parent?: EntityReference
   children?: EntityReference[]

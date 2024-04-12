@@ -1,15 +1,5 @@
 import { ComponentType } from 'react';
-
-const renderTag = {
-  webGl: 'render:web-gl',
-  webXr: 'render:web-xr',
-  html: 'render:html'
-};
-type RenderWebGL = 'render:web-gl'
-type RenderWebXR = 'render:web-xr'
-type RenderHTML = 'render:html'
-type AnyRender = RenderWebGL | RenderWebXR | RenderHTML
-
+import { AnyRender } from './render-types';
 
 const viewTag = {
   layer: 'view:layer',
@@ -26,7 +16,7 @@ type View = {
   type: AnyViewTag,
   resizable: string, // ('x' | 'y' | 'z')[]
   rotatable: string, //string[]
-  unlisted: boolean
+  unlisted: boolean // TODO: move to entity
   components: {
     [render in AnyRender]: ComponentType
   }
@@ -35,8 +25,10 @@ type View = {
 // ---
 
 export {
-  View,
-  renderTag,
-  viewTag
+  viewTag,
+  ViewLayerTypeTag,
+  ViewSurfaceTypeTag,
+  ViewSceneTypeTag,
+  AnyViewTag,
+  View
 };
-
