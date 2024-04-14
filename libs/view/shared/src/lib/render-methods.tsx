@@ -15,14 +15,14 @@ interface RenderDocDispatch {
 }
 
 interface RenderDocMethod {
-  (render: AnyRender, model: WorldModel): ReactNode;
+  (render: AnyRender, model: WorldModel): ReactNode | null;
 }
 
 
 const dispatchDoc: RenderDocDispatch = (render /* model */) => render
 const fallbackDoc: RenderDocMethod = (render /* model */) => {
   console.error(`No Doc Render Method Found for: ${render}`);
-  return <></>;
+  return null;
 };
 
 const renderDoc = multi(dispatchDoc, method(fallbackDoc));
@@ -45,7 +45,7 @@ interface RenderEntityDispatch {
 }
 
 interface RenderEntityMethod {
-  (entity: Entity, opts: RenderOpts): ReactNode;
+  (entity: Entity, opts: RenderOpts): ReactNode | null;
 }
 
 // ---
@@ -53,7 +53,7 @@ interface RenderEntityMethod {
 const dispatchEntity: RenderEntityDispatch = (entity /* opts */) => entity.type;
 const fallbackEntity: RenderEntityMethod = (entity /* opts */) => {
   console.error(`No Entity Render Method Found for: ${entity?.type}`);
-  return <></>;
+  return null;
 };
 
 const renderEntity = multi(dispatchEntity, method(fallbackEntity));
