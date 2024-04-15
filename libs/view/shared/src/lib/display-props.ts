@@ -1,17 +1,42 @@
-import { LayerEntity, Uuid } from '@our-tools/world-shared';
+import {
+  AnyFillFacet,
+  AnyStrokeFacet,
+  Color,
+  FillFacet,
+  LayerEntity,
+  StrokeFacet,
+  UserId,
+  Uuid
+} from '@our-tools/world-shared';
 
 // interface DisplayDocProps {
 //
 // }
 
-interface ViewRectangleProps extends LayerEntity {
-  selecting: Uuid[] // Array of user ids
-  locking: Uuid[]
-  packing: Uuid[]
-  hinting: Uuid[]
-  editing: Uuid[]
-  cropping: Uuid[]
-  focusing: Uuid[]
+type ViewProps = Omit<LayerEntity, "">
+
+type EngagedProps = {
+  selecting: UserId[] // Array of user ids
+  locking: UserId[]
+  packing: UserId[]
+  hinting: UserId[]
+  editing: UserId[]
+  cropping: UserId[]
+  focusing: UserId[]
+}
+
+type UserColorMapping = Record<UserId, string>
+
+
+type ViewLayerProps = ViewProps & EngagedProps & {
+  userColors: UserColorMapping
+}
+
+type ViewRectangleProps = ViewLayerProps & {
+  //
+  fill: AnyFillFacet
+  stroke: AnyStrokeFacet
+  //
 }
 
 // interface DisplaySurfaceProps {
@@ -22,5 +47,8 @@ interface ViewRectangleProps extends LayerEntity {
 // }
 
 export {
-  ViewRectangleProps
+  ViewRectangleProps,
+  EngagedProps,
+  UserColorMapping,
+  ViewLayerProps
 };

@@ -1,24 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { renderRectangleNormal, renderRectangleSelected } from '@our-tools/view-example';
 import { SvgRectangle } from './svg-rectangle';
 
-import { within } from '@storybook/testing-library';
-import { expect } from '@storybook/jest';
+import SvgStoryDecorator from './svg-story';
 
 const meta: Meta<typeof SvgRectangle> = {
   component: SvgRectangle,
   title: 'SvgRectangle',
+  decorators: SvgStoryDecorator,
 };
+
 export default meta;
 type Story = StoryObj<typeof SvgRectangle>;
 
-export const Primary = {
-  args: {},
+export const Normal = {
+  args: renderRectangleNormal
 };
 
-export const Heading: Story = {
-  args: {},
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    expect(canvas.getByText(/Welcome to SvgRectangle!/gi)).toBeTruthy();
-  },
+export const Selected = {
+  args: renderRectangleSelected
 };
+
+
+

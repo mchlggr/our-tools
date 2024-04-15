@@ -1,0 +1,19 @@
+{
+  "name": "util-css",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/util/css/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/util/css",
+        "main": "libs/util/css/src/index.ts",
+        "tsConfig": "libs/util/css/tsconfig.lib.json",
+        "assets": ["libs/util/css/*.md"]
+      }
+    }
+  },
+  "tags": []
+}

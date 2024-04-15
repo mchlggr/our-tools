@@ -1,3 +1,5 @@
+import { values } from 'lodash';
+
 type Facet = {
   type: string
   tokenizedIds?: [] // Facet Ids of Tokens that refer to this Facet
@@ -21,17 +23,48 @@ type ImageFillTypeTag = 'fill:image'
 
 type AnyFillTypeTag = NoneFillTypeTag | SolidFillTypeTag | GradientFillTypeTag | ImageFillTypeTag
 
-type Color = string
-type FillFacet = Facet & { type: AnyFillTypeTag }
+const isFillFacet = ({ type }: AnyFillFacet) => {
+  return values(fillTag).includes(type);
+};
+
+const colorTag: Record<string, AnyColorTypeTag> = {
+  hsa: 'color:hsa',
+  rgb: 'color:rgb',
+  hex: 'color:hex',
+  named: 'color:named'
+}
+
+type HSAColorTypeTag = 'color:hsa'
+type RGBColorTypeTag = 'color:rgb'
+type HEXColorTypeTag = 'color:hex'
+type NamedColorTypeTag = 'color:named'
+type AnyColorTypeTag = HSAColorTypeTag | RGBColorTypeTag | HEXColorTypeTag | NamedColorTypeTag
+type Color = { type: AnyColorTypeTag, value: string }
+
+const isColor = ({ type }: Color): boolean => {
+  return values(colorTag).includes(type);
+};
+
+type AnyFillOpacity = number | string | undefined;
+type AnyFillRule = 'nonzero' | 'evenodd' | 'inherit' | undefined;
+
+type FillFacet = Facet & {
+  type: AnyFillTypeTag,
+  color: Color,
+  opacity?: AnyFillOpacity
+  rule?: AnyFillRule
+}
 type NoneFillFacet = FillFacet & { type: NoneFillTypeTag }
 type SolidFillFacet = FillFacet & {
   type: SolidFillTypeTag
-  color: Color
 }
 type GradientFillFacet = FillFacet & {
   type: GradientFillTypeTag
   // colors: Ramp<Color>
 }
+
+type AnyFillFacet = FillFacet | NoneFillFacet | SolidFillFacet | GradientFillFacet
+
 type ColorImageStyleTag = 'image-style:cover' // fills the entire width and height of the surface
 type RatioImageStyleTag = 'image-style:ratio' // maintains the aspect ratio of the image.
 type RepeatImageStyleTag = 'image-style:repeat' // repeats the image as a pattern in both x/y directions.
@@ -46,13 +79,39 @@ type NoneStrokeTag = 'stroke:none'
 type SolidStrokeTag = 'stroke:solid'
 type GradientStrokeTag = 'stroke:gradient'
 
-const strokeType = {
+const strokeTag = {
   none: 'stroke:none',
   solid: 'stroke:solid',
   gradient: 'stroke:gradient'
 };
+const lineCapValue = {
+  butt: 'butt',
+  round: 'round',
+  square: 'square',
+  inherit: 'inherit'
+};
+type AnyLineCapValue = 'butt' | 'round' | 'square' | 'inherit' | undefined
+type AnyLineJoinValue = 'miter' | 'round' | 'bevel' | 'inherit' | undefined;
 type StrokeTypeTag = NoneStrokeTag | SolidStrokeTag | GradientStrokeTag
-type StrokeFacet = { type: StrokeTypeTag }
+type StrokeFacet = {
+  type: StrokeTypeTag
+  color: Color
+  dashArray?: string | number | undefined;
+  dashOffset?: string | number | undefined;
+  lineCap?: AnyLineCapValue;
+  lineJoin?: AnyLineJoinValue
+  miterLimit?: number | string | undefined;
+  opacity?: number | string | undefined;
+  width?: number | string | undefined;
+}
+
+
+
+type AnyStrokeFacet = StrokeFacet
+
+const isStrokeFacet = ({ type }: AnyStrokeFacet) => {
+  return values(strokeTag).includes(type);
+};
 
 // type PositionTypeTag = 'position:2d' | 'position:3d'
 // type PositionFacet = { type: PositionTypeTag }
@@ -163,4 +222,12 @@ export {
   LayerFacetSegment,
   fillTag,
   facetTag,
+  AnyFillFacet,
+  AnyStrokeFacet,
+  isFillFacet,
+  isStrokeFacet,
+  colorTag,
+  Color,
+  isColor,
+  strokeTag
 };

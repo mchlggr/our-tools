@@ -1,10 +1,13 @@
 import { Boundary, EntityUuid, Entity } from './types';
 import { FontSizeFacet, LayerFacetSegment, PathFacet } from './facet-types';
+import { values } from 'lodash';
 
 type LayerBoundary = Boundary
 type LayerEntity = Entity & {
  facets: LayerFacetSegment[]
 }
+
+
 
 const layerTag = {
  rectangle: "layer:rectangle",
@@ -27,6 +30,12 @@ type RectangleLayer =  LayerEntity & {
   // y: number,
   // width: number,
   // height: number
+}
+
+const reactangleLayerFacetTags = ['fill', 'stroke']
+
+const isRectangleLayer = ({type}: LayerEntity) => {
+  return values(layerTag).includes(type)
 }
 
 type EllipseLayer =  LayerEntity &  {
@@ -91,5 +100,7 @@ export {
   TextLayer,
   PencilLayerTypeTag,
   PencilLayer,
-  AnyLayer
+  AnyLayer,
+  isRectangleLayer,
+  reactangleLayerFacetTags
 };

@@ -1,0 +1,4 @@
+.selecting-rectangle-red {
+  stroke-width: 2px;
+  @apply stroke-red-500
+}

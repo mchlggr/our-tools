@@ -8,6 +8,7 @@ import { AnyFacet, AnyFacetSegment } from './facet-types';
 import { AnyLayer } from './layer-types';
 import { FacetReference } from './world-types';
 import { AnyEntitySegment } from './entity-types';
+import { includes, keys, values } from 'lodash';
 
 
 type ModelEntities<EntityType> = {
@@ -63,13 +64,17 @@ type AnyFacetAwarenessTypeTag = AnyFacetSegment
 type AnyAwarenessTypeTag =  AnyEntityAwarenessTypeTag | AnyFacetAwarenessTypeTag
 
 // const awareKey : Record<string, AnyAwarenessIdKey> = {
-const awareKey = {
+const engagedKey = {
   selecting: 'selectingIds',
   locking: 'lockingIds',
   parking: 'parkingIds',
   erasing: 'erasingIds',
   hinting: 'hintingIds'
 }
+
+const isEngagedKey = (key: string) => values(engagedKey).includes(key)
+
+const engagingKeys = keys(engagedKey)
 
 type AwareIdsByType = {
   [entityOrFacetType: string]: Uuid[]
@@ -137,7 +142,9 @@ export {
   ModelTransform,
   ModelTransaction,
   ModelEntities,
-  awareKey,
+  engagedKey,
   emptyEntities,
-  emptyFacets
+  emptyFacets,
+  isEngagedKey,
+  engagingKeys
 };

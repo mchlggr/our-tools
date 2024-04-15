@@ -3,6 +3,7 @@ import { TypeTagMapping, UnknownFacetTag } from './facet-types';
 import { AnyEntitySegment, EntityReference } from './entity-types';
 
 type Uuid = string | ''
+type UserId = Uuid
 
 
 type EntityUuid = string
@@ -10,21 +11,15 @@ type EntityTypeTag = NonEmptyString
 type Entity = {
   type: string,
   id: Uuid,
-  //
   facets: UnknownFacetTag[]
-  //
-  pt1: Point2D,
-  pt2: Point2D,
-  // x1: number
-  // y1: number
-  // z1: number
-  //
-  // x2: number
-  // y2: number
-  // z2: number
-  //
+  pts: Point2D[],
   parent?: EntityReference
   children?: EntityReference[]
+}
+
+const testargs: Entity = {
+  type: "layer:rectangle",
+  id: "jiofe"
 }
 
 // ---
@@ -88,6 +83,25 @@ const worldUnitTag: TypeTagMapping<AnyWorldUnit> = {
 
 // ---
 
+const typePattenPrefix = /(^[a-z]+)/;
+const typePattenSuffix = /([a-z]+$)/;
+
+const typePrefix = (type: string): string => {
+  const [prefix] = type.match(typePattenPrefix) || [];
+  if (!prefix) throw new Error(`Type ${type} is missing prefix`);
+
+  return prefix;
+};
+
+const typeSuffix = (type: string): string => {
+  const [suffix] = type.match(typePattenSuffix) || [];
+  if (!suffix) throw new Error(`Type ${type} is missing suffix`);
+
+  return suffix;
+}
+
+// ---
+
 export {
   Uuid,
   // AwareIds,
@@ -105,5 +119,8 @@ export {
   worldUnitTag,
   InchWorldUnitTag,
   PixelWorldUnitTag,
-  emptyBoundary
+  emptyBoundary,
+  UserId,
+  typeSuffix,
+  typePrefix
 };

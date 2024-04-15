@@ -29,6 +29,8 @@
       "@our-tools/extension": ["libs/extension/src/index.ts"],
       "@our-tools/tool-shared": ["libs/tool/shared/src/index.ts"],
       "@our-tools/tool-ui": ["libs/tool/ui/src/index.ts"],
+      "@our-tools/util-css": ["libs/util/css/src/index.ts"],
+      "@our-tools/view-example": ["libs/view/example/src/index.ts"],
       "@our-tools/view-shared": ["libs/view/shared/src/index.ts"],
       "@our-tools/view-svg": ["libs/view/svg/src/index.ts"],
       "@our-tools/view-window": ["libs/view/window/src/index.ts"],

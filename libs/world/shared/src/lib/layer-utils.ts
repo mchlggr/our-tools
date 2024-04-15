@@ -8,7 +8,7 @@ import {
   AnyAwarenessTypeTag,
   ModelEntities,
   AnyEntityAwarenessTypeTag,
-  awareKey, emptyFacets
+  engagedKey, emptyFacets
 } from './model-types';
 // import { emptyObject, isPresent, multi } from '@our-tools/extension';
 // import { AnyEntitySegment, entityTag } from '@our-tools/world-shared';
