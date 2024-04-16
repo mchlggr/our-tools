@@ -8,5 +8,15 @@
       "import": "./index.mjs",
       "require": "./index.js"
     }
+  },
+  "dependencies": {
+    "@react-three/drei": "^9.105.4",
+    "@react-three/fiber": "^8.16.2",
+    "@react-three/postprocessing": "^2.16.2",
+    "three": "^0.163.0",
+    "three-stdlib": "^2.29.6"
+  },
+  "devDependencies": {
+    "@types/three": "^0.163.0"
   }
 }

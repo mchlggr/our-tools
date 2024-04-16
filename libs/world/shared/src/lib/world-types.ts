@@ -1,6 +1,6 @@
 import { Point2D, Uuid, AnyWorldUnit, worldUnitTag } from './types';
 import { UnknownToolTag } from './unknown-types';
-import { WorldModel } from './model-types';
+import { WorldModel } from './doc-types';
 import { Patch } from 'immer';
 import { WorldHistory } from './history-types';
 

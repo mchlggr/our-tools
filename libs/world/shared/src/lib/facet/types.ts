@@ -1,4 +1,4 @@
-import { UserData } from '../model-types';
+import { UserData } from '../doc-types';
 import { Uuid } from '../types';
 
 

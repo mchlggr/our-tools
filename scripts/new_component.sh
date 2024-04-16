@@ -11,3 +11,7 @@ nx g @nx/react:component-story --componentPath=./lib/three-ellipse.tsx --project
 
 nx g @nx/react:component libs/view/three/src/lib/three-line
 nx g @nx/react:component-story --componentPath=./lib/three-line.tsx --project=view-three --verbose
+
+nx g @nx/react:component libs/view/three/src/lib/three-sphere
+nx g @nx/react:component-story --componentPath=./lib/three-sphere.tsx --project=view-three --verbose
+

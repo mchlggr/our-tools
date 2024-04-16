@@ -1,7 +1,7 @@
 // Dependencies
 import { size, chain, filter, get, groupBy, isEmpty, keyBy, keys } from 'lodash';
 import { Entity, Uuid } from './types';
-import { AnyLayer, LayerEntity, RectangleLayer } from './layer-types';
+import { AnyLayerEntity, LayerEntity, RectangleLayer } from './layer-types';
 import {
   WorldModel,
   AnyAwarenessIdKey,
@@ -9,7 +9,7 @@ import {
   ModelEntities,
   AnyEntityAwarenessTypeTag,
   engagedKey, emptyFacets
-} from './model-types';
+} from './doc-types';
 // import { emptyObject, isPresent, multi } from '@our-tools/extension';
 // import { AnyEntitySegment, entityTag } from '@our-tools/world-shared';
 

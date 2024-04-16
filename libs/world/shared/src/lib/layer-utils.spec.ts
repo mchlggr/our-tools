@@ -1,5 +1,5 @@
 import { allSelectingLayers } from './layer-utils';
-import { WorldModel } from './model-types';
+import { WorldModel } from './doc-types';
 import { RectangleLayer } from './layer-types';
 
 describe('selectingLayers function', () => {

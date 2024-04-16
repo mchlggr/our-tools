@@ -1,7 +1,7 @@
 import {
   AnyFillFacet, AnyFontFacet, AnyPathTypeTag,
   AnyStrokeFacet,
-  LayerEntity, NoneFillFacet, NoneStrokeFacet, SolidFillFacet, SolidStrokeFacet,
+  LayerEntity, MaterialFacet, NoneFillFacet, NoneStrokeFacet, SolidFillFacet, SolidStrokeFacet,
   UserId
 } from '@our-tools/world-shared';
 
@@ -53,6 +53,10 @@ type ViewTextProps = ViewLayerProps & {
   stroke: SolidStrokeFacet | NoneStrokeFacet
 }
 
+type ViewSphereProps = ViewLayerProps & {
+  material: MaterialFacet
+}
+
 
 // interface DisplaySurfaceProps {
 // }
@@ -69,5 +73,6 @@ export {
   ViewEllipseProps,
   ViewLineProps,
   ViewPencileProps,
-  ViewTextProps
+  ViewTextProps,
+  ViewSphereProps
 };

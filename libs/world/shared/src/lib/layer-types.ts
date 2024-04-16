@@ -1,5 +1,7 @@
-import { Boundary, EntityUuid, Entity } from './types';
 import { values } from 'lodash';
+
+import { Boundary, EntityUuid, Entity } from './types';
+import { LayerFacetSegment } from './facet';
 
 type LayerBoundary = Boundary
 type LayerEntity = Entity & {
@@ -81,7 +83,7 @@ type PencilLayer = LayerEntity & {
 }
 
 type AnyLayerTypeTag = RectangleLayerTypeTag | EllipseLayerTypeTag | LineLayerTypeTag | TextLayerTypeTag | PencilLayerTypeTag
-type AnyLayer = RectangleLayer | EllipseLayer |
+type AnyLayerEntity = RectangleLayer | EllipseLayer |
   LineLayer | TextLayer | PencilLayer
 
 // ---
@@ -99,7 +101,7 @@ export {
   TextLayer,
   PencilLayerTypeTag,
   PencilLayer,
-  AnyLayer,
+  AnyLayerEntity,
   isRectangleLayer,
   reactangleLayerFacetTags
 };

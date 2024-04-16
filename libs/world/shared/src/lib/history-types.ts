@@ -1,5 +1,5 @@
 import { ChangeOptions, Patch } from '@automerge/automerge';
-import { WorldModel } from './model-types';
+import { WorldModel } from './doc-types';
 
 // ---
 // type WorldTimeline = WorldEvent[]

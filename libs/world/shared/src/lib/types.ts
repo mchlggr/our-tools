@@ -1,6 +1,6 @@
 import { NonEmptyString } from '@our-tools/extension';
 import { AnyEntitySegment, EntityReference } from './entity-types';
-import { UserData } from './model-types';
+import { UserData } from './doc-types';
 import { TypeTagMapping, UnknownFacetTag } from './facet';
 
 type Uuid = string | ''

@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import ViewWindow from './view-window';
+import ThreeRectangle from './three-rectangle';
 
-describe('ViewWindow', () => {
+describe('ThreeRectangle', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<ViewWindow />);
+    const { baseElement } = render(<ThreeRectangle />);
     expect(baseElement).toBeTruthy();
   });
 });

@@ -1,7 +1,7 @@
 
 // ---
 
-import { Color } from '@our-tools/world-shared';
+import { Color } from './color-types';
 
 type PatternBackgroundTypeTag = 'background:pattern'
 type ImageBackgroundTypeTag = 'background:image'

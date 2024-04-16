@@ -4,7 +4,7 @@ import { UnknownToolTag } from './unknown-types';
 import { AnySurface } from './surface-types';
 import { AnySpace } from './space-types';
 import { AnyScene } from './scene-types';
-import { AnyLayer } from './layer-types';
+import { AnyLayerEntity } from './layer-types';
 import { FacetReference } from './world-types';
 import { AnyEntitySegment } from './entity-types';
 import { includes, keys, values } from 'lodash';
@@ -131,12 +131,12 @@ type WorldModel = {
   // Segmented Entity Arrays
   // : Uuid[]
   entities: {
-    'entity:layer': ModelEntities<AnyLayer>
+    'entity:layer': ModelEntities<AnyLayerEntity>
     'entity:surface': ModelEntities<AnySurface>
     'entity:scene': ModelEntities<AnyScene>
     'entity:space': ModelEntities<AnySpace>
+    'entity:model': ModelEntities<AnySpace> // 3D equivalent of a layer
     //TODO: 'entity:block': {} // Portable Text Block
-    //TODO: 'entity:model': {} // 3D equivalent of a layer
   },
   // Connections between entities
   // edges: Record<string, ModelEdge>
