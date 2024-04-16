@@ -33,6 +33,7 @@
       "@our-tools/view-example": ["libs/view/example/src/index.ts"],
       "@our-tools/view-shared": ["libs/view/shared/src/index.ts"],
       "@our-tools/view-svg": ["libs/view/svg/src/index.ts"],
+      "@our-tools/view-three": ["libs/view/three/src/index.ts"],
       "@our-tools/view-window": ["libs/view/window/src/index.ts"],
       "@our-tools/world-doc": ["libs/world/doc/src/index.ts"],
       "@our-tools/world-shared": ["libs/world/shared/src/index.ts"],
