@@ -33,11 +33,20 @@ type ViewLayerProps = ViewProps & EngagedProps & {
 }
 
 type ViewRectangleProps = ViewLayerProps & {
-  //
   fill: AnyFillFacet
   stroke: AnyStrokeFacet
-  //
 }
+
+type ViewEllipseProps = ViewLayerProps & {
+  fill: AnyFillFacet
+  stroke: AnyStrokeFacet
+}
+
+type ViewLineProps = ViewLayerProps & {
+  stroke: AnyStrokeFacet
+}
+
+
 
 // interface DisplaySurfaceProps {
 // }
@@ -50,5 +59,7 @@ export {
   ViewRectangleProps,
   EngagedProps,
   UserColorMapping,
-  ViewLayerProps
+  ViewLayerProps,
+  ViewEllipseProps,
+  ViewLineProps
 };

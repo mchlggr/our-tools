@@ -6,7 +6,11 @@ type SceneEntitySegment = 'entity:scene'
 type SpaceEntitySegment = 'entity:space'
 type AnyEntitySegment = LayerEntitySegment | SurfaceEntitySegment | SceneEntitySegment | SpaceEntitySegment
 
-type EntityReference = { type: AnyEntitySegment, id: Uuid }
+type EntityReference = {
+  type: AnyEntitySegment,
+  id: Uuid,
+  //TODO: state: string
+}
 
 const entityTag = {
  layer: 'entity:layer',

@@ -5,21 +5,18 @@ import { AnyEntitySegment, EntityReference } from './entity-types';
 type Uuid = string | ''
 type UserId = Uuid
 
-
 type EntityUuid = string
 type EntityTypeTag = NonEmptyString
 type Entity = {
   type: string,
   id: Uuid,
+  //TODO: state: string
   facets: UnknownFacetTag[]
   pts: Point2D[],
   parent?: EntityReference
   children?: EntityReference[]
-}
-
-const testargs: Entity = {
-  type: "layer:rectangle",
-  id: "jiofe"
+  // connections: EdgeReferences[]
+  data: UserData
 }
 
 // ---

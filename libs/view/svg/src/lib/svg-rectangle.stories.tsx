@@ -6,7 +6,7 @@ import SvgStoryDecorator from './svg-story';
 
 const meta: Meta<typeof SvgRectangle> = {
   component: SvgRectangle,
-  title: 'SvgRectangle',
+  title: 'View/Svg/Rectangle',
   decorators: SvgStoryDecorator,
 };
 

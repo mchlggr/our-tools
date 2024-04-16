@@ -29,6 +29,11 @@ type EdgeConnection = {
   degrees: 8n,
   // The shape/style of the endpoint at the edge end.
   end?: EdgeEnd
+  data: UserData
+}
+
+type UserData = {
+  [key: string]: number | string | boolean
 }
 
 type ModelEdge = {
@@ -38,6 +43,7 @@ type ModelEdge = {
   to: EdgeConnection | Point2D,
   label?: string,
   // Facets color
+  data: UserData
 }
 
 const emptyEntities = Object.freeze({
@@ -80,8 +86,11 @@ type AwareIdsByType = {
   [entityOrFacetType: string]: Uuid[]
 }
 
-type AwareUser = {
-    tool: UnknownToolTag,
+type AwareAgent = {
+    // tool: UnknownToolTag,
+    state: UnknownToolTag
+    pointers: { } // settings
+    tool: { } // settings
     // TODO: pointers: {}
     selectingIds: AwareIdsByType // Gets applied from awareness on commit
     // Consider moving down to space, scene or surface
@@ -98,19 +107,21 @@ type AwareUser = {
 
 type WorldModel = {
   version: string
+  state: string //TODO: state types
   // id: Uuid
   lastModifiedBy?: Uuid,
   lastModifiedAt: Date,
   lastModifiedCounter: unknown, // Add A.Counter
   lastModifiedIds?: AwareIdsByType, // Add A.Counter
-  users: {
-    [userId: string]: AwareUser
+  users: { //TODO: rename to 'agent'
+    [userId: string]: AwareAgent
   }
   // Used for history snapshot previews
-  boundary: Boundary
+  boundary: Boundary // Move to outside of document as a cached document meta-data
   // Segmented Facet Arrays
   facets: ModelFacets<AnyFacet>
   // Segmented Entity Arrays
+  : Uuid[]
   entities: {
     'entity:layer': ModelEntities<AnyLayer>
     'entity:surface': ModelEntities<AnySurface>
@@ -121,6 +132,7 @@ type WorldModel = {
   },
   // Connections between entities
   // edges: Record<string, ModelEdge>
+  data: UserData
 }
 
 // const alternativeEntityMapping = {
@@ -146,5 +158,6 @@ export {
   emptyEntities,
   emptyFacets,
   isEngagedKey,
-  engagingKeys
+  engagingKeys,
+  UserData
 };

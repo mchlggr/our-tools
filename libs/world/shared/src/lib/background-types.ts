@@ -5,6 +5,7 @@ import { Color } from './facet-types';
 type PatternBackgroundTypeTag = 'background:pattern'
 type ImageBackgroundTypeTag = 'background:image'
 type SolidBackgroundTypeTag = 'background:solid'
+type ScenicBackgroundTypeTag = 'background:scenic'
 
 type AnyBackgroundTypeTag = PatternBackgroundTypeTag | ImageBackgroundTypeTag | SolidBackgroundTypeTag
 

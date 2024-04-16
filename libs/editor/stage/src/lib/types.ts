@@ -32,7 +32,6 @@ type User = {
   email: NonEmptyString
 }
 
-
 type StageTools = {
   [tool: NonEmptyString]:  Tool
 }

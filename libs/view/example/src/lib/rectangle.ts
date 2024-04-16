@@ -11,7 +11,6 @@ const renderRectangleNormal: ViewRectangleProps = {
   id: rectIdA,
   facets: ['fill', 'stroke'],
   pts: [{ x: 10, y: 10 }, { x: 20, y: 20 }],
-  //
   fill: {
     type: 'fill:solid',
     color: { type: colorTag.named, value: 'blue' }
@@ -22,7 +21,6 @@ const renderRectangleNormal: ViewRectangleProps = {
     opacity: 0.5,
     width: 0
   },
-  //
   selecting: [],
   locking: [],
   packing: [],

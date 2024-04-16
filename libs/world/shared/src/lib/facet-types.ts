@@ -1,8 +1,16 @@
 import { values } from 'lodash';
+import { UserData } from './model-types';
+import { Uuid } from './types';
+
+
+type FacetUuid = Uuid
 
 type Facet = {
   type: string
-  tokenizedIds?: [] // Facet Ids of Tokens that refer to this Facet
+  id: FacetUuid
+  // tokenizedIds?: [] // Facet Ids of Tokens that refer to this Facet
+  referenceIds?: FacetUuid[] // Facet Ids of Tokens that refer to this Facet
+  data: UserData
 }
 
 type TypeTagMapping<Tags = string> = {
@@ -27,12 +35,18 @@ const isFillFacet = ({ type }: AnyFillFacet) => {
   return values(fillTag).includes(type);
 };
 
+const fillColor = ({ color }: FillFacet) => {
+  console.assert(isColor(color));
+  return color.value
+}
+
+
 const colorTag: Record<string, AnyColorTypeTag> = {
   hsa: 'color:hsa',
   rgb: 'color:rgb',
   hex: 'color:hex',
   named: 'color:named'
-}
+};
 
 type HSAColorTypeTag = 'color:hsa'
 type RGBColorTypeTag = 'color:rgb'
@@ -84,6 +98,7 @@ const strokeTag = {
   solid: 'stroke:solid',
   gradient: 'stroke:gradient'
 };
+
 const lineCapValue = {
   butt: 'butt',
   round: 'round',
@@ -102,16 +117,41 @@ type StrokeFacet = {
   lineJoin?: AnyLineJoinValue
   miterLimit?: number | string | undefined;
   opacity?: number | string | undefined;
-  width?: number | string | undefined;
+  width?: number | string | undefined
 }
-
-
 
 type AnyStrokeFacet = StrokeFacet
 
 const isStrokeFacet = ({ type }: AnyStrokeFacet) => {
   return values(strokeTag).includes(type);
 };
+
+const strokeGuard = (selector) => (stroke: StrokeFacet) => {
+  // We ignore the rest of the stroke facet params for 'stroke:none'
+  // Another extra effect of this is that if the user re-enables the stroke
+  // There previous stroke settings will still exist and be applied again
+  // This is helpful in case the user accidentally sets the stroke none
+  // It also helps keep the element attributes cleaner for inspecting, debugging, etc
+  if (stroke.type === strokeTag.none) {
+    return undefined;
+  } else {
+    return selector(stroke);
+  }
+};
+
+const strokeColor = strokeGuard(({ color }: StrokeFacet) => {
+  console.assert(isColor(color));
+  return color;
+});
+
+const strokeDashArray = strokeGuard((stroke: StrokeFacet) => stroke.dashArray);
+const strokeDashOffset = strokeGuard((stroke: StrokeFacet) => stroke.dashOffset);
+const strokeLineCap = strokeGuard((stroke: StrokeFacet) => stroke.lineCap);
+const strokeLineJoin = strokeGuard((stroke: StrokeFacet) => stroke.lineJoin);
+const strokeMiterLimit = strokeGuard((stroke: StrokeFacet) => stroke.miterLimit);
+const strokeOpacity = strokeGuard((stroke: StrokeFacet) => stroke.opacity);
+const strokeWidth = strokeGuard((stroke: StrokeFacet) => stroke.width);
+
 
 // type PositionTypeTag = 'position:2d' | 'position:3d'
 // type PositionFacet = { type: PositionTypeTag }
@@ -229,5 +269,15 @@ export {
   colorTag,
   Color,
   isColor,
-  strokeTag
+  strokeTag,
+  strokeGuard,
+  strokeColor,
+  strokeDashArray,
+  strokeDashOffset,
+  strokeLineCap,
+  strokeLineJoin,
+  strokeMiterLimit,
+  strokeOpacity,
+  strokeWidth,
+  fillColor
 };
