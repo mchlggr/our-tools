@@ -1,5 +1,5 @@
 import { Entity, EntityUuid  } from './types';
-import { FillFacetSegment } from './facet-types'
+import { FillFacetSegment } from './facet';
 
 type UnknownSpace = string
 type SpaceEntity = Entity

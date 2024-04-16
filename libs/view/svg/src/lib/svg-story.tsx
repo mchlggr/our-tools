@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 function SvgStoryDecorator(Story: React.ComponentType) {
   return (
-    <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+    <div style={{ width: '100%', height: '100%', position: 'relative', background: 'lightgrey' }}>
       <svg
            height={'100%'}
            width={'100%'}

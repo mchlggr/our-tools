@@ -1,19 +1,15 @@
 import {
-  AnyFillFacet,
+  AnyFillFacet, AnyFontFacet, AnyPathTypeTag,
   AnyStrokeFacet,
-  Color,
-  FillFacet,
-  LayerEntity,
-  StrokeFacet,
-  UserId,
-  Uuid
+  LayerEntity, NoneFillFacet, NoneStrokeFacet, SolidFillFacet, SolidStrokeFacet,
+  UserId
 } from '@our-tools/world-shared';
 
 // interface DisplayDocProps {
 //
 // }
 
-type ViewProps = Omit<LayerEntity, "">
+type ViewProps = Omit<LayerEntity, ''>
 
 type EngagedProps = {
   selecting: UserId[] // Array of user ids
@@ -28,8 +24,8 @@ type EngagedProps = {
 type UserColorMapping = Record<UserId, string>
 
 
-type ViewLayerProps = ViewProps & EngagedProps & {
-  userColors: UserColorMapping
+type ViewLayerProps = ViewProps & {
+  // userColors: UserColorMapping
 }
 
 type ViewRectangleProps = ViewLayerProps & {
@@ -46,6 +42,16 @@ type ViewLineProps = ViewLayerProps & {
   stroke: AnyStrokeFacet
 }
 
+type ViewPencileProps = ViewLayerProps & {
+  path: AnyPathTypeTag
+  stroke: AnyStrokeFacet
+}
+
+type ViewTextProps = ViewLayerProps & {
+  font: AnyFontFacet
+  fill: SolidFillFacet | NoneFillFacet
+  stroke: SolidStrokeFacet | NoneStrokeFacet
+}
 
 
 // interface DisplaySurfaceProps {
@@ -61,5 +67,7 @@ export {
   UserColorMapping,
   ViewLayerProps,
   ViewEllipseProps,
-  ViewLineProps
+  ViewLineProps,
+  ViewPencileProps,
+  ViewTextProps
 };

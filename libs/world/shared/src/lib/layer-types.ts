@@ -1,5 +1,4 @@
 import { Boundary, EntityUuid, Entity } from './types';
-import { FontSizeFacet, LayerFacetSegment, PathFacet } from './facet-types';
 import { values } from 'lodash';
 
 type LayerBoundary = Boundary

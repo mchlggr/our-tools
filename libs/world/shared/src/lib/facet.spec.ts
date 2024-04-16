@@ -1,5 +1,5 @@
-import { isStrokeFacet } from './facet-types';
 import { describe } from 'vitest';
+import { isStrokeFacet } from './facet';
 
 describe('Runtime Facet Type Checkers', () => {
   test('isStrokeFacet returns true when type is a strokeType', () => {

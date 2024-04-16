@@ -4,11 +4,11 @@ import { UnknownToolTag } from './unknown-types';
 import { AnySurface } from './surface-types';
 import { AnySpace } from './space-types';
 import { AnyScene } from './scene-types';
-import { AnyFacet, AnyFacetSegment } from './facet-types';
 import { AnyLayer } from './layer-types';
 import { FacetReference } from './world-types';
 import { AnyEntitySegment } from './entity-types';
 import { includes, keys, values } from 'lodash';
+import { AnyFacet, AnyFacetSegment } from './facet';
 
 
 type ModelEntities<EntityType> = {
@@ -29,7 +29,7 @@ type EdgeConnection = {
   degrees: 8n,
   // The shape/style of the endpoint at the edge end.
   end?: EdgeEnd
-  data: UserData
+  data?: UserData
 }
 
 type UserData = {
@@ -43,7 +43,7 @@ type ModelEdge = {
   to: EdgeConnection | Point2D,
   label?: string,
   // Facets color
-  data: UserData
+  data?: UserData
 }
 
 const emptyEntities = Object.freeze({
@@ -89,8 +89,9 @@ type AwareIdsByType = {
 type AwareAgent = {
     // tool: UnknownToolTag,
     state: UnknownToolTag
-    pointers: { } // settings
-    tool: { } // settings
+    pointers: object // settings
+    tool: string // settings
+    // facets: {} // for default 'fill' 'stroke' 'font' of each facet type
     // TODO: pointers: {}
     selectingIds: AwareIdsByType // Gets applied from awareness on commit
     // Consider moving down to space, scene or surface
@@ -113,6 +114,13 @@ type WorldModel = {
   lastModifiedAt: Date,
   lastModifiedCounter: unknown, // Add A.Counter
   lastModifiedIds?: AwareIdsByType, // Add A.Counter
+  //
+  // methods: {
+  // renderLayer: {
+  //    "layer:rect": () =>
+  // }
+  // }
+  //
   users: { //TODO: rename to 'agent'
     [userId: string]: AwareAgent
   }
@@ -121,7 +129,7 @@ type WorldModel = {
   // Segmented Facet Arrays
   facets: ModelFacets<AnyFacet>
   // Segmented Entity Arrays
-  : Uuid[]
+  // : Uuid[]
   entities: {
     'entity:layer': ModelEntities<AnyLayer>
     'entity:surface': ModelEntities<AnySurface>
@@ -132,7 +140,7 @@ type WorldModel = {
   },
   // Connections between entities
   // edges: Record<string, ModelEdge>
-  data: UserData
+  data?: UserData
 }
 
 // const alternativeEntityMapping = {

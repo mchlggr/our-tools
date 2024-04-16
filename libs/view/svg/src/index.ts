@@ -1,3 +1,4 @@
+export * from './lib/svg-html';
 export * from './lib/svg-pencil';
 export * from './lib/svg-text';
 export * from './lib/svg-ellipse';

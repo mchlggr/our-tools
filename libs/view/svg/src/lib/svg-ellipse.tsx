@@ -2,7 +2,7 @@
 import { cnLayer } from './classNames';
 import { ViewEllipseProps } from '@our-tools/view-shared';
 import {
-  fillColor,
+  getFillColor,
   strokeColor,
   strokeDashArray,
   strokeDashOffset,
@@ -21,7 +21,7 @@ export function SvgEllipse(props: ViewEllipseProps) {
         cy={(p1.y + p2.y) / 2}
         rx={Math.abs(p2.x - p1.x) / 2}
         ry={Math.abs(p2.y - p1.y) / 2}
-        fill={fillColor(fill)}
+        fill={getFillColor(fill)}
         stroke={strokeColor(stroke)}
         strokeDasharray={strokeDashArray(stroke)}
         strokeDashoffset={strokeDashOffset(stroke)}
@@ -30,7 +30,7 @@ export function SvgEllipse(props: ViewEllipseProps) {
         strokeMiterlimit={strokeMiterLimit(stroke)}
         strokeOpacity={strokeOpacity(stroke)}
         strokeWidth={strokeWidth(stroke)}
-        className={cnLayer(props)}
+        // className={cnLayer(props)}
       />
       {/* TODO: <SvgAnnotations {...props}></SvgAnnotations>*/}
     </>

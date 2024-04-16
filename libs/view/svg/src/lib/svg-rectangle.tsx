@@ -2,7 +2,7 @@ import './layer.css';
 import { EngagedProps, UserColorMapping, ViewLayerProps, ViewRectangleProps } from '@our-tools/view-shared';
 
 import {
-  fillColor,
+  getFillColor,
   strokeColor,
   strokeDashArray,
   strokeDashOffset,
@@ -25,6 +25,7 @@ import {
 import { cn } from '@our-tools/util-css';
 import { flatten, get, keys, pick } from 'lodash';
 import { cnLayer } from './classNames';
+import { svgStroke } from './svg-stroke';
 
 export function SvgRectangle(props: ViewRectangleProps) {
   console.assert(isRectangleLayer(props), 'Incorrect prop for react');
@@ -40,16 +41,9 @@ export function SvgRectangle(props: ViewRectangleProps) {
             y={p1.y}
             width={p2.x - p1.x}
             height={p2.y - p1.y}
-            fill={fillColor(fill)}
-            stroke={strokeColor(stroke)}
-            strokeDasharray={strokeDashArray(stroke)}
-            strokeDashoffset={strokeDashOffset(stroke)}
-            strokeLinecap={strokeLineCap(stroke)}
-            strokeLinejoin={strokeLineJoin(stroke)}
-            strokeMiterlimit={strokeMiterLimit(stroke)}
-            strokeOpacity={strokeOpacity(stroke)}
-            strokeWidth={strokeWidth(stroke)}
-            className={cnLayer(props)}
+            fill={getFillColor(fill)}
+            // className={cnLayer(props)}
+            {...svgStroke(stroke)}
       />
       {/* TODO: <SvgAnnotations {...props}></SvgAnnotations>*/}
     </>

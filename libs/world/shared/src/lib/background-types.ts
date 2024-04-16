@@ -1,6 +1,7 @@
-import { Color } from './facet-types';
 
 // ---
+
+import { Color } from '@our-tools/world-shared';
 
 type PatternBackgroundTypeTag = 'background:pattern'
 type ImageBackgroundTypeTag = 'background:image'

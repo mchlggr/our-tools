@@ -1,6 +1,7 @@
 import { NonEmptyString } from '@our-tools/extension';
-import { TypeTagMapping, UnknownFacetTag } from './facet-types';
 import { AnyEntitySegment, EntityReference } from './entity-types';
+import { UserData } from './model-types';
+import { TypeTagMapping, UnknownFacetTag } from './facet';
 
 type Uuid = string | ''
 type UserId = Uuid
@@ -13,10 +14,11 @@ type Entity = {
   //TODO: state: string
   facets: UnknownFacetTag[]
   pts: Point2D[],
+  text?: string,
   parent?: EntityReference
   children?: EntityReference[]
   // connections: EdgeReferences[]
-  data: UserData
+  data?: UserData
 }
 
 // ---

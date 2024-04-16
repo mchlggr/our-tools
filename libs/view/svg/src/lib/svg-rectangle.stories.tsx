@@ -17,9 +17,8 @@ export const Normal = {
   args: renderRectangleNormal
 };
 
-export const Selected = {
-  args: renderRectangleSelected
-};
-
+// export const Selected = {
+//   args: renderRectangleSelected
+// };
 
 

@@ -27,16 +27,16 @@ describe('cnEngaged function', () => {
   });
 });
 
-describe('cnLayer function', () => {
-  it('should return correct class names based on props', () => {
-    const result = cnLayer(renderRectangleSelected);
-
-    expect(result).toEqual('selecting-rectangle-red');
-    expect(result).not.toContain('hinting');
-    expect(result).not.toContain('locking');
-    expect(result).not.toContain('packing');
-    expect(result).not.toContain('editing');
-    expect(result).not.toContain('cropping');
-    expect(result).not.toContain('focusing');
-  });
-});
+// describe('cnLayer function', () => {
+  // it('should return correct class names based on props', () => {
+  //   const result = cnLayer(renderRectangleSelected);
+  //
+  //   expect(result).toEqual('selecting-rectangle-red');
+  //   expect(result).not.toContain('hinting');
+  //   expect(result).not.toContain('locking');
+  //   expect(result).not.toContain('packing');
+  //   expect(result).not.toContain('editing');
+  //   expect(result).not.toContain('cropping');
+  //   expect(result).not.toContain('focusing');
+  // });
+// });
