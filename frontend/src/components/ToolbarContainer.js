@@ -16,9 +16,9 @@ export const TOOLS = Object.freeze([
     ["tool:rectangle", "R"],
     ["tool:ellipse", "O"],
     ["tool:line", "L"],
-    ["tool:text", "T"],
+    // ["tool:text", "T"],  // Disabled for now as this is a work in progress
     ["tool:path", "P"],
-    ["tool:polygon", "S"]
+    // ["tool:polygon", "S"] // Disabled for now as this is not implemented yet
 ])
 
 const mapStateToProps = (state) => {
